@@ -1,0 +1,127 @@
+{# =====================================================================
+   文件说明：分类体系维护后台页（对应报告 API-15：/admin/taxonomy，仅管理员可访问）
+   核心功能：维护省/市/县三级地区树、国家级非遗十大门类与自由标签的新增和受保护删除
+   后端传入变量：regions, categories, tags
+   对接队友：谭应锋（后台界面统一风格）、周世航（管理员导航入口挂载）
+   ===================================================================== #}
+{% extends "base.html" %}
+{% block title %}分类体系维护 - 非遗数字化管理平台{% endblock %}
+
+{% block content %}
+<h1 class="h4 mb-3">分类体系维护（地区树 / 十大门类 / 标签）</h1>
+
+<div class="row g-4">
+  <!-- 地区维护 -->
+  <div class="col-lg-5">
+    <div class="card shadow-sm h-100">
+      <div class="card-header bg-white fw-semibold">省/市/县三级地区（{{ regions|length }}）</div>
+      <div class="card-body">
+        <form method="post" action="{{ url_for('projects.manage_taxonomy') }}" class="row g-2 mb-3">
+          {% if csrf_token is defined %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}
+          <input type="hidden" name="entity" value="region">
+          <input type="hidden" name="action" value="create">
+          <div class="col-5">
+            <input type="text" name="name" class="form-control form-control-sm" placeholder="地区名称" required>
+          </div>
+          <div class="col-3">
+            <select name="level" class="form-select form-select-sm">
+              <option value="province">省</option>
+              <option value="city">市/州</option>
+              <option value="county" selected>县/区</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <select name="parent_id" class="form-select form-select-sm">
+              <option value="">无上级</option>
+              {% for r in regions %}
+                <option value="{{ r.id }}">{{ r.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-sm btn-primary w-100">新增地区</button>
+          </div>
+        </form>
+
+        <ul class="list-group list-group-flush small" style="max-height:360px;overflow:auto;">
+          {% for r in regions %}
+          <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+            <span>
+              {% if r.level == 'city' %}&nbsp;&nbsp;├ {% elif r.level == 'county' %}&nbsp;&nbsp;&nbsp;&nbsp;└ {% endif %}
+              {{ r.name }} <span class="text-muted">({{ r.level }})</span>
+            </span>
+            <form method="post" action="{{ url_for('projects.manage_taxonomy') }}" onsubmit="return confirm('确认删除地区 {{ r.name }}？');">
+              {% if csrf_token is defined %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}
+              <input type="hidden" name="entity" value="region">
+              <input type="hidden" name="action" value="delete">
+              <input type="hidden" name="id" value="{{ r.id }}">
+              <button type="submit" class="btn btn-link btn-sm text-danger p-0 text-decoration-none">删除</button>
+            </form>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 门类维护 -->
+  <div class="col-lg-3">
+    <div class="card shadow-sm h-100">
+      <div class="card-header bg-white fw-semibold">非遗门类（{{ categories|length }}）</div>
+      <div class="card-body">
+        <form method="post" action="{{ url_for('projects.manage_taxonomy') }}" class="input-group input-group-sm mb-3">
+          {% if csrf_token is defined %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}
+          <input type="hidden" name="entity" value="category">
+          <input type="hidden" name="action" value="create">
+          <input type="text" name="name" class="form-control" placeholder="新增门类" required>
+          <button type="submit" class="btn btn-primary">添加</button>
+        </form>
+        <ul class="list-group list-group-flush small">
+          {% for c in categories %}
+          <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+            <span>{{ c.name }}</span>
+            <form method="post" action="{{ url_for('projects.manage_taxonomy') }}" onsubmit="return confirm('确认删除门类 {{ c.name }}？');">
+              {% if csrf_token is defined %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}
+              <input type="hidden" name="entity" value="category">
+              <input type="hidden" name="action" value="delete">
+              <input type="hidden" name="id" value="{{ c.id }}">
+              <button type="submit" class="btn btn-link btn-sm text-danger p-0 text-decoration-none">删除</button>
+            </form>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 标签维护 -->
+  <div class="col-lg-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-header bg-white fw-semibold">自由标签（{{ tags|length }}）</div>
+      <div class="card-body">
+        <form method="post" action="{{ url_for('projects.manage_taxonomy') }}" class="input-group input-group-sm mb-3">
+          {% if csrf_token is defined %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}
+          <input type="hidden" name="entity" value="tag">
+          <input type="hidden" name="action" value="create">
+          <input type="text" name="name" class="form-control" placeholder="新增标签（≤30字）" required>
+          <button type="submit" class="btn btn-primary">添加</button>
+        </form>
+        <div class="d-flex flex-wrap gap-2">
+          {% for t in tags %}
+          <span class="badge bg-light text-dark border d-inline-flex align-items-center gap-1 py-1 px-2">
+            {{ t.name }}
+            <form method="post" action="{{ url_for('projects.manage_taxonomy') }}" class="d-inline" onsubmit="return confirm('确认删除标签 {{ t.name }}？');">
+              {% if csrf_token is defined %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}
+              <input type="hidden" name="entity" value="tag">
+              <input type="hidden" name="action" value="delete">
+              <input type="hidden" name="id" value="{{ t.id }}">
+              <button type="submit" class="btn-close" style="font-size:0.55rem;" aria-label="删除"></button>
+            </form>
+          </span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

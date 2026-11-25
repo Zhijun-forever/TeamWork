@@ -1,0 +1,134 @@
+{# =====================================================================
+   文件说明：非遗项目库列表页（对应报告 API-10：GET /projects）
+   核心功能：关键词检索、省市县地区级联筛选、十大门类筛选、多标签勾选、4 种排序与 12 条/页分页
+   后端传入变量：pagination, projects, filters, regions, categories, tags
+   对接队友：谭应锋（前端美化时请保留各 input/select 的 name 属性，避免破坏后端查询参数）
+   ===================================================================== #}
+{% extends "base.html" %}
+{% block title %}非遗项目库 - 非遗数字化管理平台{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="h4 mb-0">非遗项目库 <small class="text-muted fs-6">（共 {{ pagination.total }} 项）</small></h1>
+  {% if current_user.is_authenticated and current_user.role in ('manager', 'admin', 'sysadmin') %}
+    <a class="btn btn-primary btn-sm" href="{{ url_for('projects.create_project') }}">+ 新建项目</a>
+  {% endif %}
+</div>
+
+<form method="get" action="{{ url_for('projects.list_projects') }}" class="card card-body mb-4 shadow-sm">
+  <input type="hidden" name="scope" value="{{ filters.scope }}">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-3">
+      <label class="form-label small mb-1">关键词</label>
+      <input type="text" class="form-control form-control-sm" name="q" value="{{ filters.q }}" placeholder="标题 / 摘要 / 正文">
+    </div>
+    <div class="col-md-2">
+      <label class="form-label small mb-1">地区（支持省级级联）</label>
+      <select class="form-select form-select-sm" name="region_id">
+        <option value="">全部地区</option>
+        {% for r in regions %}
+          <option value="{{ r.id }}" {% if filters.region_id == r.id %}selected{% endif %}>
+            {% if r.level == 'city' %}&nbsp;&nbsp;├ {% elif r.level == 'county' %}&nbsp;&nbsp;&nbsp;&nbsp;└ {% endif %}{{ r.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label small mb-1">非遗门类</label>
+      <select class="form-select form-select-sm" name="category_id">
+        <option value="">全部门类</option>
+        {% for c in categories %}
+          <option value="{{ c.id }}" {% if filters.category_id == c.id %}selected{% endif %}>{{ c.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label small mb-1">排序方式</label>
+      <select class="form-select form-select-sm" name="sort">
+        <option value="updated_at" {% if filters.sort == 'updated_at' %}selected{% endif %}>最近更新</option>
+        <option value="views" {% if filters.sort == 'views' %}selected{% endif %}>浏览量最高</option>
+        <option value="created_at" {% if filters.sort == 'created_at' %}selected{% endif %}>最新创建</option>
+        <option value="archived_at" {% if filters.sort == 'archived_at' %}selected{% endif %}>归档时间</option>
+      </select>
+    </div>
+    <div class="col-md-3 d-flex gap-2">
+      <button type="submit" class="btn btn-dark btn-sm flex-grow-1">筛选检索</button>
+      <a href="{{ url_for('projects.list_projects', scope=filters.scope) }}" class="btn btn-outline-secondary btn-sm">重置</a>
+    </div>
+  </div>
+
+  <div class="mt-3 pt-2 border-top">
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <span class="small text-muted">标签筛选：</span>
+      {% for t in tags %}
+        <div class="form-check form-check-inline mb-0">
+          <input class="form-check-input" type="checkbox" name="tag_id" value="{{ t.id }}"
+                 id="tag-{{ t.id }}" {% if t.id in filters.tag_ids %}checked{% endif %}>
+          <label class="form-check-label small" for="tag-{{ t.id }}">{{ t.name }}</label>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</form>
+
+{% if projects %}
+<div class="row row-cols-1 row-cols-md-3 g-3">
+  {% for p in projects %}
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      {% set ns = namespace(cover=None) %}
+      {% for m in p.media_assets %}
+        {% if m.is_cover %}{% set ns.cover = m %}{% endif %}
+      {% endfor %}
+      {% if ns.cover %}
+        <img src="{{ url_for('projects.serve_media', asset_id=ns.cover.id) }}" class="card-img-top" alt="{{ p.title }}" style="height:160px;object-fit:cover;">
+      {% endif %}
+      <div class="card-body d-flex flex-column">
+        <div class="d-flex justify-content-between align-items-start mb-1">
+          <h2 class="h6 card-title mb-0">
+            <a class="text-decoration-none text-dark" href="{{ url_for('projects.project_detail', project_id=p.id) }}">{{ p.title }}</a>
+          </h2>
+          {% if filters.scope != 'public' %}
+            <span class="badge bg-secondary">{{ p.status }}</span>
+          {% endif %}
+        </div>
+        <div class="small text-muted mb-2">
+          {{ p.category.name if p.category else '-' }} · {{ p.region.name if p.region else '-' }} · 浏览 {{ p.views }}
+        </div>
+        <p class="card-text small text-secondary flex-grow-1">{{ p.summary[:80] }}{% if p.summary|length > 80 %}...{% endif %}</p>
+        <div class="d-flex flex-wrap gap-1 mt-2">
+          {% for t in p.tags %}
+            <span class="badge bg-light text-dark border">{{ t.name }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% if pagination.pages > 1 %}
+<nav class="mt-4" aria-label="分页导航">
+  <ul class="pagination pagination-sm justify-content-center">
+    <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+      <a class="page-link" href="{{ url_for('projects.list_projects', page=pagination.prev_num, scope=filters.scope, region_id=filters.region_id, category_id=filters.category_id, tag_id=filters.tag_ids, tag_mode=filters.tag_mode, q=filters.q, sort=filters.sort) }}">上一页</a>
+    </li>
+    {% for pnum in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+      {% if pnum %}
+        <li class="page-item {% if pnum == pagination.page %}active{% endif %}">
+          <a class="page-link" href="{{ url_for('projects.list_projects', page=pnum, scope=filters.scope, region_id=filters.region_id, category_id=filters.category_id, tag_id=filters.tag_ids, tag_mode=filters.tag_mode, q=filters.q, sort=filters.sort) }}">{{ pnum }}</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled"><span class="page-link">…</span></li>
+      {% endif %}
+    {% endfor %}
+    <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+      <a class="page-link" href="{{ url_for('projects.list_projects', page=pagination.next_num, scope=filters.scope, region_id=filters.region_id, category_id=filters.category_id, tag_id=filters.tag_ids, tag_mode=filters.tag_mode, q=filters.q, sort=filters.sort) }}">下一页</a>
+    </li>
+  </ul>
+</nav>
+{% endif %}
+{% else %}
+<div class="alert alert-light border text-center py-5">未检索到符合条件的非遗项目。</div>
+{% endif %}
+{% endblock %}

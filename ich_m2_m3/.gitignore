@@ -1,0 +1,18 @@
+# Python 缓存与虚拟环境
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# 本地数据库、环境变量与测试上传文件（保留 uploads 目录占位文件）
+.env
+instance/*.db
+instance/*.db-*
+instance/uploads/*
+!instance/uploads/.gitkeep
+
+# 编辑器配置
+.vscode/
+.idea/
+.DS_Store

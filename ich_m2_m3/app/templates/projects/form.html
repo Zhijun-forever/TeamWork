@@ -1,0 +1,124 @@
+{# =====================================================================
+   文件说明：新建 / 编辑非遗项目共用表单页（对应报告 API-12 & API-13）
+   核心功能：必填项逐字段错误高亮回显（TE-01）、封面图与多附件上传（multipart/form-data）、可选 CSRF 兼容
+   后端传入变量：mode('create'|'edit'), project, form_data, errors, regions, categories, tags
+   对接队友：谭应锋（请保留 enctype="multipart/form-data" 及各字段 name 与 errors 回显逻辑）
+   ===================================================================== #}
+{% extends "base.html" %}
+{% block title %}{{ '编辑项目' if mode == 'edit' else '新建项目' }} - 非遗数字化管理平台{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+    <div class="card shadow-sm">
+      <div class="card-header bg-white">
+        <h1 class="h5 mb-0">{{ '编辑非遗项目' if mode == 'edit' else '新建非遗项目' }}</h1>
+      </div>
+      <div class="card-body">
+        {% if errors.get('media') %}
+          <div class="alert alert-danger py-2 small">{{ errors.get('media') }}</div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data"
+              action="{{ url_for('projects.edit_project', project_id=project.id) if mode == 'edit' else url_for('projects.create_project') }}">
+          {% if csrf_token is defined %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}
+
+          <div class="mb-3">
+            <label class="form-label">项目标题 <span class="text-danger">*</span></label>
+            <input type="text" name="title" maxlength="100"
+                   class="form-control {% if errors.get('title') %}is-invalid{% endif %}"
+                   value="{{ form_data.get('title', '') }}">
+            {% if errors.get('title') %}<div class="invalid-feedback">{{ errors.get('title') }}</div>{% endif %}
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-4">
+              <label class="form-label">所属地区 <span class="text-danger">*</span></label>
+              <select name="region_id" class="form-select {% if errors.get('region_id') %}is-invalid{% endif %}">
+                <option value="">请选择地区</option>
+                {% for r in regions %}
+                  <option value="{{ r.id }}" {% if (form_data.get('region_id')|string) == (r.id|string) %}selected{% endif %}>
+                    {% if r.level == 'city' %}├ {% elif r.level == 'county' %}└ {% endif %}{{ r.name }}
+                  </option>
+                {% endfor %}
+              </select>
+              {% if errors.get('region_id') %}<div class="invalid-feedback">{{ errors.get('region_id') }}</div>{% endif %}
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">非遗门类 <span class="text-danger">*</span></label>
+              <select name="category_id" class="form-select {% if errors.get('category_id') %}is-invalid{% endif %}">
+                <option value="">请选择门类</option>
+                {% for c in categories %}
+                  <option value="{{ c.id }}" {% if (form_data.get('category_id')|string) == (c.id|string) %}selected{% endif %}>{{ c.name }}</option>
+                {% endfor %}
+              </select>
+              {% if errors.get('category_id') %}<div class="invalid-feedback">{{ errors.get('category_id') }}</div>{% endif %}
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label">可见性</label>
+              <select name="visibility" class="form-select {% if errors.get('visibility') %}is-invalid{% endif %}">
+                <option value="public" {% if form_data.get('visibility', 'public') == 'public' %}selected{% endif %}>公开（public）</option>
+                <option value="internal" {% if form_data.get('visibility') == 'internal' %}selected{% endif %}>内部（internal）</option>
+              </select>
+              {% if errors.get('visibility') %}<div class="invalid-feedback">{{ errors.get('visibility') }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">项目摘要 <span class="text-danger">*</span></label>
+            <textarea name="summary" rows="2" class="form-control {% if errors.get('summary') %}is-invalid{% endif %}">{{ form_data.get('summary', '') }}</textarea>
+            {% if errors.get('summary') %}<div class="invalid-feedback">{{ errors.get('summary') }}</div>{% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">标签（可多选）</label>
+            <div class="border rounded p-2 bg-light">
+              {% set selected_tags = form_data.get('tag_ids', []) | map('string') | list %}
+              {% for t in tags %}
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="tag_ids" value="{{ t.id }}"
+                         id="ftag-{{ t.id }}" {% if (t.id|string) in selected_tags %}checked{% endif %}>
+                  <label class="form-check-label small" for="ftag-{{ t.id }}">{{ t.name }}</label>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">详细内容（工艺/艺术特征）</label>
+            <textarea name="content" rows="4" class="form-control">{{ form_data.get('content', '') }}</textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">历史渊源</label>
+            <textarea name="history" rows="3" class="form-control">{{ form_data.get('history', '') }}</textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">保护单位与保护措施</label>
+            <textarea name="protection" rows="3" class="form-control">{{ form_data.get('protection', '') }}</textarea>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label">封面图片（JPG/PNG/WebP，≤5MB）</label>
+              <input type="file" name="cover" accept=".jpg,.jpeg,.png,.webp" class="form-control form-control-sm">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">图集或 PDF 资料（可多选，PDF ≤10MB）</label>
+              <input type="file" name="attachments" accept=".jpg,.jpeg,.png,.webp,.pdf" multiple class="form-control form-control-sm">
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2">
+            <a href="{{ url_for('projects.list_projects') }}" class="btn btn-outline-secondary">取消</a>
+            <button type="submit" class="btn btn-primary">{{ '保存修改' if mode == 'edit' else '提交保存' }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

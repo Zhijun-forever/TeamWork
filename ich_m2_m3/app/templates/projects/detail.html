@@ -1,0 +1,90 @@
+{# =====================================================================
+   文件说明：非遗项目详情页（对应报告 API-11：GET /projects/<id>）
+   核心功能：展示项目主信息、标签、受控媒体图集/PDF 附件、简介/历史/保护单位三段正文及编辑/删除入口
+   后端传入变量：project（含 project.region / category / tags / detail / media_assets）
+   对接队友：谭应锋（美化）、方成朋（后续可在此页挂接“提交审核 / 归档 / 申请修改”按钮）
+   ===================================================================== #}
+{% extends "base.html" %}
+{% block title %}{{ project.title }} - 非遗数字化管理平台{% endblock %}
+
+{% block content %}
+<div class="mb-3">
+  <a href="{{ url_for('projects.list_projects') }}" class="text-decoration-none small">&larr; 返回项目库</a>
+</div>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+      <div>
+        <h1 class="h3 mb-1">{{ project.title }}</h1>
+        <div class="small text-muted">
+          门类：<strong>{{ project.category.name if project.category else '-' }}</strong>
+          · 地区：<strong>{{ project.region.name if project.region else '-' }}</strong>
+          · 浏览量：<strong>{{ project.views }}</strong>
+          · 状态：<span class="badge bg-info text-dark">{{ project.status }}</span>
+          · 可见性：<span class="badge bg-secondary">{{ project.visibility }}</span>
+        </div>
+      </div>
+
+      {% if current_user.is_authenticated and current_user.role in ('manager', 'admin', 'sysadmin') %}
+      <div class="d-flex gap-2">
+        {% if project.status != 'archived' %}
+          <a class="btn btn-outline-primary btn-sm" href="{{ url_for('projects.edit_project', project_id=project.id) }}">编辑项目</a>
+        {% else %}
+          <span class="badge bg-warning text-dark align-self-center">已归档（只读）</span>
+        {% endif %}
+        <form method="post" action="{{ url_for('projects.delete_project', project_id=project.id) }}" onsubmit="return confirm('确认软删除该项目吗？');">
+          {% if csrf_token is defined %}<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">{% endif %}
+          <button type="submit" class="btn btn-outline-danger btn-sm">删除</button>
+        </form>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="mb-3">
+      {% for t in project.tags %}
+        <span class="badge bg-light text-dark border me-1">#{{ t.name }}</span>
+      {% endfor %}
+    </div>
+
+    <p class="lead fs-6 bg-light p-3 rounded border">{{ project.summary }}</p>
+
+    {% if project.media_assets %}
+    <h2 class="h6 mt-4">项目媒体与附件</h2>
+    <div class="row g-2 mb-3">
+      {% for m in project.media_assets %}
+        {% if m.path.lower().endswith('.pdf') %}
+          <div class="col-12">
+            <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('projects.serve_media', asset_id=m.id) }}" target="_blank">
+              查看 PDF 资料（附件 #{{ m.id }}）
+            </a>
+          </div>
+        {% else %}
+          <div class="col-6 col-md-3">
+            <a href="{{ url_for('projects.serve_media', asset_id=m.id) }}" target="_blank">
+              <img src="{{ url_for('projects.serve_media', asset_id=m.id) }}" class="img-fluid rounded border" alt="项目图片">
+            </a>
+            {% if m.is_cover %}<div class="small text-muted text-center">封面图</div>{% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if project.detail %}
+      <h2 class="h6 mt-4">项目简介与特征</h2>
+      <p style="white-space: pre-line;">{{ project.detail.content }}</p>
+
+      {% if project.detail.history %}
+        <h2 class="h6 mt-4">历史渊源</h2>
+        <p style="white-space: pre-line;">{{ project.detail.history }}</p>
+      {% endif %}
+
+      {% if project.detail.protection %}
+        <h2 class="h6 mt-4">保护单位与保护措施</h2>
+        <p style="white-space: pre-line;">{{ project.detail.protection }}</p>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

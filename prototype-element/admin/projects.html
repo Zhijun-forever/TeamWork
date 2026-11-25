@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>项目库 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="projects"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="项目库" data-crumb="项目管理 / 项目库"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">项目库</h1>
+            <p class="page-head__desc">维护非遗项目资料，跟踪从草稿到归档的完整状态。</p>
+          </div>
+          <div class="page-head__actions">
+            <button class="el-button" type="button" data-toast="导出任务已创建"><i data-icon="download"></i> 导出清单</button>
+            <a class="el-button el-button--primary" href="project-new.html"><i data-icon="plus"></i> 新建项目</a>
+          </div>
+        </div>
+
+        <section class="stat-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">全部项目</div>
+              <div class="stat-card__value">50</div>
+              <div class="stat-card__meta">含草稿、待审核与归档</div>
+            </div>
+            <span class="stat-card__icon"><i data-icon="folder" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">已发布</div>
+              <div class="stat-card__value">34</div>
+              <div class="stat-card__meta"><i data-icon="trend" class="text-green"></i> 本月新增 8 个</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--green"><i data-icon="check-circle" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">待审核</div>
+              <div class="stat-card__value">6</div>
+              <div class="stat-card__meta"><i data-icon="clock" class="text-orange"></i> 2 个超过 24 小时</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--orange"><i data-icon="check-circle" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">已归档</div>
+              <div class="stat-card__value">3</div>
+              <div class="stat-card__meta">归档后只读，可恢复</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--gray"><i data-icon="archive" class="el-icon--lg"></i></span>
+          </div>
+        </section>
+
+        <!-- 筛选 -->
+        <div class="el-card filter-card">
+          <div class="el-card__body">
+            <div class="filter-row">
+              <div class="filter-item filter-item--wide">
+                <label class="filter-label" for="q">关键词</label>
+                <div class="el-input">
+                  <span class="el-input__prefix"><i data-icon="search" class="el-icon--sm"></i></span>
+                  <input class="el-input__inner" id="q" type="search" placeholder="项目名称、摘要、编号">
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="region">地区</label>
+                <div class="el-select">
+                  <select id="region">
+                    <option>全部地区</option>
+                    <option>贵州省</option>
+                    <option>江苏省</option>
+                    <option>浙江省</option>
+                    <option>福建省</option>
+                    <option>江西省</option>
+                    <option>陕西省</option>
+                    <option>西藏自治区</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="category">门类</label>
+                <div class="el-select">
+                  <select id="category">
+                    <option>全部门类</option>
+                    <option>民间文学</option>
+                    <option>传统音乐</option>
+                    <option>传统舞蹈</option>
+                    <option>传统戏剧</option>
+                    <option>曲艺</option>
+                    <option>传统美术</option>
+                    <option>传统技艺</option>
+                    <option>传统医药</option>
+                    <option>民俗</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="status">状态</label>
+                <div class="el-select">
+                  <select id="status">
+                    <option>全部状态</option>
+                    <option>已发布</option>
+                    <option>待审核</option>
+                    <option>已驳回</option>
+                    <option>草稿</option>
+                    <option>已归档</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="sort">排序</label>
+                <div class="el-select">
+                  <select id="sort">
+                    <option>最近更新</option>
+                    <option>浏览量从高到低</option>
+                    <option>创建时间从新到旧</option>
+                    <option>归档时间从新到旧</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-actions">
+                <button class="el-button el-button--primary" type="button" data-filter-submit><i data-icon="search"></i> 查询</button>
+                <button class="el-button" type="button" data-toast="已重置筛选条件">重置</button>
+              </div>
+            </div>
+            <div class="active-filters">
+              <span>已应用：</span>
+              <span class="el-tag">状态：全部 <span class="close">✕</span></span>
+              <span class="el-tag">排序：最近更新 <span class="close">✕</span></span>
+              <span class="text-placeholder">共 50 条记录，12 条 / 页</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 表格 -->
+        <div class="el-card table-card">
+          <div class="table-toolbar">
+            <div class="table-toolbar__left">
+              <span class="cell-title text-primary">全部项目</span>
+              <span>共 50 条</span>
+            </div>
+            <div class="table-toolbar__right">
+              <button class="el-button el-button--small" type="button" data-toast="列表已刷新"><i data-icon="refresh"></i> 刷新</button>
+              <button class="el-button el-button--small" type="button" data-toast="导出任务已创建"><i data-icon="download"></i> 导出</button>
+            </div>
+          </div>
+
+          <div class="selection-bar" style="margin: 12px 20px 0;">
+            已选择 <strong data-selected-count>0</strong> 个项目
+            <button class="el-button el-button--primary" type="button" data-toast="批量操作已提交">批量归档</button>
+            <button class="el-button" type="button" data-toast="批量操作已提交">批量导出</button>
+            <button class="el-button el-button--text" type="button" data-toast="已清空选择">取消选择</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="el-table">
+              <thead>
+                <tr>
+                  <th class="check-col">
+                    <label class="el-checkbox" aria-label="全选">
+                      <input type="checkbox" data-select-all>
+                      <span class="el-checkbox__box"></span>
+                    </label>
+                  </th>
+                  <th>项目</th>
+                  <th>地区</th>
+                  <th>门类</th>
+                  <th>状态</th>
+                  <th>浏览量</th>
+                  <th>更新时间</th>
+                  <th class="col-actions">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-record-id="12">
+                  <td class="check-col"><label class="el-checkbox" aria-label="选择苗族刺绣"><input type="checkbox" data-row-check><span class="el-checkbox__box"></span></label></td>
+                  <td>
+                    <div class="project-cell">
+                      <span class="thumb">绣</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">苗族刺绣</div>
+                        <div class="cell-sub">ID 12 · manager01</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>贵州省 / 黔东南州</td>
+                  <td>传统美术</td>
+                  <td><span class="el-tag el-tag--success"><span class="dot"></span>已发布</span></td>
+                  <td>12,480</td>
+                  <td>2026-11-21 10:24</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <a href="../site/project.html">查看</a>
+                      <a href="project-edit.html">编辑</a>
+                      <button class="is-danger" type="button" data-dialog-open="archiveDialog">归档</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="11">
+                  <td class="check-col"><label class="el-checkbox" aria-label="选择侗族大歌"><input type="checkbox" data-row-check><span class="el-checkbox__box"></span></label></td>
+                  <td>
+                    <div class="project-cell">
+                      <span class="thumb thumb--green">歌</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">侗族大歌</div>
+                        <div class="cell-sub">ID 11 · manager01</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>贵州省 / 黔东南州</td>
+                  <td>传统音乐</td>
+                  <td><span class="el-tag el-tag--success"><span class="dot"></span>已发布</span></td>
+                  <td>9,860</td>
+                  <td>2026-11-20 15:12</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <a href="../site/project.html">查看</a>
+                      <a href="project-edit.html">编辑</a>
+                      <button class="is-danger" type="button" data-dialog-open="archiveDialog">归档</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="10">
+                  <td class="check-col"><label class="el-checkbox" aria-label="选择景德镇手工制瓷技艺"><input type="checkbox" data-row-check><span class="el-checkbox__box"></span></label></td>
+                  <td>
+                    <div class="project-cell">
+                      <span class="thumb thumb--orange">瓷</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">景德镇手工制瓷技艺</div>
+                        <div class="cell-sub">ID 10 · manager02</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>江西省 / 景德镇市</td>
+                  <td>传统技艺</td>
+                  <td><span class="el-tag el-tag--warning"><span class="dot"></span>待审核</span></td>
+                  <td>8,310</td>
+                  <td>2026-11-19 09:40</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <a href="review.html">审核</a>
+                      <a href="../site/project.html">查看</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="9">
+                  <td class="check-col"><label class="el-checkbox" aria-label="选择南京云锦织造技艺"><input type="checkbox" data-row-check><span class="el-checkbox__box"></span></label></td>
+                  <td>
+                    <div class="project-cell">
+                      <span class="thumb thumb--red">锦</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">南京云锦织造技艺</div>
+                        <div class="cell-sub">ID 9 · manager03</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>江苏省 / 南京市</td>
+                  <td>传统技艺</td>
+                  <td><span class="el-tag el-tag--success"><span class="dot"></span>已发布</span></td>
+                  <td>7,940</td>
+                  <td>2026-11-18 16:05</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <a href="../site/project.html">查看</a>
+                      <a href="project-edit.html">编辑</a>
+                      <button class="is-danger" type="button" data-dialog-open="archiveDialog">归档</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="8">
+                  <td class="check-col"><label class="el-checkbox" aria-label="选择泉州提线木偶戏"><input type="checkbox" data-row-check><span class="el-checkbox__box"></span></label></td>
+                  <td>
+                    <div class="project-cell">
+                      <span class="thumb thumb--gray">偶</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">泉州提线木偶戏</div>
+                        <div class="cell-sub">ID 8 · manager04</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>福建省 / 泉州市</td>
+                  <td>传统戏剧</td>
+                  <td><span class="el-tag el-tag--danger"><span class="dot"></span>已驳回</span></td>
+                  <td>6,720</td>
+                  <td>2026-11-17 11:30</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <a href="project-edit.html">修改</a>
+                      <a href="project-edit.html">查看意见</a>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="7">
+                  <td class="check-col"><label class="el-checkbox" aria-label="选择陕北剪纸"><input type="checkbox" data-row-check><span class="el-checkbox__box"></span></label></td>
+                  <td>
+                    <div class="project-cell">
+                      <span class="thumb thumb--gray">纸</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">陕北剪纸</div>
+                        <div class="cell-sub">ID 7 · manager01</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>陕西省 / 延安市</td>
+                  <td>传统美术</td>
+                  <td><span class="el-tag el-tag--info"><span class="dot"></span>草稿</span></td>
+                  <td>—</td>
+                  <td>2026-11-16 14:08</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <a href="project-edit.html">编辑</a>
+                      <button type="button" data-api="project-status" data-action="submit">提交</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="6">
+                  <td class="check-col"><label class="el-checkbox" aria-label="选择藏医药浴法"><input type="checkbox" data-row-check><span class="el-checkbox__box"></span></label></td>
+                  <td>
+                    <div class="project-cell">
+                      <span class="thumb thumb--green">藏</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">藏医药浴法</div>
+                        <div class="cell-sub">ID 6 · manager05</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>西藏自治区 / 拉萨市</td>
+                  <td>传统医药</td>
+                  <td><span class="el-tag el-tag--info"><span class="dot"></span>已归档</span></td>
+                  <td>5,380</td>
+                  <td>2026-11-15 17:20</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <a href="../site/project.html">查看</a>
+                      <button type="button" data-api="project-status" data-action="request_edit">申请恢复</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="5">
+                  <td class="check-col"><label class="el-checkbox" aria-label="选择苏州评弹"><input type="checkbox" data-row-check><span class="el-checkbox__box"></span></label></td>
+                  <td>
+                    <div class="project-cell">
+                      <span class="thumb thumb--green">弹</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">苏州评弹</div>
+                        <div class="cell-sub">ID 5 · manager03</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>江苏省 / 苏州市</td>
+                  <td>曲艺</td>
+                  <td><span class="el-tag el-tag--success"><span class="dot"></span>已发布</span></td>
+                  <td>4,960</td>
+                  <td>2026-11-14 10:18</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <a href="../site/project.html">查看</a>
+                      <a href="project-edit.html">编辑</a>
+                      <button class="is-danger" type="button" data-dialog-open="archiveDialog">归档</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <span>共 50 条 · 每页 12 条</span>
+            <nav class="el-pagination" aria-label="分页">
+              <button type="button" aria-label="上一页"><i data-icon="chevron-left"></i></button>
+              <button class="is-active" type="button" aria-current="page">1</button>
+              <button type="button">2</button>
+              <button type="button">3</button>
+              <button type="button">4</button>
+              <button type="button">5</button>
+              <button type="button" aria-label="下一页"><i data-icon="chevron-right"></i></button>
+            </nav>
+          </div>
+        </div>
+
+        <p class="muted-note mt-16">提示：状态为“已归档”的项目只读；恢复编辑需提交修改申请，经管理员同意后生效。</p>
+      </main>
+    </div>
+  </div>
+
+  <!-- 归档确认弹窗 -->
+  <div class="el-dialog" id="archiveDialog" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="archiveDialogTitle">
+    <div class="el-dialog__mask" data-dialog-close></div>
+    <div class="el-dialog__panel">
+      <div class="el-dialog__header">
+        <div>
+          <div class="el-dialog__title" id="archiveDialogTitle">归档项目</div>
+          <div class="el-dialog__subtitle">归档后项目进入只读状态，公众端仍可查看，管理者需申请才能恢复编辑。</div>
+        </div>
+        <button class="el-dialog__close" type="button" data-dialog-close aria-label="关闭">✕</button>
+      </div>
+      <div class="el-dialog__body">
+        <div class="el-alert el-alert--warning">
+          <span class="el-alert__icon"><i data-icon="alert-circle"></i></span>
+          <div class="el-alert__body">
+            <div class="el-alert__title">确认归档所选项目？</div>
+            <div class="el-alert__desc">本次操作会写入审核记录，可在“归档管理”中恢复。</div>
+          </div>
+        </div>
+        <div class="el-form-item mt-16">
+          <label class="el-form-item__label" for="archiveNote">归档原因（可选）</label>
+          <textarea class="el-textarea__inner" id="archiveNote" rows="3" placeholder="例如：项目资料需重新核对，暂时归档"></textarea>
+        </div>
+      </div>
+      <div class="el-dialog__footer">
+        <button class="el-button" type="button" data-dialog-close>取消</button>
+        <button class="el-button el-button--danger" type="button" data-api="project-status" data-action="archive" data-comment="#archiveNote">确认归档</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

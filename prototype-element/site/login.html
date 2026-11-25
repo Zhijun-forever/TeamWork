@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录 · 非遗数字化管理平台</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <div class="auth-page">
+    <!-- 品牌侧 -->
+    <aside class="auth-aside">
+      <a class="auth-aside__brand site-brand" href="home.html">
+        <span class="site-brand__logo">非</span>
+        <span class="site-brand__name">非遗数字化平台</span>
+        
+      </a>
+
+      <div class="auth-aside__content">
+        <h1 class="auth-aside__title">让项目资料<br>可追溯、可检索、可对话</h1>
+        <p class="auth-aside__desc">
+          面向省市级非遗保护中心、项目保护单位与公众的轻量平台。
+          四类角色、六个模块，项目从草稿到归档全程留痕。
+        </p>
+        <div class="auth-features">
+          <div class="auth-feature">
+            <span class="auth-feature__icon"><i data-icon="layers"></i></span>
+            <div>
+              <div class="auth-feature__title">全生命周期管理</div>
+              <div class="auth-feature__desc">草稿 → 待审核 → 发布 / 驳回 → 归档，状态迁移有审计记录。</div>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <span class="auth-feature__icon"><i data-icon="filter"></i></span>
+            <div>
+              <div class="auth-feature__title">分类检索与 AI 问答</div>
+              <div class="auth-feature__desc">地区树、十大门类、标签组合筛选；回答带引用来源。</div>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <span class="auth-feature__icon"><i data-icon="shield"></i></span>
+            <div>
+              <div class="auth-feature__title">四类角色与项目认证</div>
+              <div class="auth-feature__desc">服务端逐路由鉴权，管理者只维护自己认证的项目。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="auth-aside__foot">© 2026 非遗数字化管理平台 · 数据来自公开名录与项目保护单位资料</p>
+    </aside>
+
+    <!-- 表单侧 -->
+    <main class="auth-main">
+      <div class="auth-box">
+        <a class="auth-mobile-brand site-brand" href="home.html">
+          <span class="site-brand__logo">非</span>
+          <span class="site-brand__name">非遗数字化平台</span>
+        </a>
+        <h2 class="auth-box__title">欢迎回来</h2>
+        <p class="auth-box__desc">登录后可管理项目、查看审核状态，并使用 AI 知识问答。</p>
+
+        <form class="auth-form" data-login-form>
+          <div class="el-form-item">
+            <label class="el-form-item__label" for="loginAccount">账号</label>
+            <div class="el-input">
+              <span class="el-input__prefix"><i data-icon="user" class="el-icon--sm"></i></span>
+              <input class="el-input__inner" id="loginAccount" name="username" type="text" placeholder="用户名 / 邮箱" autocomplete="username" required>
+            </div>
+          </div>
+          <div class="el-form-item">
+            <label class="el-form-item__label" for="loginPassword">密码</label>
+            <div class="el-input">
+              <span class="el-input__prefix"><i data-icon="lock" class="el-icon--sm"></i></span>
+              <input class="el-input__inner" id="loginPassword" name="password" type="password" placeholder="请输入密码" autocomplete="current-password" required>
+              <button class="el-input__suffix" type="button" data-toggle-password="#loginPassword" aria-label="显示或隐藏密码" style="border:none;background:none;cursor:pointer;">
+                <i data-icon="eye" class="el-icon--sm"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="auth-row">
+            <label class="el-checkbox">
+              <input type="checkbox" checked>
+              <span class="el-checkbox__box"></span>
+              <span>记住我</span>
+            </label>
+            <a href="javascript:;" data-toast="请联系管理员重置密码">忘记密码？</a>
+          </div>
+
+          <button class="el-button el-button--primary is-block" type="submit">登录</button>
+        </form>
+
+        <div class="el-divider el-divider--with-text">测试账号快速填入</div>
+        <div class="demo-accounts" style="margin-top:0;">
+          <div class="demo-accounts__title">选择角色后自动填充账号与密码（123456）</div>
+          <div class="demo-accounts__list">
+            <button class="demo-account" type="button" data-demo-user="sysadmin">系统管理员</button>
+            <button class="demo-account" type="button" data-demo-user="admin01">管理员</button>
+            <button class="demo-account" type="button" data-demo-user="manager01">项目管理者</button>
+            <button class="demo-account" type="button" data-demo-user="user01">普通用户</button>
+          </div>
+        </div>
+
+        <p class="auth-switch">还没有账号？<a href="register.html">注册新账号</a></p>
+
+        <p class="auth-note">
+          开发环境提供测试账号用于验证四类角色入口；正式环境由服务端会话维护登录态，
+          使用 Werkzeug 哈希、CSRF 与服务端鉴权。
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

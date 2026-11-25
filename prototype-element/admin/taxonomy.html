@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>分类体系 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="taxonomy"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="分类体系" data-crumb="认证与分类 / 分类体系"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">分类体系</h1>
+            <p class="page-head__desc">维护省 / 市 / 县地区树、十大门类与自由标签；分类调整会影响公众端筛选。</p>
+          </div>
+          <div class="page-head__actions">
+            <button class="el-button el-button--primary" type="button" data-dialog-open="taxonomyDialog"><i data-icon="plus"></i> 新增分类节点</button>
+          </div>
+        </div>
+
+        <div class="el-tabs" data-tabs>
+          <div class="el-tabs__header" role="tablist" aria-label="分类体系">
+            <button class="el-tabs__item is-active" type="button" data-tab="regions" role="tab" aria-selected="true">地区管理</button>
+            <button class="el-tabs__item" type="button" data-tab="categories" role="tab" aria-selected="false">门类管理</button>
+            <button class="el-tabs__item" type="button" data-tab="tags" role="tab" aria-selected="false">标签管理</button>
+          </div>
+          <div class="el-tabs__body">
+            <!-- 地区 -->
+            <div data-tab-panel="regions" class="is-active">
+              <div class="taxonomy-layout">
+                <div class="el-card">
+                  <div class="el-card__header">
+                    <span class="el-card__title">地区树</span>
+                    <button class="el-button el-button--small" type="button" data-dialog-open="taxonomyDialog"><i data-icon="plus"></i> 新建</button>
+                  </div>
+                  <div class="el-card__body taxonomy-tree">
+                    <div class="el-tree">
+                      <div class="el-tree__node is-active">
+                        <i data-icon="chevron-down" class="el-icon--sm"></i>
+                        <i data-icon="map-pin"></i>
+                        <span>贵州省</span>
+                        <span class="el-tree__count">14</span>
+                      </div>
+                      <div class="el-tree__children">
+                        <div class="el-tree__node">
+                          <i data-icon="chevron-right" class="el-icon--sm"></i>
+                          <i data-icon="map-pin"></i>
+                          <span>黔东南州</span>
+                          <span class="el-tree__count">6</span>
+                        </div>
+                        <div class="el-tree__node">
+                          <i data-icon="chevron-right" class="el-icon--sm"></i>
+                          <i data-icon="map-pin"></i>
+                          <span>黔南州</span>
+                          <span class="el-tree__count">4</span>
+                        </div>
+                        <div class="el-tree__node">
+                          <i data-icon="chevron-right" class="el-icon--sm"></i>
+                          <i data-icon="map-pin"></i>
+                          <span>贵阳市</span>
+                          <span class="el-tree__count">4</span>
+                        </div>
+                      </div>
+                      <div class="el-tree__node">
+                        <i data-icon="chevron-right" class="el-icon--sm"></i>
+                        <i data-icon="map-pin"></i>
+                        <span>江苏省</span>
+                        <span class="el-tree__count">8</span>
+                      </div>
+                      <div class="el-tree__node">
+                        <i data-icon="chevron-right" class="el-icon--sm"></i>
+                        <i data-icon="map-pin"></i>
+                        <span>浙江省</span>
+                        <span class="el-tree__count">6</span>
+                      </div>
+                      <div class="el-tree__node">
+                        <i data-icon="chevron-right" class="el-icon--sm"></i>
+                        <i data-icon="map-pin"></i>
+                        <span>福建省</span>
+                        <span class="el-tree__count">5</span>
+                      </div>
+                      <div class="el-tree__node">
+                        <i data-icon="chevron-right" class="el-icon--sm"></i>
+                        <i data-icon="map-pin"></i>
+                        <span>江西省</span>
+                        <span class="el-tree__count">4</span>
+                      </div>
+                      <div class="el-tree__node">
+                        <i data-icon="chevron-right" class="el-icon--sm"></i>
+                        <i data-icon="map-pin"></i>
+                        <span>陕西省</span>
+                        <span class="el-tree__count">4</span>
+                      </div>
+                      <div class="el-tree__node">
+                        <i data-icon="chevron-right" class="el-icon--sm"></i>
+                        <i data-icon="map-pin"></i>
+                        <span>河南省</span>
+                        <span class="el-tree__count">3</span>
+                      </div>
+                      <div class="el-tree__node">
+                        <i data-icon="chevron-right" class="el-icon--sm"></i>
+                        <i data-icon="map-pin"></i>
+                        <span>安徽省</span>
+                        <span class="el-tree__count">3</span>
+                      </div>
+                      <div class="el-tree__node">
+                        <i data-icon="chevron-right" class="el-icon--sm"></i>
+                        <i data-icon="map-pin"></i>
+                        <span>山东省</span>
+                        <span class="el-tree__count">2</span>
+                      </div>
+                      <div class="el-tree__node">
+                        <i data-icon="chevron-right" class="el-icon--sm"></i>
+                        <i data-icon="map-pin"></i>
+                        <span>西藏自治区</span>
+                        <span class="el-tree__count">1</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="el-card table-card">
+                  <div class="table-toolbar">
+                    <div class="table-toolbar__left"><span class="cell-title text-primary">贵州省 / 黔东南州 下级地区</span><span>3 个节点</span></div>
+                    <div class="table-toolbar__right">
+                      <button class="el-button el-button--small" type="button" data-dialog-open="taxonomyDialog"><i data-icon="plus"></i> 添加下级</button>
+                    </div>
+                  </div>
+                  <div class="table-wrap">
+                    <table class="el-table">
+                      <thead>
+                        <tr><th>地区名称</th><th>层级</th><th>上级</th><th>项目数</th><th>排序</th><th class="col-actions">操作</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="cell-title">凯里市</td><td>县级</td><td>黔东南州</td><td>2</td><td>1</td>
+                          <td class="col-actions"><div class="table-actions"><button type="button" data-toast="编辑地区">编辑</button><button type="button" data-toast="添加下级地区">添加下级</button></div></td>
+                        </tr>
+                        <tr>
+                          <td class="cell-title">黎平县</td><td>县级</td><td>黔东南州</td><td>2</td><td>2</td>
+                          <td class="col-actions"><div class="table-actions"><button type="button" data-toast="编辑地区">编辑</button><button type="button" data-toast="添加下级地区">添加下级</button></div></td>
+                        </tr>
+                        <tr>
+                          <td class="cell-title">丹寨县</td><td>县级</td><td>黔东南州</td><td>2</td><td>3</td>
+                          <td class="col-actions"><div class="table-actions"><button type="button" data-toast="编辑地区">编辑</button><button type="button" data-toast="添加下级地区">添加下级</button></div></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="table-footer">
+                    <span class="muted-note">地区采用省 / 市 / 县三级树；删除前需确认该地区下无项目。</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 门类 -->
+            <div data-tab-panel="categories">
+              <div class="el-card table-card">
+                <div class="table-toolbar">
+                  <div class="table-toolbar__left"><span class="cell-title text-primary">十大门类</span><span>固定 10 个，不建议增删</span></div>
+                  <div class="table-toolbar__right"><button class="el-button el-button--small" type="button" data-dialog-open="taxonomyDialog"><i data-icon="plus"></i> 新增门类</button></div>
+                </div>
+                <div class="table-wrap">
+                  <table class="el-table">
+                    <thead>
+                      <tr><th>编码</th><th>门类名称</th><th>项目数</th><th>排序</th><th>状态</th><th class="col-actions">操作</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>C01</td><td class="cell-title">民间文学</td><td>6</td><td>1</td><td><span class="el-tag el-tag--success"><span class="dot"></span>启用</span></td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button></div></td></tr>
+                      <tr><td>C02</td><td class="cell-title">传统音乐</td><td>7</td><td>2</td><td><span class="el-tag el-tag--success"><span class="dot"></span>启用</span></td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button></div></td></tr>
+                      <tr><td>C03</td><td class="cell-title">传统舞蹈</td><td>5</td><td>3</td><td><span class="el-tag el-tag--success"><span class="dot"></span>启用</span></td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button></div></td></tr>
+                      <tr><td>C04</td><td class="cell-title">传统戏剧</td><td>6</td><td>4</td><td><span class="el-tag el-tag--success"><span class="dot"></span>启用</span></td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button></div></td></tr>
+                      <tr><td>C05</td><td class="cell-title">曲艺</td><td>4</td><td>5</td><td><span class="el-tag el-tag--success"><span class="dot"></span>启用</span></td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button></div></td></tr>
+                      <tr><td>C06</td><td class="cell-title">传统体育、游艺与杂技</td><td>3</td><td>6</td><td><span class="el-tag el-tag--success"><span class="dot"></span>启用</span></td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button></div></td></tr>
+                      <tr><td>C07</td><td class="cell-title">传统美术</td><td>8</td><td>7</td><td><span class="el-tag el-tag--success"><span class="dot"></span>启用</span></td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button></div></td></tr>
+                      <tr><td>C08</td><td class="cell-title">传统技艺</td><td>9</td><td>8</td><td><span class="el-tag el-tag--success"><span class="dot"></span>启用</span></td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button></div></td></tr>
+                      <tr><td>C09</td><td class="cell-title">传统医药</td><td>2</td><td>9</td><td><span class="el-tag el-tag--success"><span class="dot"></span>启用</span></td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button></div></td></tr>
+                      <tr><td>C10</td><td class="cell-title">民俗</td><td>5</td><td>10</td><td><span class="el-tag el-tag--success"><span class="dot"></span>启用</span></td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button></div></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-footer">
+                  <span class="muted-note">门类与项目为 1:N 关系；停用门类不会删除既有项目，但公众端不再展示该筛选项。</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 标签 -->
+            <div data-tab-panel="tags">
+              <div class="el-card mb-16">
+                <div class="el-card__body">
+                  <div class="flex-between flex-wrap gap-12">
+                    <div class="flex flex-wrap gap-8">
+                      <span class="el-tag el-tag--large">国家级</span>
+                      <span class="el-tag el-tag--large">省级</span>
+                      <span class="el-tag el-tag--large">手工技艺</span>
+                      <span class="el-tag el-tag--large">少数民族</span>
+                      <span class="el-tag el-tag--large">节庆民俗</span>
+                      <span class="el-tag el-tag--large">口传文学</span>
+                      <span class="el-tag el-tag--large">传统服饰</span>
+                      <span class="el-tag el-tag--large">传统建筑</span>
+                    </div>
+                    <button class="el-button el-button--small" type="button" data-dialog-open="taxonomyDialog"><i data-icon="plus"></i> 新增标签</button>
+                  </div>
+                  <p class="muted-note mt-12">标签与项目为多对多关系（project_tag），每个项目最多 8 个标签。</p>
+                </div>
+              </div>
+
+              <div class="el-card table-card">
+                <div class="table-toolbar">
+                  <div class="table-toolbar__left"><span class="cell-title text-primary">全部标签</span><span>共 20 个</span></div>
+                  <div class="table-toolbar__right">
+                    <div class="el-input" style="width:200px;">
+                      <span class="el-input__prefix"><i data-icon="search" class="el-icon--sm"></i></span>
+                      <input class="el-input__inner" type="search" placeholder="搜索标签">
+                    </div>
+                  </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="el-table">
+                    <thead>
+                      <tr><th>标签</th><th>使用项目数</th><th>创建人</th><th>创建时间</th><th class="col-actions">操作</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td><span class="el-tag">国家级</span></td><td>24</td><td>admin01</td><td>2026-09-01</td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button><button class="is-danger" type="button" data-toast="标签已删除">删除</button></div></td></tr>
+                      <tr><td><span class="el-tag">省级</span></td><td>15</td><td>admin01</td><td>2026-09-01</td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button><button class="is-danger" type="button" data-toast="标签已删除">删除</button></div></td></tr>
+                      <tr><td><span class="el-tag">手工技艺</span></td><td>12</td><td>admin01</td><td>2026-09-02</td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button><button class="is-danger" type="button" data-toast="标签已删除">删除</button></div></td></tr>
+                      <tr><td><span class="el-tag">少数民族</span></td><td>11</td><td>admin01</td><td>2026-09-02</td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button><button class="is-danger" type="button" data-toast="标签已删除">删除</button></div></td></tr>
+                      <tr><td><span class="el-tag">节庆民俗</span></td><td>6</td><td>admin02</td><td>2026-10-08</td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button><button class="is-danger" type="button" data-toast="标签已删除">删除</button></div></td></tr>
+                      <tr><td><span class="el-tag">口传文学</span></td><td>5</td><td>admin02</td><td>2026-10-08</td><td class="col-actions"><div class="table-actions"><button type="button" data-dialog-open="taxonomyDialog">编辑</button><button class="is-danger" type="button" data-toast="标签已删除">删除</button></div></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-footer">
+                  <span>共 20 条 · 每页 12 条</span>
+                  <nav class="el-pagination" aria-label="分页">
+                    <button type="button" aria-label="上一页"><i data-icon="chevron-left"></i></button>
+                    <button class="is-active" type="button">1</button>
+                    <button type="button">2</button>
+                    <button type="button" aria-label="下一页"><i data-icon="chevron-right"></i></button>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="muted-note mt-16">分类变更不会联动到其他页面；正式实现需校验地区层级、门类唯一性与标签使用计数。</p>
+      </main>
+    </div>
+  </div>
+
+  <!-- 分类弹窗 -->
+  <div class="el-dialog" id="taxonomyDialog" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="taxonomyTitle">
+    <div class="el-dialog__mask" data-dialog-close></div>
+    <div class="el-dialog__panel">
+      <div class="el-dialog__header">
+        <div>
+          <div class="el-dialog__title" id="taxonomyTitle">新增分类节点</div>
+          <div class="el-dialog__subtitle">地区、门类与标签共用同一维护入口，按类型校验字段。</div>
+        </div>
+        <button class="el-dialog__close" type="button" data-dialog-close aria-label="关闭">✕</button>
+      </div>
+      <div class="el-dialog__body">
+        <div class="el-form-item">
+          <label class="el-form-item__label" for="taxType">分类类型</label>
+          <div class="el-select">
+            <select id="taxType">
+              <option>地区</option>
+              <option>门类</option>
+              <option>标签</option>
+            </select>
+          </div>
+        </div>
+        <div class="el-form-grid">
+          <div class="el-form-item">
+            <label class="el-form-item__label is-required" for="taxName">名称</label>
+            <div class="el-input"><input class="el-input__inner" id="taxName" type="text" placeholder="例如：黔东南州"></div>
+          </div>
+          <div class="el-form-item">
+            <label class="el-form-item__label" for="taxParent">上级节点</label>
+            <div class="el-select">
+              <select id="taxParent">
+                <option>无（顶级）</option>
+                <option selected>贵州省</option>
+                <option>江苏省</option>
+                <option>浙江省</option>
+              </select>
+            </div>
+          </div>
+          <div class="el-form-item">
+            <label class="el-form-item__label" for="taxLevel">层级</label>
+            <div class="el-select">
+              <select id="taxLevel"><option>省级</option><option selected>市级</option><option>县级</option></select>
+            </div>
+          </div>
+          <div class="el-form-item">
+            <label class="el-form-item__label" for="taxSort">排序</label>
+            <div class="el-input"><input class="el-input__inner" id="taxSort" type="number" value="1"></div>
+          </div>
+        </div>
+        <div class="el-form-item">
+          <label class="el-form-item__label" for="taxDesc">说明</label>
+          <textarea class="el-textarea__inner" id="taxDesc" rows="3" placeholder="选填，用于管理员备注"></textarea>
+        </div>
+      </div>
+      <div class="el-dialog__footer">
+        <button class="el-button" type="button" data-dialog-close>取消</button>
+        <button class="el-button el-button--primary" type="button" data-api="taxonomy-save">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

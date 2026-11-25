@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>系统运维 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="ops"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="系统运维" data-crumb="系统 / 系统运维"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">系统运维</h1>
+            <p class="page-head__desc">查看系统状态、执行备份与索引维护、审计关键操作。仅系统管理员可访问。</p>
+          </div>
+          <div class="page-head__actions">
+            <button class="el-button" type="button" data-toast="已下载最新备份"><i data-icon="download"></i> 下载备份</button>
+            <button class="el-button el-button--primary" type="button" data-dialog-open="backupDialog"><i data-icon="database"></i> 立即备份</button>
+          </div>
+        </div>
+
+        <div class="el-alert el-alert--success mb-16">
+          <span class="el-alert__icon"><i data-icon="check-circle"></i></span>
+          <div class="el-alert__body">
+            <div class="el-alert__title">所有服务运行正常</div>
+            <div class="el-alert__desc">最近一次健康检查：今天 10:32 · /healthz 返回 200 · 数据库 WAL 模式 · 上次备份 03:00 成功。</div>
+          </div>
+        </div>
+
+        <section class="stat-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">运行时长</div>
+              <div class="stat-card__value">12<span style="font-size:14px;font-weight:400;color:#909399;">天 6 小时</span></div>
+              <div class="stat-card__meta">上次重启 2026-11-13 04:20</div>
+            </div>
+            <span class="stat-card__icon"><i data-icon="activity" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">数据库大小</div>
+              <div class="stat-card__value">6.4<span style="font-size:14px;font-weight:400;color:#909399;">MB</span></div>
+              <div class="stat-card__meta">14 张表 · WAL 模式</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--green"><i data-icon="database" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">今日请求</div>
+              <div class="stat-card__value">386</div>
+              <div class="stat-card__meta"><i data-icon="trend" class="text-green"></i> 峰值为 10:00–11:00</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--orange"><i data-icon="server" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">错误率</div>
+              <div class="stat-card__value">0.2<span style="font-size:14px;font-weight:400;color:#909399;">%</span></div>
+              <div class="stat-card__meta">今日 1 次 404、0 次 500</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--gray"><i data-icon="alert-circle" class="el-icon--lg"></i></span>
+          </div>
+        </section>
+
+        <section class="content-grid cols-2-1">
+          <div class="el-card">
+            <div class="el-card__header">
+              <span class="el-card__title"><i data-icon="cpu"></i> 系统信息</span>
+              <button class="el-button el-button--text el-button--small" type="button" data-toast="系统信息已刷新">刷新</button>
+            </div>
+            <div class="el-card__body">
+              <div class="el-descriptions">
+                <div class="el-descriptions__item"><div class="el-descriptions__label">应用框架</div><div class="el-descriptions__value">Flask 3.x · Jinja2</div></div>
+                <div class="el-descriptions__item"><div class="el-descriptions__label">Python</div><div class="el-descriptions__value">3.12</div></div>
+                <div class="el-descriptions__item"><div class="el-descriptions__label">数据库</div><div class="el-descriptions__value">SQLite 3 · WAL · 6.4 MB</div></div>
+                <div class="el-descriptions__item"><div class="el-descriptions__label">部署方式</div><div class="el-descriptions__value">Waitress · 127.0.0.1:8000</div></div>
+                <div class="el-descriptions__item"><div class="el-descriptions__label">向量模型</div><div class="el-descriptions__value">bge-m3 · 1024 维</div></div>
+                <div class="el-descriptions__item"><div class="el-descriptions__label">生成模型</div><div class="el-descriptions__value">qwen-turbo · max_tokens 400</div></div>
+                <div class="el-descriptions__item"><div class="el-descriptions__label">数据表</div><div class="el-descriptions__value">14 张 · 索引 9 个</div></div>
+                <div class="el-descriptions__item"><div class="el-descriptions__label">备份策略</div><div class="el-descriptions__value">每日 03:00 · 保留 7 份</div></div>
+              </div>
+              <div class="el-divider"></div>
+              <div class="flex-between flex-wrap gap-8">
+                <span class="muted-note">健康检查 <code>GET /healthz</code> 返回 200 表示 Web 与数据库均可用。</span>
+                <button class="el-button el-button--small" type="button" data-toast="健康检查通过：200 OK">执行健康检查</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-card">
+            <div class="el-card__header">
+              <span class="el-card__title"><i data-icon="activity"></i> 服务状态</span>
+              <span class="el-tag el-tag--success"><span class="dot"></span>正常</span>
+            </div>
+            <div class="el-card__body">
+              <div class="kb-status">
+                <span class="kb-status__icon"><i data-icon="globe"></i></span>
+                <div style="flex:1;">
+                  <div class="el-flex-between flex-between"><span class="kb-status__value">Web 服务</span><span class="el-tag el-tag--success">12 ms</span></div>
+                  <div class="kb-status__label">Waitress · 127.0.0.1:8000</div>
+                </div>
+              </div>
+              <div class="kb-status">
+                <span class="kb-status__icon"><i data-icon="database"></i></span>
+                <div style="flex:1;">
+                  <div class="flex-between"><span class="kb-status__value">SQLite 数据库</span><span class="el-tag el-tag--success">4 ms</span></div>
+                  <div class="kb-status__label">WAL 模式 · 最近备份 03:00</div>
+                </div>
+              </div>
+              <div class="kb-status">
+                <span class="kb-status__icon"><i data-icon="layers"></i></span>
+                <div style="flex:1;">
+                  <div class="flex-between"><span class="kb-status__value">向量检索</span><span class="el-tag el-tag--success">210 ms</span></div>
+                  <div class="kb-status__label">386 个知识块 · Top3</div>
+                </div>
+              </div>
+              <div class="kb-status">
+                <span class="kb-status__icon"><i data-icon="sparkles"></i></span>
+                <div style="flex:1;">
+                  <div class="flex-between"><span class="kb-status__value">大模型 API</span><span class="el-tag el-tag--warning">1.6 s</span></div>
+                  <div class="kb-status__label">通义千问 · 正常，偶有延迟</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-grid cols-4 mt-16">
+          <div class="ops-tile">
+            <div class="ops-tile__head">
+              <span class="ops-tile__icon"><i data-icon="download"></i></span>
+              <span class="ops-tile__title">数据库备份</span>
+            </div>
+            <p class="ops-tile__desc">打包 app.db 与 uploads，生成可下载的备份文件。</p>
+            <div class="ops-tile__foot">
+              <span class="ops-tile__time">上次：今天 03:00</span>
+              <button class="el-button el-button--small el-button--primary" type="button" data-dialog-open="backupDialog">立即备份</button>
+            </div>
+          </div>
+          <div class="ops-tile">
+            <div class="ops-tile__head">
+              <span class="ops-tile__icon"><i data-icon="refresh"></i></span>
+              <span class="ops-tile__title">索引重建</span>
+            </div>
+            <p class="ops-tile__desc">重新切块并向量化公开项目，修复异常知识块。</p>
+            <div class="ops-tile__foot">
+              <span class="ops-tile__time">上次：今天 03:00</span>
+              <a class="el-button el-button--small" href="ai.html"><i data-icon="arrow-right"></i> 前往</a>
+            </div>
+          </div>
+          <div class="ops-tile">
+            <div class="ops-tile__head">
+              <span class="ops-tile__icon"><i data-icon="trash"></i></span>
+              <span class="ops-tile__title">清理缓存</span>
+            </div>
+            <p class="ops-tile__desc">清理常见问题缓存与临时文件，不会删除业务数据。</p>
+            <div class="ops-tile__foot">
+              <span class="ops-tile__time">缓存 1,240 条</span>
+              <button class="el-button el-button--small" type="button" data-toast="缓存已清理">清理</button>
+            </div>
+          </div>
+          <div class="ops-tile">
+            <div class="ops-tile__head">
+              <span class="ops-tile__icon"><i data-icon="file"></i></span>
+              <span class="ops-tile__title">操作日志</span>
+            </div>
+            <p class="ops-tile__desc">审计登录、审核、归档、备份等关键操作。</p>
+            <div class="ops-tile__foot">
+              <span class="ops-tile__time">共 2,864 条</span>
+              <button class="el-button el-button--small" type="button" data-toast="导出任务已创建">导出</button>
+            </div>
+          </div>
+        </section>
+
+        <div class="el-card table-card mt-16">
+          <div class="table-toolbar">
+            <div class="table-toolbar__left"><span class="cell-title text-primary">操作日志</span><span>最近 8 条</span></div>
+            <div class="table-toolbar__right">
+              <div class="el-input" style="width:220px;">
+                <span class="el-input__prefix"><i data-icon="search" class="el-icon--sm"></i></span>
+                <input class="el-input__inner" type="search" placeholder="搜索操作、用户、IP">
+              </div>
+              <button class="el-button el-button--small" type="button" data-toast="列表已刷新"><i data-icon="refresh"></i> 刷新</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="el-table">
+              <thead>
+                <tr><th>时间</th><th>用户</th><th>操作</th><th>对象</th><th>IP</th><th class="col-actions">详情</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>今天 10:24</td><td class="cell-title">admin01</td><td>审核通过项目</td><td>苗族刺绣（ID 12）</td><td>127.0.0.1</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看日志详情">查看</button></div></td></tr>
+                <tr><td>今天 10:02</td><td class="cell-title">admin01</td><td>登录</td><td>—</td><td>127.0.0.1</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看日志详情">查看</button></div></td></tr>
+                <tr><td>今天 09:40</td><td class="cell-title">manager01</td><td>提交审核</td><td>潍坊风筝（ID 13）</td><td>127.0.0.1</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看日志详情">查看</button></div></td></tr>
+                <tr><td>今天 03:00</td><td class="cell-title">sysadmin</td><td>数据库备份</td><td>app-20261125-0300.db</td><td>127.0.0.1</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看日志详情">查看</button></div></td></tr>
+                <tr><td>今天 03:00</td><td class="cell-title">sysadmin</td><td>重建索引</td><td>386 个知识块</td><td>127.0.0.1</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看日志详情">查看</button></div></td></tr>
+                <tr><td>昨天 17:06</td><td class="cell-title">admin01</td><td>驳回项目</td><td>泉州提线木偶戏（ID 8）</td><td>127.0.0.1</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看日志详情">查看</button></div></td></tr>
+                <tr><td>昨天 16:20</td><td class="cell-title">manager05</td><td>提交修改申请</td><td>藏医药浴法（ID 6）</td><td>127.0.0.1</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看日志详情">查看</button></div></td></tr>
+                <tr><td>昨天 15:30</td><td class="cell-title">admin01</td><td>审批认证</td><td>认证 #18</td><td>127.0.0.1</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看日志详情">查看</button></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span>共 2,864 条 · 每页 20 条</span>
+            <nav class="el-pagination" aria-label="分页">
+              <button type="button" aria-label="上一页"><i data-icon="chevron-left"></i></button>
+              <button class="is-active" type="button">1</button>
+              <button type="button">2</button>
+              <button type="button">3</button>
+              <button type="button">4</button>
+              <button type="button" aria-label="下一页"><i data-icon="chevron-right"></i></button>
+            </nav>
+          </div>
+        </div>
+
+        <p class="muted-note mt-16">备份、清理与健康检查均为前端提示，不会执行真实系统命令。</p>
+      </main>
+    </div>
+  </div>
+
+  <!-- 备份弹窗 -->
+  <div class="el-dialog" id="backupDialog" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="backupTitle">
+    <div class="el-dialog__mask" data-dialog-close></div>
+    <div class="el-dialog__panel">
+      <div class="el-dialog__header">
+        <div>
+          <div class="el-dialog__title" id="backupTitle">立即备份</div>
+          <div class="el-dialog__subtitle">打包数据库与上传目录，生成新的备份文件。</div>
+        </div>
+        <button class="el-dialog__close" type="button" data-dialog-close aria-label="关闭">✕</button>
+      </div>
+      <div class="el-dialog__body">
+        <div class="el-alert el-alert--info">
+          <span class="el-alert__icon"><i data-icon="info"></i></span>
+          <div class="el-alert__body">
+            <div class="el-alert__title">备份内容</div>
+            <div class="el-alert__desc">app.db（6.4 MB）与 uploads（约 48 MB）；预计耗时 10–20 秒。备份期间可正常浏览，写入操作可能短暂排队。</div>
+          </div>
+        </div>
+        <div class="el-form-item mt-16">
+          <label class="el-checkbox">
+            <input type="checkbox" checked>
+            <span class="el-checkbox__box"></span>
+            <span class="text-md">同时清理 7 天前的旧备份</span>
+          </label>
+        </div>
+      </div>
+      <div class="el-dialog__footer">
+        <button class="el-button" type="button" data-dialog-close>取消</button>
+        <button class="el-button el-button--primary" type="button" data-api="backup">开始备份</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

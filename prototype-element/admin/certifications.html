@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>项目认证 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="certifications"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="项目认证" data-crumb="认证与分类 / 项目认证"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">项目认证</h1>
+            <p class="page-head__desc">审核项目管理者与项目的授权关系。认证通过后，管理者才能编辑对应项目。</p>
+          </div>
+          <div class="page-head__actions">
+            <button class="el-button" type="button" data-toast="导出任务已创建"><i data-icon="download"></i> 导出记录</button>
+          </div>
+        </div>
+
+        <div class="el-alert el-alert--primary mb-16">
+          <span class="el-alert__icon"><i data-icon="info"></i></span>
+          <div class="el-alert__body">
+            <div class="el-alert__title">认证规则</div>
+            <div class="el-alert__desc">一个管理者可以对多个项目认证，同一项目保留唯一有效认证。认证只授予编辑权，不授予审核与归档权；管理者对他人项目仅可查看公开数据。</div>
+          </div>
+        </div>
+
+        <section class="stat-grid" style="grid-template-columns:repeat(3,minmax(0,1fr));">
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">待审批</div>
+              <div class="stat-card__value">3</div>
+              <div class="stat-card__meta"><i data-icon="clock" class="text-orange"></i> 最早提交于昨天</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--orange"><i data-icon="award" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">本月通过</div>
+              <div class="stat-card__value">5</div>
+              <div class="stat-card__meta"><i data-icon="trend" class="text-green"></i> 认证管理者 12 人</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--green"><i data-icon="check-circle" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">已认证项目</div>
+              <div class="stat-card__value">18</div>
+              <div class="stat-card__meta">覆盖 8 个地区、9 个门类</div>
+            </div>
+            <span class="stat-card__icon"><i data-icon="shield" class="el-icon--lg"></i></span>
+          </div>
+        </section>
+
+        <div class="el-card filter-card">
+          <div class="el-card__body">
+            <div class="filter-row">
+              <div class="filter-item filter-item--wide">
+                <label class="filter-label" for="q">关键词</label>
+                <div class="el-input">
+                  <span class="el-input__prefix"><i data-icon="search" class="el-icon--sm"></i></span>
+                  <input class="el-input__inner" id="q" type="search" placeholder="申请人、项目名称">
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="status">状态</label>
+                <div class="el-select">
+                  <select id="status">
+                    <option>全部状态</option>
+                    <option>待审批</option>
+                    <option>已通过</option>
+                    <option>已驳回</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="time">提交时间</label>
+                <div class="el-select">
+                  <select id="time">
+                    <option>全部时间</option>
+                    <option>最近 7 天</option>
+                    <option>最近 30 天</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-actions">
+                <button class="el-button el-button--primary" type="button" data-filter-submit><i data-icon="search"></i> 查询</button>
+                <button class="el-button" type="button" data-toast="已重置筛选条件">重置</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="el-tabs" data-tabs>
+          <div class="el-tabs__header" role="tablist" aria-label="认证状态">
+            <button class="el-tabs__item is-active" type="button" data-tab="pending" role="tab" aria-selected="true">待审批（3）</button>
+            <button class="el-tabs__item" type="button" data-tab="approved" role="tab" aria-selected="false">已通过（12）</button>
+            <button class="el-tabs__item" type="button" data-tab="rejected" role="tab" aria-selected="false">已驳回（2）</button>
+          </div>
+          <div class="el-tabs__body">
+            <!-- 待审批 -->
+            <div data-tab-panel="pending" class="is-active">
+              <div class="el-card table-card">
+                <div class="table-toolbar">
+                  <div class="table-toolbar__left"><span class="cell-title text-primary">认证申请</span><span>共 3 条待处理</span></div>
+                  <div class="table-toolbar__right"><span class="el-tag el-tag--warning">建议 48 小时内处理</span></div>
+                </div>
+                <div class="table-wrap">
+                  <table class="el-table">
+                    <thead>
+                      <tr>
+                        <th>申请人</th>
+                        <th>申请项目</th>
+                        <th>认证材料</th>
+                        <th>提交时间</th>
+                        <th>状态</th>
+                        <th class="col-actions">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-record-id="18">
+                        <td>
+                          <div class="project-cell">
+                            <span class="el-avatar">王</span>
+                            <div class="project-cell__text">
+                              <div class="cell-title">王秀兰</div>
+                              <div class="cell-sub">manager07 · 黔东南州非遗中心</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="cell-title">苗族刺绣</div>
+                          <div class="cell-sub">ID 12 · 传统美术</div>
+                        </td>
+                        <td class="text-md text-secondary">单位证明、项目授权函（2 份）</td>
+                        <td>2026-11-24 15:20</td>
+                        <td><span class="el-tag el-tag--warning"><span class="dot"></span>待审批</span></td>
+                        <td class="col-actions">
+                          <div class="table-actions">
+                            <button type="button" data-dialog-open="certDialog">查看并审批</button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-record-id="19">
+                        <td>
+                          <div class="project-cell">
+                            <span class="el-avatar el-avatar--green">李</span>
+                            <div class="project-cell__text">
+                              <div class="cell-title">李承志</div>
+                              <div class="cell-sub">manager08 · 龙泉青瓷博物馆</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="cell-title">龙泉青瓷烧制技艺</div>
+                          <div class="cell-sub">ID 18 · 传统技艺</div>
+                        </td>
+                        <td class="text-md text-secondary">馆藏证明、项目授权函（3 份）</td>
+                        <td>2026-11-23 10:05</td>
+                        <td><span class="el-tag el-tag--warning"><span class="dot"></span>待审批</span></td>
+                        <td class="col-actions">
+                          <div class="table-actions">
+                            <button type="button" data-dialog-open="certDialog">查看并审批</button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-record-id="20">
+                        <td>
+                          <div class="project-cell">
+                            <span class="el-avatar">陈</span>
+                            <div class="project-cell__text">
+                              <div class="cell-title">陈雨桐</div>
+                              <div class="cell-sub">manager09 · 苏州评弹团</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="cell-title">苏州评弹</div>
+                          <div class="cell-sub">ID 5 · 曲艺</div>
+                        </td>
+                        <td class="text-md text-secondary">单位证明（1 份）</td>
+                        <td>2026-11-24 09:32</td>
+                        <td><span class="el-tag el-tag--warning"><span class="dot"></span>待审批</span></td>
+                        <td class="col-actions">
+                          <div class="table-actions">
+                            <button type="button" data-dialog-open="certDialog">查看并审批</button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-footer">
+                  <span>共 3 条</span>
+                  <nav class="el-pagination" aria-label="分页">
+                    <button type="button" disabled aria-label="上一页"><i data-icon="chevron-left"></i></button>
+                    <button class="is-active" type="button">1</button>
+                    <button type="button" disabled aria-label="下一页"><i data-icon="chevron-right"></i></button>
+                  </nav>
+                </div>
+              </div>
+            </div>
+
+            <!-- 已通过 -->
+            <div data-tab-panel="approved">
+              <div class="el-card table-card">
+                <div class="table-toolbar">
+                  <div class="table-toolbar__left"><span class="cell-title text-primary">已通过认证</span><span>共 12 条</span></div>
+                  <div class="table-toolbar__right"><span class="el-tag el-tag--success">唯一有效认证</span></div>
+                </div>
+                <div class="table-wrap">
+                  <table class="el-table">
+                    <thead>
+                      <tr><th>申请人</th><th>项目</th><th>审批人</th><th>通过时间</th><th>状态</th><th class="col-actions">操作</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><div class="cell-title">赵敏</div><div class="cell-sub">manager01</div></td>
+                        <td>侗族大歌 <span class="text-placeholder text-sm">ID 11</span></td>
+                        <td>admin01</td><td>2026-11-02 14:10</td>
+                        <td><span class="el-tag el-tag--success"><span class="dot"></span>已通过</span></td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="已提交撤销认证">撤销认证</button></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-title">周文</div><div class="cell-sub">manager03</div></td>
+                        <td>南京云锦织造技艺 <span class="text-placeholder text-sm">ID 9</span></td>
+                        <td>admin01</td><td>2026-10-28 09:25</td>
+                        <td><span class="el-tag el-tag--success"><span class="dot"></span>已通过</span></td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="已提交撤销认证">撤销认证</button></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-title">吴岚</div><div class="cell-sub">manager04</div></td>
+                        <td>泉州提线木偶戏 <span class="text-placeholder text-sm">ID 8</span></td>
+                        <td>admin01</td><td>2026-10-20 16:48</td>
+                        <td><span class="el-tag el-tag--success"><span class="dot"></span>已通过</span></td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="已提交撤销认证">撤销认证</button></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-title">郑楠</div><div class="cell-sub">manager05</div></td>
+                        <td>藏医药浴法 <span class="text-placeholder text-sm">ID 6</span></td>
+                        <td>admin01</td><td>2026-10-12 11:02</td>
+                        <td><span class="el-tag el-tag--success"><span class="dot"></span>已通过</span></td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="已提交撤销认证">撤销认证</button></div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-footer">
+                  <span>共 12 条 · 当前显示 4 条</span>
+                  <nav class="el-pagination" aria-label="分页">
+                    <button type="button" aria-label="上一页"><i data-icon="chevron-left"></i></button>
+                    <button class="is-active" type="button">1</button>
+                    <button type="button">2</button>
+                    <button type="button">3</button>
+                    <button type="button" aria-label="下一页"><i data-icon="chevron-right"></i></button>
+                  </nav>
+                </div>
+              </div>
+            </div>
+
+            <!-- 已驳回 -->
+            <div data-tab-panel="rejected">
+              <div class="el-card table-card">
+                <div class="table-toolbar">
+                  <div class="table-toolbar__left"><span class="cell-title text-primary">已驳回申请</span><span>共 2 条</span></div>
+                </div>
+                <div class="table-wrap">
+                  <table class="el-table">
+                    <thead>
+                      <tr><th>申请人</th><th>项目</th><th>驳回原因</th><th>驳回时间</th><th>状态</th><th class="col-actions">操作</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><div class="cell-title">孙浩</div><div class="cell-sub">manager10</div></td>
+                        <td>潍坊风筝 <span class="text-placeholder text-sm">ID 13</span></td>
+                        <td class="text-md">授权材料缺少单位公章，无法确认申请人与保护单位关系。</td>
+                        <td>2026-11-15 10:30</td>
+                        <td><span class="el-tag el-tag--danger"><span class="dot"></span>已驳回</span></td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看驳回记录">查看记录</button></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-title">何静</div><div class="cell-sub">manager11</div></td>
+                        <td>徽州三雕 <span class="text-placeholder text-sm">ID 16</span></td>
+                        <td class="text-md">同一项目已存在有效认证，重复申请。</td>
+                        <td>2026-11-10 16:12</td>
+                        <td><span class="el-tag el-tag--danger"><span class="dot"></span>已驳回</span></td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看驳回记录">查看记录</button></div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-footer">
+                  <span>共 2 条</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="muted-note mt-16">说明：认证审批可以批量处理，但系统仅展示单条流程；正式实现会校验“同一项目唯一有效认证”。</p>
+      </main>
+    </div>
+  </div>
+
+  <!-- 认证审批弹窗 -->
+  <div class="el-dialog" id="certDialog" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="certTitle">
+    <div class="el-dialog__mask" data-dialog-close></div>
+    <div class="el-dialog__panel">
+      <div class="el-dialog__header">
+        <div>
+          <div class="el-dialog__title" id="certTitle">认证审批</div>
+          <div class="el-dialog__subtitle">王秀兰 · 申请认证「苗族刺绣」</div>
+        </div>
+        <button class="el-dialog__close" type="button" data-dialog-close aria-label="关闭">✕</button>
+      </div>
+      <div class="el-dialog__body">
+        <div class="el-descriptions">
+          <div class="el-descriptions__item"><div class="el-descriptions__label">申请人</div><div class="el-descriptions__value">王秀兰（manager07）</div></div>
+          <div class="el-descriptions__item"><div class="el-descriptions__label">所属单位</div><div class="el-descriptions__value">黔东南州非遗中心</div></div>
+          <div class="el-descriptions__item"><div class="el-descriptions__label">申请项目</div><div class="el-descriptions__value">苗族刺绣（ID 12）</div></div>
+          <div class="el-descriptions__item"><div class="el-descriptions__label">提交时间</div><div class="el-descriptions__value">2026-11-24 15:20</div></div>
+        </div>
+        <div class="el-form-item mt-16">
+          <label class="el-form-item__label">认证材料</label>
+          <div class="review-attachment" style="margin:0 0 8px;">
+            <span class="thumb thumb--gray"><i data-icon="file"></i></span>
+            <div style="flex:1;min-width:0;"><div class="cell-title">单位证明.pdf</div><div class="cell-sub">PDF · 420 KB</div></div>
+            <button class="el-button el-button--small" type="button" data-toast="材料预览已打开">查看</button>
+          </div>
+          <div class="review-attachment" style="margin:0;">
+            <span class="thumb thumb--gray"><i data-icon="file"></i></span>
+            <div style="flex:1;min-width:0;"><div class="cell-title">项目授权函.pdf</div><div class="cell-sub">PDF · 380 KB</div></div>
+            <button class="el-button el-button--small" type="button" data-toast="材料预览已打开">查看</button>
+          </div>
+        </div>
+        <div class="el-form-item">
+          <label class="el-form-item__label" for="certNote">审批意见</label>
+          <textarea class="el-textarea__inner" id="certNote" rows="3" placeholder="通过或驳回的说明"></textarea>
+        </div>
+      </div>
+      <div class="el-dialog__footer">
+        <button class="el-button" type="button" data-dialog-close>取消</button>
+        <button class="el-button el-button--danger" type="button" data-api="cert-review" data-action="reject" data-comment="#certNote">驳回</button>
+        <button class="el-button el-button--primary" type="button" data-api="cert-review" data-action="approve" data-comment="#certNote">通过认证</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

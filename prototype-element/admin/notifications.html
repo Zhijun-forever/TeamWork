@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>通知中心 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="notifications"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="通知中心" data-crumb="支持 / 通知中心"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">通知中心</h1>
+            <p class="page-head__desc">审核、认证、项目状态与系统运维通知集中展示，未读通知会在顶栏显示数量。</p>
+          </div>
+          <div class="page-head__actions">
+            <button class="el-button" type="button" data-api="notification-read-all"><i data-icon="check"></i> 全部标为已读</button>
+          </div>
+        </div>
+
+        <section class="stat-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">未读通知</div>
+              <div class="stat-card__value" data-notify-unread>3</div>
+              <div class="stat-card__meta">需要及时处理</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--orange"><i data-icon="bell" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">全部通知</div>
+              <div class="stat-card__value" data-notify-total>6</div>
+              <div class="stat-card__meta">近 30 天</div>
+            </div>
+            <span class="stat-card__icon"><i data-icon="list" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">审核相关</div>
+              <div class="stat-card__value">2</div>
+              <div class="stat-card__meta">项目审核与归档申请</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--green"><i data-icon="check-circle" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">认证相关</div>
+              <div class="stat-card__value">1</div>
+              <div class="stat-card__meta">待审批认证申请</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--gray"><i data-icon="award" class="el-icon--lg"></i></span>
+          </div>
+        </section>
+
+        <div class="el-card filter-card">
+          <div class="el-card__body">
+            <div class="flex-between flex-wrap gap-12">
+              <div class="el-tabs" style="flex:1;min-width:0;">
+                <div class="el-tabs__header" role="tablist" aria-label="通知筛选">
+                  <button class="el-tabs__item is-active" type="button" data-notify-filter data-filter="all">全部</button>
+                  <button class="el-tabs__item" type="button" data-notify-filter data-filter="unread">未读</button>
+                  <button class="el-tabs__item" type="button" data-notify-filter data-type="review">审核</button>
+                  <button class="el-tabs__item" type="button" data-notify-filter data-type="certification">认证</button>
+                  <button class="el-tabs__item" type="button" data-notify-filter data-type="system">系统</button>
+                </div>
+              </div>
+              <div class="el-input notify-search">
+                <span class="el-input__prefix"><i data-icon="search" class="el-icon--sm"></i></span>
+                <input class="el-input__inner" id="notifySearch" type="search" placeholder="搜索通知标题或内容" aria-label="搜索通知">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-grid cols-2-1">
+          <div class="el-card">
+            <div class="el-card__header">
+              <span class="el-card__title"><i data-icon="bell"></i> 通知列表</span>
+              <span class="el-tag el-tag--plain">按时间倒序</span>
+            </div>
+            <div class="el-card__body" style="padding:0;">
+              <div class="notify-list" id="notificationList">
+                <div class="el-empty">
+                  <div class="el-empty__icon"><i data-icon="refresh"></i></div>
+                  <div class="el-empty__title">正在加载通知…</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside>
+            <div class="el-card">
+              <div class="el-card__header">
+                <span class="el-card__title"><i data-icon="settings"></i> 通知偏好</span>
+              </div>
+              <div class="el-card__body">
+                <div class="notify-pref">
+                  <div>
+                    <div class="text-primary font-medium text-md">项目审核</div>
+                    <div class="muted-note">新项目提交、审核通过与驳回</div>
+                  </div>
+                  <label class="el-switch" aria-label="项目审核通知"><input type="checkbox" checked><span class="el-switch__core"></span></label>
+                </div>
+                <div class="notify-pref">
+                  <div>
+                    <div class="text-primary font-medium text-md">项目认证</div>
+                    <div class="muted-note">认证申请与审批结果</div>
+                  </div>
+                  <label class="el-switch" aria-label="项目认证通知"><input type="checkbox" checked><span class="el-switch__core"></span></label>
+                </div>
+                <div class="notify-pref">
+                  <div>
+                    <div class="text-primary font-medium text-md">系统运维</div>
+                    <div class="muted-note">备份、索引重建与服务异常</div>
+                  </div>
+                  <label class="el-switch" aria-label="系统运维通知"><input type="checkbox" checked><span class="el-switch__core"></span></label>
+                </div>
+                <div class="el-divider"></div>
+                <p class="muted-note">通知偏好保存在当前账号下；系统级故障通知不受开关影响。</p>
+              </div>
+            </div>
+
+            <div class="el-card mt-16">
+              <div class="el-card__header">
+                <span class="el-card__title"><i data-icon="compass"></i> 快捷入口</span>
+              </div>
+              <div class="el-card__body">
+                <div class="quick-grid" style="grid-template-columns:1fr;">
+                  <a class="quick-item" href="review.html">
+                    <span class="quick-item__icon"><i data-icon="check-circle"></i></span>
+                    <span><span class="quick-item__title">待审核项目</span><br><span class="quick-item__desc">查看 6 个待处理项目</span></span>
+                  </a>
+                  <a class="quick-item" href="certifications.html">
+                    <span class="quick-item__icon"><i data-icon="award"></i></span>
+                    <span><span class="quick-item__title">认证审批</span><br><span class="quick-item__desc">3 条认证申请待处理</span></span>
+                  </a>
+                  <a class="quick-item" href="ops.html">
+                    <span class="quick-item__icon"><i data-icon="server"></i></span>
+                    <span><span class="quick-item__title">系统运维</span><br><span class="quick-item__desc">查看服务状态与备份</span></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="el-alert el-alert--info mt-16">
+              <span class="el-alert__icon"><i data-icon="info"></i></span>
+              <div class="el-alert__body">
+                <div class="el-alert__title">通知来源</div>
+                <div class="el-alert__desc">通知由审核、认证、归档与运维操作自动生成，保留 30 天；点击通知可跳转到对应处理页面。</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <p class="muted-note mt-16">说明：未读数量会同步到顶栏铃铛；标记已读仅影响当前账号的展示状态。</p>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>403 · 没有访问权限</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <main class="error-page">
+    <div class="error-box">
+      <div class="error-badge"><i data-icon="shield"></i> 权限校验未通过</div>
+      <div class="error-code">403</div>
+      <h1 class="error-title">没有权限访问此页面</h1>
+      <p class="error-desc">
+        当前账号的角色不允许访问该资源。项目管理者只能编辑自己认证的项目；
+        用户管理、系统运维等页面仅对管理员或系统管理员开放。
+      </p>
+      <div class="error-actions">
+        <a class="el-button el-button--primary" href="../admin/dashboard.html"><i data-icon="home"></i> 返回工作台</a>
+        <a class="el-button" href="../site/home.html">前往公众端</a>
+        <a class="el-button el-button--text" href="../index.html">页面地图</a>
+      </div>
+      <div class="error-help">
+        如果你是项目管理者，请先在「项目认证」中申请对应项目的编辑权限；<br>
+        如果认为这是误判，请联系系统管理员（sysadmin）核对角色与认证关系。
+      </div>
+    </div>
+  </main>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

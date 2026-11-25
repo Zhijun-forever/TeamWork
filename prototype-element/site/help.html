@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>帮助中心 · 非遗数字化管理平台</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <div id="site-header" data-active="help"></div>
+
+  <main class="site-main">
+    <section class="page-hero">
+      <div class="container">
+        <div class="flex-between flex-wrap gap-16">
+          <div>
+            <h1 class="page-hero__title">帮助中心</h1>
+            <p class="page-hero__desc">
+              从浏览检索到项目发布、审核归档与 AI 问答，这里整理了平台的主要使用说明与常见问题。
+            </p>
+          </div>
+          <div class="help-search">
+            <div class="el-input el-input--large">
+              <span class="el-input__prefix"><i data-icon="search"></i></span>
+              <input class="el-input__inner" data-help-search type="search" placeholder="搜索问题，例如：如何提交审核" aria-label="搜索帮助">
+            </div>
+            <div class="help-search__meta">共 <strong data-help-count>0</strong> 条匹配结果</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="page-body">
+      <div class="container help-layout">
+        <aside class="el-card help-nav">
+          <div class="el-card__body">
+            <div class="help-nav__title">目录</div>
+            <nav class="help-nav__list" aria-label="帮助目录">
+              <a href="#start" class="is-active"><i data-icon="compass"></i> 快速开始</a>
+              <a href="#account"><i data-icon="user"></i> 账户与登录</a>
+              <a href="#project"><i data-icon="folder"></i> 项目管理</a>
+              <a href="#review"><i data-icon="check-circle"></i> 审核与归档</a>
+              <a href="#ai"><i data-icon="sparkles"></i> AI 问答</a>
+              <a href="#permission"><i data-icon="shield"></i> 角色与权限</a>
+              <a href="#support"><i data-icon="message"></i> 联系支持</a>
+            </nav>
+            <div class="el-divider"></div>
+            <div class="help-nav__foot">
+              <div class="text-md text-primary font-medium">需要人工帮助？</div>
+              <p class="muted-note mt-4">账号权限与项目认证问题请联系系统管理员；数据与接口问题请附页面路径与操作时间。</p>
+              <a class="el-button el-button--primary el-button--small is-block mt-12" href="login.html">登录平台</a>
+            </div>
+          </div>
+        </aside>
+
+        <div class="help-main">
+          <section class="help-section" id="start">
+            <div class="section__head">
+              <div>
+                <h2 class="section__title" style="font-size:24px;">快速开始</h2>
+                <p class="section__desc">用最短的路径完成浏览、投稿与审核。</p>
+              </div>
+            </div>
+            <div class="help-quick-grid">
+              <a class="help-quick" href="projects.html">
+                <span class="help-quick__icon"><i data-icon="search"></i></span>
+                <span class="help-quick__title">查找非遗项目</span>
+                <span class="help-quick__desc">按地区、门类、标签与关键词组合筛选，查看公开项目详情。</span>
+                <span class="help-quick__link">进入项目库 <i data-icon="arrow-right"></i></span>
+              </a>
+              <a class="help-quick" href="register.html">
+                <span class="help-quick__icon"><i data-icon="user"></i></span>
+                <span class="help-quick__title">注册与认证</span>
+                <span class="help-quick__desc">注册普通用户或项目管理者，管理者需申请项目认证后编辑。</span>
+                <span class="help-quick__link">注册账号 <i data-icon="arrow-right"></i></span>
+              </a>
+              <a class="help-quick" href="ai.html">
+                <span class="help-quick__icon"><i data-icon="sparkles"></i></span>
+                <span class="help-quick__title">使用 AI 问答</span>
+                <span class="help-quick__desc">用自然语言提问，回答附带公开项目引用与来源链接。</span>
+                <span class="help-quick__link">开始提问 <i data-icon="arrow-right"></i></span>
+              </a>
+              <a class="help-quick" href="../admin/dashboard.html">
+                <span class="help-quick__icon"><i data-icon="grid"></i></span>
+                <span class="help-quick__title">管理项目</span>
+                <span class="help-quick__desc">新建、编辑、提交审核、归档恢复与查看操作记录。</span>
+                <span class="help-quick__link">进入工作台 <i data-icon="arrow-right"></i></span>
+              </a>
+            </div>
+          </section>
+
+          <section class="help-section" id="account">
+            <h2 class="help-section__title"><i data-icon="user"></i> 账户与登录</h2>
+            <details class="help-faq" data-help-item open>
+              <summary>忘记密码怎么办？</summary>
+              <div class="help-faq__body">
+                在登录页点击「忘记密码」，按提示验证绑定邮箱或联系系统管理员重置。首次登录后建议立即修改初始密码；密码至少 8 位，并避免与其他站点复用。
+              </div>
+            </details>
+            <details class="help-faq" data-help-item>
+              <summary>登录后为什么看不到后台菜单？</summary>
+              <div class="help-faq__body">
+                后台入口按角色开放：普通用户只能浏览公开项目与使用 AI 问答；项目管理者、管理员与系统管理员登录后进入对应工作台。如果角色不正确，请联系系统管理员核对账号角色与项目认证关系。
+              </div>
+            </details>
+            <details class="help-faq" data-help-item>
+              <summary>账号被禁用后还能恢复吗？</summary>
+              <div class="help-faq__body">
+                管理员禁用账号采用软删除，历史项目与审计记录会保留。需要恢复时联系管理员在「用户管理」中重新启用；系统管理员账号只由命令行维护，不在后台删除。
+              </div>
+            </details>
+          </section>
+
+          <section class="help-section" id="project">
+            <h2 class="help-section__title"><i data-icon="folder"></i> 项目管理</h2>
+            <details class="help-faq" data-help-item>
+              <summary>项目管理者可以编辑哪些项目？</summary>
+              <div class="help-faq__body">
+                项目管理者只能编辑自己创建的项目，以及通过认证获得编辑权限的项目；其他项目仅能查看公开数据。认证申请通过后，对应项目才会出现在可编辑范围内。
+              </div>
+            </details>
+            <details class="help-faq" data-help-item>
+              <summary>新建项目时哪些字段是必填的？</summary>
+              <div class="help-faq__body">
+                标题、地区、门类、摘要为必填；封面、标签、历史渊源、保护措施等为选填。地区需要落到市级或县级，标签最多 8 个，摘要建议 80–150 字，便于列表展示与 AI 检索。
+              </div>
+            </details>
+            <details class="help-faq" data-help-item>
+              <summary>为什么保存草稿后公众看不到？</summary>
+              <div class="help-faq__body">
+                草稿仅在本人和管理员范围内可见。项目需要提交审核，由管理员审核通过并发布后，才会出现在公众项目库；已发布项目还需满足 visibility=public。
+              </div>
+            </details>
+            <details class="help-faq" data-help-item>
+              <summary>支持哪些封面与附件格式？</summary>
+              <div class="help-faq__body">
+                封面与图集支持 JPG、PNG、WebP，单文件不超过 10 MB；PDF 附件不超过 20 MB。系统会校验扩展名、MIME 与文件大小，并使用 UUID 文件名，避免覆盖与路径注入。
+              </div>
+            </details>
+            <div class="help-flow">
+              <div class="help-flow__step"><span>1</span><div><strong>保存草稿</strong><p>先填写标题、地区、门类与摘要。</p></div></div>
+              <div class="help-flow__step"><span>2</span><div><strong>提交审核</strong><p>补充封面与来源后提交，状态变为待审核。</p></div></div>
+              <div class="help-flow__step"><span>3</span><div><strong>审核发布</strong><p>管理员通过后发布；驳回需填写意见。</p></div></div>
+              <div class="help-flow__step"><span>4</span><div><strong>归档留痕</strong><p>发布后可按规则归档，归档只读、可恢复。</p></div></div>
+            </div>
+          </section>
+
+          <section class="help-section" id="review">
+            <h2 class="help-section__title"><i data-icon="check-circle"></i> 审核与归档</h2>
+            <details class="help-faq" data-help-item>
+              <summary>审核通过或驳回后会发生什么？</summary>
+              <div class="help-faq__body">
+                通过后项目状态变为已发布，并写入审核记录；驳回必须填写意见，项目管理者可修改后重新提交。管理员不能审核自己创建的项目，管理员创建的项目可以直接发布。
+              </div>
+            </details>
+            <details class="help-faq" data-help-item>
+              <summary>已归档项目为什么不能直接编辑？</summary>
+              <div class="help-faq__body">
+                归档用于长期保存，状态为只读。需要修改时，项目管理者提交修改申请并说明理由，管理员同意后项目恢复为已发布并可编辑；不同意则保持归档。
+              </div>
+            </details>
+            <details class="help-faq" data-help-item>
+              <summary>重复提交审核会怎样？</summary>
+              <div class="help-faq__body">
+                平台对审核、归档、恢复与认证审批使用状态条件更新。重复请求会提示状态冲突，不会重复写入审核记录；如遇提示，请刷新页面确认最新状态。
+              </div>
+            </details>
+          </section>
+
+          <section class="help-section" id="ai">
+            <h2 class="help-section__title"><i data-icon="sparkles"></i> AI 问答</h2>
+            <details class="help-faq" data-help-item>
+              <summary>AI 回答的来源是什么？</summary>
+              <div class="help-faq__body">
+                只检索状态为已发布且公开的项目语料，不包含草稿、审核意见与用户信息。回答会附带引用来源，点击可回到对应项目详情；资料不足时会说明未找到，而不是编造答案。
+              </div>
+            </details>
+            <details class="help-faq" data-help-item>
+              <summary>每天可以问多少次？</summary>
+              <div class="help-faq__body">
+                登录用户每人每天 15 次，管理员与系统管理员同样计入额度。超过额度会提示限流，次日自动恢复；可以在问答页右上角查看剩余次数。
+              </div>
+            </details>
+            <details class="help-faq" data-help-item>
+              <summary>模型超时或服务不可用怎么办？</summary>
+              <div class="help-faq__body">
+                平台会自动降级为检索片段，仍可查看相关项目；嵌入服务不可用时会改用关键词检索。问答失败不影响项目浏览、检索与后台管理。
+              </div>
+            </details>
+          </section>
+
+          <section class="help-section" id="permission">
+            <h2 class="help-section__title"><i data-icon="shield"></i> 角色与权限</h2>
+            <div class="el-card">
+              <div class="table-wrap">
+                <table class="el-table help-role-table">
+                  <thead>
+                    <tr><th>能力</th><th>普通用户</th><th>项目管理者</th><th>管理员</th><th>系统管理员</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="cell-title">浏览公开项目</td><td><i data-icon="check" class="text-green"></i></td><td><i data-icon="check" class="text-green"></i></td><td><i data-icon="check" class="text-green"></i></td><td><i data-icon="check" class="text-green"></i></td></tr>
+                    <tr><td class="cell-title">创建项目</td><td class="text-placeholder">—</td><td>草稿 → 待审</td><td>可直接发布</td><td>可直接发布</td></tr>
+                    <tr><td class="cell-title">编辑项目</td><td class="text-placeholder">—</td><td>仅认证项目</td><td>任意项目</td><td>任意项目</td></tr>
+                    <tr><td class="cell-title">审核 / 发布 / 驳回</td><td class="text-placeholder">—</td><td class="text-placeholder">—</td><td><i data-icon="check" class="text-green"></i></td><td><i data-icon="check" class="text-green"></i></td></tr>
+                    <tr><td class="cell-title">归档 / 恢复</td><td class="text-placeholder">—</td><td class="text-placeholder">—</td><td><i data-icon="check" class="text-green"></i></td><td><i data-icon="check" class="text-green"></i></td></tr>
+                    <tr><td class="cell-title">用户管理</td><td class="text-placeholder">—</td><td class="text-placeholder">—</td><td>不含系统管理员</td><td>全部</td></tr>
+                    <tr><td class="cell-title">系统运维 / 备份</td><td class="text-placeholder">—</td><td class="text-placeholder">—</td><td class="text-placeholder">—</td><td><i data-icon="check" class="text-green"></i></td></tr>
+                    <tr><td class="cell-title">AI 问答</td><td>15 次 / 天</td><td>15 次 / 天</td><td>15 次 / 天</td><td>15 次 / 天</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section class="help-section" id="support">
+            <h2 class="help-section__title"><i data-icon="message"></i> 联系支持</h2>
+            <div class="help-contact-grid">
+              <div class="el-card">
+                <div class="el-card__body">
+                  <div class="flex gap-10">
+                    <span class="help-quick__icon"><i data-icon="user"></i></span>
+                    <div>
+                      <div class="text-primary font-medium">账号与权限</div>
+                      <p class="muted-note mt-4">角色调整、账号禁用与项目认证审批，请联系系统管理员（sysadmin）。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="el-card">
+                <div class="el-card__body">
+                  <div class="flex gap-10">
+                    <span class="help-quick__icon"><i data-icon="server"></i></span>
+                    <div>
+                      <div class="text-primary font-medium">接口与运维</div>
+                      <p class="muted-note mt-4">接口异常请附请求路径、返回码与操作时间；服务状态可在「系统运维」查看。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="el-card">
+                <div class="el-card__body">
+                  <div class="flex gap-10">
+                    <span class="help-quick__icon"><i data-icon="book"></i></span>
+                    <div>
+                      <div class="text-primary font-medium">资料与版权</div>
+                      <p class="muted-note mt-4">项目资料应来自公开名录或授权材料，引用请注明来源，不发布未授权肖像与素材。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="el-alert el-alert--primary mt-16">
+              <span class="el-alert__icon"><i data-icon="info"></i></span>
+              <div class="el-alert__body">
+                <div class="el-alert__title">服务时间与响应</div>
+                <div class="el-alert__desc">工作日 09:00–18:00 处理账号与权限申请；紧急故障通过系统运维台登记，平台会保留审计日志与操作记录。</div>
+              </div>
+            </div>
+          </section>
+
+          <div class="el-empty hidden" data-help-empty>
+            <div class="el-empty__icon"><i data-icon="search"></i></div>
+            <div class="el-empty__title">没有找到相关问题</div>
+            <div class="el-empty__desc">试试更短的关键词，或直接联系系统管理员。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 · 页面不存在</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <main class="error-page">
+    <div class="error-box">
+      <div class="error-badge"><i data-icon="compass"></i> 页面走丢了</div>
+      <div class="error-code">404</div>
+      <h1 class="error-title">你访问的页面不存在</h1>
+      <p class="error-desc">
+        链接可能已经失效，或项目已被归档、删除。你可以回到项目库重新检索，
+        也可以直接向 AI 助手提问。
+      </p>
+      <div class="error-actions">
+        <a class="el-button el-button--primary" href="../site/home.html"><i data-icon="home"></i> 返回首页</a>
+        <a class="el-button" href="../site/projects.html">浏览项目库</a>
+        <button class="el-button el-button--text" type="button" onclick="history.back()">返回上一页</button>
+      </div>
+      <div class="error-help">
+        想找具体项目？在项目库中按地区、门类或关键词筛选；<br>
+        如果确认链接无误，请联系管理员核查项目状态。
+      </div>
+    </div>
+  </main>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

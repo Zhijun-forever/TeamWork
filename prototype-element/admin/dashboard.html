@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工作台 · 非遗数字化管理平台</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="dashboard"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="工作台" data-crumb="首页 / 工作台"></header>
+
+      <main class="admin-page">
+        <!-- 欢迎 -->
+        <section class="welcome-card">
+          <div>
+            <div class="welcome-card__eyebrow"><i data-icon="calendar"></i> 2026-11-25 · 上午好</div>
+            <h1 class="welcome-card__title">欢迎回来，admin01</h1>
+            <p class="welcome-card__desc">今天有 <strong class="text-blue">6</strong> 个项目等待审核，<strong class="text-orange">3</strong> 条认证申请待处理，最近一次数据库备份在今天 03:00 完成。</p>
+          </div>
+          <div class="welcome-card__actions">
+            <a class="el-button el-button--primary" href="review.html"><i data-icon="check-circle"></i> 去审核</a>
+            <a class="el-button" href="project-new.html"><i data-icon="plus"></i> 新建项目</a>
+          </div>
+        </section>
+
+        <!-- 统计 -->
+        <section class="stat-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">项目总数</div>
+              <div class="stat-card__value">50</div>
+              <div class="stat-card__meta"><i data-icon="trend" class="text-green"></i> 较上月新增 6 个</div>
+            </div>
+            <span class="stat-card__icon"><i data-icon="folder" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">待审核</div>
+              <div class="stat-card__value">6</div>
+              <div class="stat-card__meta"><i data-icon="clock" class="text-orange"></i> 其中 2 个超过 24 小时</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--orange"><i data-icon="check-circle" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">本月发布</div>
+              <div class="stat-card__value">8</div>
+              <div class="stat-card__meta"><i data-icon="trend" class="text-green"></i> 较上月增加 3 个</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--green"><i data-icon="upload" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">已归档</div>
+              <div class="stat-card__value">3</div>
+              <div class="stat-card__meta"><i data-icon="info"></i> 归档后只读，可恢复</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--gray"><i data-icon="archive" class="el-icon--lg"></i></span>
+          </div>
+        </section>
+
+        <!-- 最近项目 + 待办 -->
+        <section class="content-grid cols-2-1">
+          <div class="el-card table-card">
+            <div class="el-card__header">
+              <span class="el-card__title"><i data-icon="folder"></i> 最近项目</span>
+              <a class="el-button el-button--text el-button--small" href="projects.html">查看全部 <i data-icon="arrow-right"></i></a>
+            </div>
+            <div class="el-card__body">
+              <div class="table-wrap">
+                <table class="el-table">
+                  <thead>
+                    <tr>
+                      <th>项目</th>
+                      <th>门类</th>
+                      <th>状态</th>
+                      <th>更新时间</th>
+                      <th class="col-actions">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="project-cell">
+                          <span class="thumb">绣</span>
+                          <div class="project-cell__text">
+                            <div class="cell-title">苗族刺绣</div>
+                            <div class="cell-sub">ID 12 · 贵州黔东南</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>传统美术</td>
+                      <td><span class="el-tag el-tag--success"><span class="dot"></span>已发布</span></td>
+                      <td>11-21 10:24</td>
+                      <td class="col-actions">
+                        <div class="table-actions">
+                          <a href="../site/project.html">查看</a>
+                          <a href="project-edit.html">编辑</a>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="project-cell">
+                          <span class="thumb thumb--green">歌</span>
+                          <div class="project-cell__text">
+                            <div class="cell-title">侗族大歌</div>
+                            <div class="cell-sub">ID 11 · 贵州黔东南</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>传统音乐</td>
+                      <td><span class="el-tag el-tag--success"><span class="dot"></span>已发布</span></td>
+                      <td>11-20 15:12</td>
+                      <td class="col-actions">
+                        <div class="table-actions">
+                          <a href="../site/project.html">查看</a>
+                          <a href="project-edit.html">编辑</a>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="project-cell">
+                          <span class="thumb thumb--orange">瓷</span>
+                          <div class="project-cell__text">
+                            <div class="cell-title">景德镇手工制瓷技艺</div>
+                            <div class="cell-sub">ID 10 · 江西景德镇</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>传统技艺</td>
+                      <td><span class="el-tag el-tag--warning"><span class="dot"></span>待审核</span></td>
+                      <td>11-19 09:40</td>
+                      <td class="col-actions">
+                        <div class="table-actions">
+                          <a href="review.html">审核</a>
+                          <a href="project-edit.html">查看</a>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="project-cell">
+                          <span class="thumb thumb--gray">纸</span>
+                          <div class="project-cell__text">
+                            <div class="cell-title">陕北剪纸</div>
+                            <div class="cell-sub">ID 7 · 陕西延安</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>传统美术</td>
+                      <td><span class="el-tag el-tag--info"><span class="dot"></span>草稿</span></td>
+                      <td>11-16 14:08</td>
+                      <td class="col-actions">
+                        <div class="table-actions">
+                          <a href="project-edit.html">编辑</a>
+                          <span class="is-muted">提交</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="project-cell">
+                          <span class="thumb thumb--red">偶</span>
+                          <div class="project-cell__text">
+                            <div class="cell-title">泉州提线木偶戏</div>
+                            <div class="cell-sub">ID 8 · 福建泉州</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>传统戏剧</td>
+                      <td><span class="el-tag el-tag--danger"><span class="dot"></span>已驳回</span></td>
+                      <td>11-17 11:30</td>
+                      <td class="col-actions">
+                        <div class="table-actions">
+                          <a href="project-edit.html">修改</a>
+                          <a href="project-edit.html">查看意见</a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-card">
+            <div class="el-card__header">
+              <span class="el-card__title"><i data-icon="check-circle"></i> 待办事项</span>
+              <span class="el-tag el-tag--warning">11 项</span>
+            </div>
+            <div class="el-card__body">
+              <a class="todo-item" href="review.html">
+                <span class="todo-item__icon todo-item__icon--orange"><i data-icon="check-circle" class="el-icon--lg"></i></span>
+                <div class="todo-item__text">
+                  <div class="todo-item__title">项目待审核</div>
+                  <div class="todo-item__desc">6 个项目等待审核，最早已等待 26 小时</div>
+                </div>
+                <i data-icon="chevron-right" class="text-placeholder"></i>
+              </a>
+              <a class="todo-item" href="certifications.html">
+                <span class="todo-item__icon todo-item__icon--blue"><i data-icon="award" class="el-icon--lg"></i></span>
+                <div class="todo-item__text">
+                  <div class="todo-item__title">认证申请</div>
+                  <div class="todo-item__desc">3 条项目管理者认证等待审批</div>
+                </div>
+                <i data-icon="chevron-right" class="text-placeholder"></i>
+              </a>
+              <a class="todo-item" href="archive.html">
+                <span class="todo-item__icon todo-item__icon--green"><i data-icon="archive" class="el-icon--lg"></i></span>
+                <div class="todo-item__text">
+                  <div class="todo-item__title">归档修改申请</div>
+                  <div class="todo-item__desc">2 个项目申请恢复编辑权限</div>
+                </div>
+                <i data-icon="chevron-right" class="text-placeholder"></i>
+              </a>
+              <a class="todo-item" href="ai.html">
+                <span class="todo-item__icon todo-item__icon--blue"><i data-icon="refresh" class="el-icon--lg"></i></span>
+                <div class="todo-item__text">
+                  <div class="todo-item__title">知识库索引</div>
+                  <div class="todo-item__desc">有 2 个新发布项目尚未建立索引</div>
+                </div>
+                <i data-icon="chevron-right" class="text-placeholder"></i>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 状态分布 + 动态 -->
+        <section class="content-grid cols-1-1">
+          <div class="el-card">
+            <div class="el-card__header">
+              <span class="el-card__title"><i data-icon="pie"></i> 项目状态分布</span>
+              <a class="el-button el-button--text el-button--small" href="projects.html">项目库</a>
+            </div>
+            <div class="el-card__body">
+              <div class="donut-wrap">
+                <div class="donut" style="background: conic-gradient(#409eff 0 68%, #e6a23c 68% 80%, #f56c6c 80% 88%, #909399 88% 94%, #c0c4cc 94% 100%);">
+                  <div class="donut__center">
+                    <span class="donut__num">50</span>
+                    <span class="donut__label">项目总数</span>
+                  </div>
+                </div>
+                <div class="legend">
+                  <div class="legend__item"><span class="legend__dot"></span> 已发布 <span class="legend__count">34 个 · 68%</span></div>
+                  <div class="legend__item"><span class="legend__dot legend__dot--warning"></span> 待审核 <span class="legend__count">6 个 · 12%</span></div>
+                  <div class="legend__item"><span class="legend__dot legend__dot--danger"></span> 已驳回 <span class="legend__count">4 个 · 8%</span></div>
+                  <div class="legend__item"><span class="legend__dot legend__dot--info"></span> 草稿 <span class="legend__count">3 个 · 6%</span></div>
+                  <div class="legend__item"><span class="legend__dot legend__dot--gray"></span> 已归档 <span class="legend__count">3 个 · 6%</span></div>
+                </div>
+              </div>
+              <div class="el-divider"></div>
+              <div class="quick-grid">
+                <a class="quick-item" href="review.html">
+                  <span class="quick-item__icon"><i data-icon="check-circle"></i></span>
+                  <span><span class="quick-item__title">审核项目</span><br><span class="quick-item__desc">按意见发布或驳回</span></span>
+                </a>
+                <a class="quick-item" href="certifications.html">
+                  <span class="quick-item__icon"><i data-icon="award"></i></span>
+                  <span><span class="quick-item__title">认证审批</span><br><span class="quick-item__desc">通过或拒绝认证</span></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="el-card">
+            <div class="el-card__header">
+              <span class="el-card__title"><i data-icon="activity"></i> 最近动态</span>
+              <a class="el-button el-button--text el-button--small" href="ops.html">操作日志</a>
+            </div>
+            <div class="el-card__body">
+              <div class="el-timeline">
+                <div class="el-timeline-item">
+                  <span class="el-timeline-item__dot el-timeline-item__dot--success"></span>
+                  <div class="el-timeline-item__time">今天 10:24</div>
+                  <div class="el-timeline-item__title">admin01 审核通过「苗族刺绣」并发布</div>
+                  <div class="el-timeline-item__content">审核意见：资料完整，地区与门类归类正确。</div>
+                </div>
+                <div class="el-timeline-item">
+                  <span class="el-timeline-item__dot el-timeline-item__dot--primary"></span>
+                  <div class="el-timeline-item__time">今天 09:40</div>
+                  <div class="el-timeline-item__title">manager01 提交「潍坊风筝」审核</div>
+                  <div class="el-timeline-item__content">项目状态：草稿 → 待审核。</div>
+                </div>
+                <div class="el-timeline-item">
+                  <span class="el-timeline-item__dot el-timeline-item__dot--danger"></span>
+                  <div class="el-timeline-item__time">昨天 17:06</div>
+                  <div class="el-timeline-item__title">admin01 驳回「泉州提线木偶戏」</div>
+                  <div class="el-timeline-item__content">驳回意见：封面缺失，保护单位信息待补充。</div>
+                </div>
+                <div class="el-timeline-item">
+                  <span class="el-timeline-item__dot"></span>
+                  <div class="el-timeline-item__time">今天 03:00</div>
+                  <div class="el-timeline-item__title">sysadmin 完成数据库备份</div>
+                  <div class="el-timeline-item__content">备份文件 app-20261125-0300.db，约 6.4 MB。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <p class="muted-note mt-16">统计范围：全部项目与最近 30 天操作记录。</p>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

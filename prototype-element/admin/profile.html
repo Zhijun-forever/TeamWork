@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人中心 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="profile"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="个人中心" data-crumb="系统 / 个人中心"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">个人中心</h1>
+            <p class="page-head__desc">维护个人资料与账号安全设置。</p>
+          </div>
+          <div class="page-head__actions">
+            <a class="el-button" href="../site/home.html"><i data-icon="globe"></i> 前往公众端</a>
+          </div>
+        </div>
+
+        <div class="profile-layout">
+          <!-- 左侧资料卡 -->
+          <aside class="el-card profile-side">
+            <div class="el-card__body">
+              <span class="el-avatar el-avatar--lg el-avatar--primary">陈</span>
+              <div class="profile-name">陈立</div>
+              <div class="profile-role"><span class="el-tag el-tag--danger"><span class="dot"></span>系统管理员</span></div>
+              <p class="muted-note mt-8">admin01 · 内容审核组</p>
+
+              <div class="profile-meta">
+                <div class="el-descriptions el-descriptions--one">
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">邮箱</div><div class="el-descriptions__value">admin01@example.org</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">手机</div><div class="el-descriptions__value">138****0021</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">注册时间</div><div class="el-descriptions__value">2026-09-01 09:20</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">最后登录</div><div class="el-descriptions__value">今天 10:02 · 127.0.0.1</div></div>
+                </div>
+              </div>
+
+              <div class="el-divider"></div>
+              <div class="flex flex-wrap gap-8" style="justify-content:center;">
+                <span class="el-tag el-tag--plain">项目审核</span>
+                <span class="el-tag el-tag--plain">认证审批</span>
+                <span class="el-tag el-tag--plain">用户管理</span>
+              </div>
+            </div>
+          </aside>
+
+          <!-- 右侧 -->
+          <div class="el-card">
+            <div class="el-card__body">
+              <div class="el-tabs" data-tabs>
+                <div class="el-tabs__header" role="tablist" aria-label="个人中心">
+                  <button class="el-tabs__item is-active" type="button" data-tab="info" role="tab" aria-selected="true">基本资料</button>
+                  <button class="el-tabs__item" type="button" data-tab="password" role="tab" aria-selected="false">修改密码</button>
+                  <button class="el-tabs__item" type="button" data-tab="security" role="tab" aria-selected="false">账号安全</button>
+                </div>
+                <div class="el-tabs__body">
+                  <!-- 基本资料 -->
+                  <div data-tab-panel="info" class="is-active">
+                    <div class="el-form-grid">
+                      <div class="el-form-item">
+                        <label class="el-form-item__label" for="pName">姓名</label>
+                        <div class="el-input"><input class="el-input__inner" id="pName" type="text" value="陈立"></div>
+                      </div>
+                      <div class="el-form-item">
+                        <label class="el-form-item__label" for="pUser">用户名</label>
+                        <div class="el-input"><input class="el-input__inner" id="pUser" type="text" value="admin01" disabled></div>
+                        <div class="el-form-item__help">用户名唯一，注册后不可修改。</div>
+                      </div>
+                      <div class="el-form-item">
+                        <label class="el-form-item__label" for="pEmail">邮箱</label>
+                        <div class="el-input"><input class="el-input__inner" id="pEmail" type="email" value="admin01@example.org"></div>
+                      </div>
+                      <div class="el-form-item">
+                        <label class="el-form-item__label" for="pPhone">手机号</label>
+                        <div class="el-input"><input class="el-input__inner" id="pPhone" type="tel" value="13800000021"></div>
+                        <div class="el-form-item__help">最小必要收集，展示时自动脱敏。</div>
+                      </div>
+                      <div class="el-form-item">
+                        <label class="el-form-item__label" for="pOrg">所属单位</label>
+                        <div class="el-input"><input class="el-input__inner" id="pOrg" type="text" value="内容审核组"></div>
+                      </div>
+                      <div class="el-form-item">
+                        <label class="el-form-item__label" for="pRole">角色</label>
+                        <div class="el-input"><input class="el-input__inner" id="pRole" type="text" value="系统管理员" disabled></div>
+                        <div class="el-form-item__help">角色调整需由系统管理员在命令行或后台完成。</div>
+                      </div>
+                      <div class="el-form-item span-2">
+                        <label class="el-form-item__label" for="pBio">个人简介</label>
+                        <textarea class="el-textarea__inner" id="pBio" rows="3">负责平台内容审核与日常运维，关注非遗资料的规范化整理与开放共享。</textarea>
+                      </div>
+                    </div>
+                    <div class="flex gap-8 mt-16">
+                      <button class="el-button el-button--primary" type="button" data-api="profile-save">保存修改</button>
+                      <button class="el-button" type="button" data-toast="已恢复为上次保存的内容">重置</button>
+                    </div>
+                  </div>
+
+                  <!-- 修改密码 -->
+                  <div data-tab-panel="password">
+                    <div class="el-alert el-alert--warning mb-16">
+                      <span class="el-alert__icon"><i data-icon="shield"></i></span>
+                      <div class="el-alert__body">
+                        <div class="el-alert__title">修改密码后需要重新登录</div>
+                        <div class="el-alert__desc">新密码至少 8 位，建议同时包含大小写字母、数字与符号；不要与其他站点复用密码。</div>
+                      </div>
+                    </div>
+                    <div style="max-width:420px;">
+                      <div class="el-form-item">
+                        <label class="el-form-item__label is-required" for="oldPwd">当前密码</label>
+                        <div class="el-input">
+                          <span class="el-input__prefix"><i data-icon="lock" class="el-icon--sm"></i></span>
+                          <input class="el-input__inner" id="oldPwd" type="password" placeholder="请输入当前密码">
+                        </div>
+                      </div>
+                      <div class="el-form-item">
+                        <label class="el-form-item__label is-required" for="newPwd">新密码</label>
+                        <div class="el-input">
+                          <span class="el-input__prefix"><i data-icon="key" class="el-icon--sm"></i></span>
+                          <input class="el-input__inner" id="newPwd" type="password" placeholder="至少 8 位">
+                          <button class="el-input__suffix" type="button" data-toggle-password="#newPwd" aria-label="显示或隐藏密码" style="border:none;background:none;cursor:pointer;"><i data-icon="eye" class="el-icon--sm"></i></button>
+                        </div>
+                        <div class="el-progress mt-8">
+                          <div class="el-progress__bar"><div class="el-progress__inner el-progress__inner--warning" style="width:55%;"></div></div>
+                          <span class="el-progress__text">中等</span>
+                        </div>
+                      </div>
+                      <div class="el-form-item">
+                        <label class="el-form-item__label is-required" for="newPwd2">确认新密码</label>
+                        <div class="el-input">
+                          <span class="el-input__prefix"><i data-icon="lock" class="el-icon--sm"></i></span>
+                          <input class="el-input__inner" id="newPwd2" type="password" placeholder="再次输入新密码">
+                        </div>
+                      </div>
+                      <button class="el-button el-button--primary" type="button" data-api="profile-password">更新密码</button>
+                    </div>
+                  </div>
+
+                  <!-- 账号安全 -->
+                  <div data-tab-panel="security">
+                    <div class="el-alert el-alert--danger mb-16">
+                      <span class="el-alert__icon"><i data-icon="shield"></i></span>
+                      <div class="el-alert__body">
+                        <div class="el-alert__title">系统管理员账号受保护</div>
+                        <div class="el-alert__desc">系统管理员账号（sysadmin）只由命令行维护，后台不可创建、删除或修改其角色；本页面展示的是 admin01 的账号。</div>
+                      </div>
+                    </div>
+
+                    <div class="el-card el-card--flat mb-16">
+                      <div class="el-card__header"><span class="el-card__title">登录记录</span><a class="text-sm" href="javascript:;" data-toast="已加载全部登录记录">查看全部</a></div>
+                      <div class="el-card__body" style="padding:0;">
+                        <div class="table-wrap">
+                          <table class="el-table">
+                            <thead><tr><th>时间</th><th>IP 地址</th><th>设备</th><th>登录方式</th><th>状态</th></tr></thead>
+                            <tbody>
+                              <tr><td>今天 10:02</td><td>127.0.0.1</td><td>Chrome · Windows 11</td><td>账号密码</td><td><span class="el-tag el-tag--success"><span class="dot"></span>成功</span></td></tr>
+                              <tr><td>昨天 09:15</td><td>127.0.0.1</td><td>Chrome · Windows 11</td><td>账号密码</td><td><span class="el-tag el-tag--success"><span class="dot"></span>成功</span></td></tr>
+                              <tr><td>2026-11-22 18:40</td><td>127.0.0.1</td><td>Safari · iPadOS</td><td>账号密码</td><td><span class="el-tag el-tag--success"><span class="dot"></span>成功</span></td></tr>
+                              <tr><td>2026-11-20 08:33</td><td>127.0.0.1</td><td>Chrome · Windows 11</td><td>密码错误</td><td><span class="el-tag el-tag--danger"><span class="dot"></span>失败</span></td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="el-form-grid">
+                      <div class="el-card el-card--flat">
+                        <div class="el-card__body">
+                          <div class="flex-between">
+                            <div>
+                              <div class="text-primary font-medium">邮箱验证</div>
+                              <div class="muted-note mt-4">admin01@example.org</div>
+                            </div>
+                            <span class="el-tag el-tag--success">已绑定</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="el-card el-card--flat">
+                        <div class="el-card__body">
+                          <div class="flex-between">
+                            <div>
+                              <div class="text-primary font-medium">手机号绑定</div>
+                              <div class="muted-note mt-4">138****0021</div>
+                            </div>
+                            <span class="el-tag el-tag--success">已绑定</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="flex gap-8 mt-16">
+                      <button class="el-button" type="button" data-toast="绑定信息修改已提交">修改绑定信息</button>
+                      <button class="el-button" type="button" data-toast="已注销其他设备的会话">注销其他设备</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="muted-note mt-16">保存按钮仅显示提示，不会修改数据；正式系统使用 Werkzeug 哈希、CSRF 与会话失效机制。</p>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

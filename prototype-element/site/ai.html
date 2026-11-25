@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 问答 · 非遗数字化管理平台</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <div id="site-header" data-active="ai"></div>
+
+  <main class="site-main">
+    <section class="page-hero">
+      <div class="container">
+        <div class="flex-between gap-16 flex-wrap">
+          <div>
+            <h1 class="page-hero__title">AI 知识问答</h1>
+            <p class="page-hero__desc">
+              基于平台公开项目语料的 RAG 问答。答案附带引用来源；资料不足时会明确说明，超出非遗范围的问题会拒答。
+            </p>
+          </div>
+          <div class="flex gap-8">
+            <span class="el-tag el-tag--success"><span class="dot"></span>知识库已同步</span>
+            <span class="el-tag el-tag--plain">仅索引公开项目</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="page-body">
+      <div class="container">
+        <div class="ai-page-layout">
+          <!-- 对话 -->
+          <div class="el-card chat-card">
+            <div class="chat-head">
+              <div class="chat-head__left">
+                <span class="chat-head__avatar"><i data-icon="sparkles" class="el-icon--lg"></i></span>
+                <div>
+                  <div class="chat-head__title">非遗知识助手</div>
+                  <div class="chat-head__sub">已连接知识库 · 50 个公开项目</div>
+                </div>
+              </div>
+              <div class="flex gap-8">
+                <span class="chat-quota">今日剩余 <strong data-chat-quota>12</strong> / 15 次</span>
+                <button class="el-button el-button--small" type="button" data-toast="已开启新对话"><i data-icon="refresh"></i> 新对话</button>
+              </div>
+            </div>
+
+            <div class="chat-body">
+              <div class="chat-msg">
+                <span class="chat-msg__avatar chat-msg__avatar--ai"><i data-icon="sparkles" class="el-icon--sm"></i></span>
+                <div class="chat-msg__content">
+                  <div class="chat-bubble">
+                    <p>你好，我是非遗知识助手。我会检索平台已发布的公开项目资料来回答你的问题，并在答案下方标注引用来源。</p>
+                    <p style="margin-top:8px;">你可以问我项目介绍、地区分布、门类对比或推荐，例如：</p>
+                  </div>
+                  <div class="chat-suggest">
+                    <button type="button" data-chat-suggest>苗族刺绣有哪些代表项目？</button>
+                    <button type="button" data-chat-suggest>贵州有哪些传统音乐？</button>
+                    <button type="button" data-chat-suggest>比较苗族刺绣与侗族大歌</button>
+                  </div>
+                  <div class="chat-msg__time">今天 10:26</div>
+                </div>
+              </div>
+
+              <div class="chat-msg chat-msg--user">
+                <span class="chat-msg__avatar chat-msg__avatar--user">我</span>
+                <div class="chat-msg__content">
+                  <div class="chat-bubble">苗族刺绣有哪些代表项目？</div>
+                  <div class="chat-msg__time">今天 10:27</div>
+                </div>
+              </div>
+
+              <div class="chat-msg">
+                <span class="chat-msg__avatar chat-msg__avatar--ai"><i data-icon="sparkles" class="el-icon--sm"></i></span>
+                <div class="chat-msg__content">
+                  <div class="chat-bubble">
+                    <p>根据知识库，与苗族刺绣相关的公开项目主要有：</p>
+                    <p style="margin-top:8px;">1. <strong>苗族刺绣</strong>（贵州省 / 黔东南州，传统美术）——以破线绣、绉绣、堆绣见长，纹样多取蝴蝶妈妈、龙、鸟等意象。</p>
+                    <p style="margin-top:6px;">2. <strong>水族马尾绣</strong>（贵州省 / 三都县，传统美术）——以马尾缠丝为芯，盘出立体纹样。</p>
+                    <p style="margin-top:8px;">以上信息来自平台公开项目资料，可以点击下方来源查看原文。</p>
+                  </div>
+                  <div class="chat-sources">
+                    <div class="chat-sources__title"><i data-icon="link"></i> 引用来源（2）</div>
+                    <div class="chat-source">
+                      <span class="chat-source__index">1</span>
+                      <a href="project.html">苗族刺绣 · 项目详情</a>
+                      <span class="chat-source__meta">传统美术</span>
+                    </div>
+                    <div class="chat-source">
+                      <span class="chat-source__index">2</span>
+                      <a href="project.html">水族马尾绣 · 项目详情</a>
+                      <span class="chat-source__meta">传统美术</span>
+                    </div>
+                  </div>
+                  <div class="chat-msg__time">今天 10:27 · 回答仅供参考</div>
+                </div>
+              </div>
+            </div>
+
+            <form class="chat-input" id="chatForm">
+              <div class="chat-input__box">
+                <div class="el-textarea">
+                  <textarea class="el-textarea__inner" rows="1" placeholder="输入你的问题，例如：贵州有哪些传统音乐项目？" aria-label="提问内容"></textarea>
+                </div>
+                <button class="el-button el-button--primary" type="submit" style="height:40px;padding:0 18px;">
+                  <i data-icon="send"></i> 发送
+                </button>
+              </div>
+              <div class="chat-input__foot">
+                <span>Enter 发送 · Shift + Enter 换行</span>
+                <span>回答由 AI 生成，仅供参考</span>
+              </div>
+            </form>
+          </div>
+
+          <!-- 侧栏 -->
+          <aside>
+            <div class="el-card chat-side-card">
+              <div class="el-card__header">
+                <span class="el-card__title">使用说明</span>
+              </div>
+              <div class="el-card__body">
+                <ul class="usage-list">
+                  <li><i data-icon="check-circle"></i> 仅索引“已发布且公开”的项目，不涉及草稿与私有资料。</li>
+                  <li><i data-icon="check-circle"></i> 每条回答附带引用编号，点击可回到项目详情。</li>
+                  <li><i data-icon="check-circle"></i> 登录用户每天 15 次，第 16 次会提示限流。</li>
+                  <li><i data-icon="check-circle"></i> 模型超时会自动降级为检索片段，不影响浏览。</li>
+                  <li><i data-icon="alert-circle"></i> 资料不足时回答“未找到”，不编造事实。</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="el-card chat-side-card">
+              <div class="el-card__header">
+                <span class="el-card__title">试试这样问</span>
+              </div>
+              <div class="el-card__body">
+                <button class="sample-q" type="button" data-chat-suggest>苗族刺绣有哪些代表项目？</button>
+                <button class="sample-q" type="button" data-chat-suggest>贵州有哪些传统音乐项目？</button>
+                <button class="sample-q" type="button" data-chat-suggest>比较苗族刺绣与侗族大歌</button>
+                <button class="sample-q" type="button" data-chat-suggest>推荐三个传统戏剧项目</button>
+                <button class="sample-q" type="button" data-chat-suggest>苏州评弹的保护单位是谁？</button>
+              </div>
+            </div>
+
+            <div class="el-card chat-side-card">
+              <div class="el-card__header">
+                <span class="el-card__title">回答边界</span>
+              </div>
+              <div class="el-card__body">
+                <p class="text-md text-secondary" style="line-height:1.8;">
+                  助手只回答与平台收录非遗项目相关的问题。天气、闲聊、医疗建议等超出范围的问题会被拒绝；
+                  涉及具体政策与申报流程时，请以主管部门公开信息为准。
+                </p>
+                <div class="el-divider"></div>
+                <div class="flex gap-8">
+                  <span class="el-tag el-tag--plain">qwen-turbo</span>
+                  <span class="el-tag el-tag--plain">bge-m3</span>
+                  <span class="el-tag el-tag--plain">Top3 检索</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

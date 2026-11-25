@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新建项目 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="new"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="新建项目" data-crumb="项目管理 / 新建项目"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">新建项目</h1>
+            <p class="page-head__desc">项目管理者提交后进入待审核；管理员创建可直接发布。</p>
+          </div>
+          <div class="page-head__actions">
+            <a class="el-button" href="projects.html"><i data-icon="arrow-left"></i> 返回项目库</a>
+          </div>
+        </div>
+
+        <div class="el-card filter-card">
+          <div class="el-card__body">
+            <div class="el-steps">
+              <div class="el-step is-active">
+                <div class="el-step__head"><span class="el-step__icon">1</span><span class="el-step__title">填写项目信息</span></div>
+              </div>
+              <div class="el-step">
+                <div class="el-step__head"><span class="el-step__icon">2</span><span class="el-step__title">上传封面与媒体</span></div>
+              </div>
+              <div class="el-step">
+                <div class="el-step__head"><span class="el-step__icon">3</span><span class="el-step__title">保存草稿或提交审核</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-layout">
+          <div class="form-main">
+            <!-- 基本信息 -->
+            <div class="el-card">
+              <div class="el-card__header">
+                <span class="el-card__title"><i data-icon="file"></i> 基本信息</span>
+                <span class="el-tag el-tag--danger">必填</span>
+              </div>
+              <div class="el-card__body">
+                <div class="el-form-grid">
+                  <div class="el-form-item span-2">
+                    <label class="el-form-item__label is-required" for="title">项目名称</label>
+                    <div class="el-input">
+                      <input class="el-input__inner" id="title" type="text" placeholder="例如：苗族刺绣">
+                    </div>
+                    <div class="el-form-item__help">建议使用公开名录中的规范名称，不超过 60 个字。</div>
+                  </div>
+                  <div class="el-form-item">
+                    <label class="el-form-item__label is-required" for="province">所属地区（省）</label>
+                    <div class="el-select">
+                      <select id="province">
+                        <option>请选择省份</option>
+                        <option selected>贵州省</option>
+                        <option>江苏省</option>
+                        <option>浙江省</option>
+                        <option>福建省</option>
+                        <option>江西省</option>
+                        <option>陕西省</option>
+                        <option>西藏自治区</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="el-form-item">
+                    <label class="el-form-item__label" for="city">所属地区（市 / 县）</label>
+                    <div class="el-select">
+                      <select id="city">
+                        <option>请选择市 / 县</option>
+                        <option selected>黔东南苗族侗族自治州</option>
+                        <option>黔南布依族苗族自治州</option>
+                        <option>贵阳市</option>
+                        <option>遵义市</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="el-form-item">
+                    <label class="el-form-item__label is-required" for="category">门类</label>
+                    <div class="el-select">
+                      <select id="category">
+                        <option>请选择门类</option>
+                        <option selected>传统美术</option>
+                        <option>传统技艺</option>
+                        <option>传统音乐</option>
+                        <option>传统舞蹈</option>
+                        <option>传统戏剧</option>
+                        <option>曲艺</option>
+                        <option>民间文学</option>
+                        <option>传统体育</option>
+                        <option>传统医药</option>
+                        <option>民俗</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="el-form-item">
+                    <label class="el-form-item__label" for="level">名录级别</label>
+                    <div class="el-select">
+                      <select id="level">
+                        <option>未定级</option>
+                        <option selected>国家级</option>
+                        <option>省级</option>
+                        <option>市级</option>
+                        <option>县级</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="el-form-item span-2">
+                    <label class="el-form-item__label" for="tags">标签</label>
+                    <div class="el-input" style="height:auto;min-height:32px;flex-wrap:wrap;gap:6px;padding:5px 8px;">
+                      <span class="el-tag">国家级 <span class="close">✕</span></span>
+                      <span class="el-tag">苗族 <span class="close">✕</span></span>
+                      <span class="el-tag">刺绣 <span class="close">✕</span></span>
+                      <span class="el-tag">破线绣 <span class="close">✕</span></span>
+                      <input class="el-input__inner" id="tags" type="text" placeholder="输入标签后回车添加" style="width:150px;flex:1;">
+                    </div>
+                    <div class="el-form-item__help">标签与项目为多对多关系，最多 8 个；建议与分类体系中的标签保持一致。</div>
+                  </div>
+                  <div class="el-form-item span-2">
+                    <label class="el-form-item__label is-required" for="summary">摘要</label>
+                    <textarea class="el-textarea__inner" id="summary" rows="3" placeholder="用 80–150 字说明项目是什么、在哪里、有什么特点">苗族刺绣主要分布于贵州省黔东南苗族侗族自治州，以破线绣、绉绣、堆绣见长，纹样多取蝴蝶妈妈、龙、鸟等意象，是苗族服饰与礼仪的重要载体。</textarea>
+                    <div class="el-form-item__help">摘要会出现在公众端列表卡片与 AI 检索片段中。</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 详细资料 -->
+            <div class="el-card">
+              <div class="el-card__header">
+                <span class="el-card__title"><i data-icon="book"></i> 详细资料</span>
+                <span class="text-placeholder text-sm">选填</span>
+              </div>
+              <div class="el-card__body">
+                <div class="el-form-item">
+                  <label class="el-form-item__label" for="history">历史渊源</label>
+                  <textarea class="el-textarea__inner" id="history" rows="4" placeholder="项目的历史脉络、传承谱系、重要节点"></textarea>
+                </div>
+                <div class="el-form-item">
+                  <label class="el-form-item__label" for="content">主要内容与技艺特征</label>
+                  <textarea class="el-textarea__inner" id="content" rows="5" placeholder="核心技艺、典型纹样、代表作品、相关习俗等"></textarea>
+                </div>
+                <div class="el-form-item">
+                  <label class="el-form-item__label" for="protection">保护与传承措施</label>
+                  <textarea class="el-textarea__inner" id="protection" rows="4" placeholder="记录性保护、生产性保护、传习活动、展示传播等"></textarea>
+                </div>
+                <div class="el-form-grid">
+                  <div class="el-form-item">
+                    <label class="el-form-item__label" for="unit">保护单位</label>
+                    <div class="el-input"><input class="el-input__inner" id="unit" type="text" placeholder="例如：黔东南州非遗保护中心"></div>
+                  </div>
+                  <div class="el-form-item">
+                    <label class="el-form-item__label" for="source">资料来源</label>
+                    <div class="el-input"><input class="el-input__inner" id="source" type="text" placeholder="公开名录、公开报道或授权资料"></div>
+                  </div>
+                </div>
+                <div class="el-form-item">
+                  <label class="el-form-item__label" for="note">备注</label>
+                  <textarea class="el-textarea__inner" id="note" rows="2" placeholder="供审核人员参考的补充说明"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- 媒体 -->
+            <div class="el-card">
+              <div class="el-card__header">
+                <span class="el-card__title"><i data-icon="image"></i> 封面与媒体</span>
+                <span class="text-placeholder text-sm">不上传真实文件</span>
+              </div>
+              <div class="el-card__body">
+                <div class="upload-grid">
+                  <label class="el-upload" data-upload>
+                    <input type="file" accept="image/png,image/jpeg,image/webp" style="display:none;">
+                    <i data-icon="upload" class="el-icon--xl"></i>
+                    <span class="el-upload__text">上传封面<br><em>点击选择图片</em></span>
+                    <div class="el-upload__tip">JPG / PNG，≤ 2 MB</div>
+                  </label>
+                  <label class="el-upload" data-upload>
+                    <input type="file" accept="image/png,image/jpeg,image/webp" multiple style="display:none;">
+                    <i data-icon="image" class="el-icon--xl"></i>
+                    <span class="el-upload__text">图集<br><em>可多选</em></span>
+                    <div class="el-upload__tip">最多 9 张，每张 ≤ 5 MB</div>
+                  </label>
+                  <label class="el-upload" data-upload>
+                    <input type="file" accept="application/pdf" style="display:none;">
+                    <i data-icon="file" class="el-icon--xl"></i>
+                    <span class="el-upload__text">附件<br><em>PDF 资料</em></span>
+                    <div class="el-upload__tip">单个文件 ≤ 20 MB</div>
+                  </label>
+                </div>
+                <p class="muted-note mt-12">正式系统会校验扩展名、MIME 与大小，使用 UUID 命名并保存到非模板目录；未授权肖像与素材不得上传。</p>
+              </div>
+            </div>
+
+            <!-- 发布设置 -->
+            <div class="el-card">
+              <div class="el-card__header">
+                <span class="el-card__title"><i data-icon="settings"></i> 发布设置</span>
+              </div>
+              <div class="el-card__body">
+                <div class="el-form-item">
+                  <label class="el-form-item__label">可见范围</label>
+                  <div class="el-radio-group">
+                    <label class="el-radio"><input type="radio" name="visibility" value="public" checked><span class="el-radio__box"></span><span>公开（审核通过后公众可见）</span></label>
+                    <label class="el-radio"><input type="radio" name="visibility" value="internal"><span class="el-radio__box"></span><span>不公开（仅本人与管理员可见）</span></label>
+                  </div>
+                </div>
+                <div class="el-form-item">
+                  <label class="el-checkbox">
+                    <input type="checkbox" checked>
+                    <span class="el-checkbox__box"></span>
+                    <span class="text-md">我确认资料来自公开或授权来源，并同意按平台规则展示</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-footer">
+              <span class="muted-note"><i data-icon="check-circle" class="text-green"></i> 草稿已在本地保存</span>
+              <div class="flex gap-8">
+                <button class="el-button" type="button" data-api="project-save" data-mode="draft">保存草稿</button>
+                <button class="el-button" type="button" data-toast="预览已生成"><i data-icon="eye"></i> 预览</button>
+                <button class="el-button el-button--primary" type="button" data-api="project-save" data-mode="submit"><i data-icon="send"></i> 提交审核</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 侧栏 -->
+          <aside class="form-side">
+            <div class="el-card">
+              <div class="el-card__header">
+                <span class="el-card__title">填写进度</span>
+                <span class="text-blue text-sm">60%</span>
+              </div>
+              <div class="el-card__body">
+                <div class="el-progress mb-12">
+                  <div class="el-progress__bar"><div class="el-progress__inner" style="width:60%;"></div></div>
+                  <span class="el-progress__text">3 / 5</span>
+                </div>
+                <ul class="form-tip-list">
+                  <li>已填写：标题、地区、门类、摘要</li>
+                  <li>待补充：封面、历史渊源</li>
+                  <li>提交前请核对资料来源与版权</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="el-card">
+              <div class="el-card__header">
+                <span class="el-card__title">填写提示</span>
+              </div>
+              <div class="el-card__body">
+                <ul class="form-tip-list">
+                  <li>标题、地区、门类、摘要为必填项，缺失时无法提交。</li>
+                  <li>地区需落到市级或县级，便于公众按地区树筛选。</li>
+                  <li>摘要建议 80–150 字，避免直接复制大段申报书。</li>
+                  <li>封面建议使用横向图片，比例 16:9，避免含未授权人物肖像。</li>
+                  <li>标签最多 8 个，优先选择分类体系中已有标签。</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="el-card">
+              <div class="el-card__body">
+                <div class="flex gap-8 mb-8">
+                  <i data-icon="info" class="text-blue"></i>
+                  <span class="text-primary font-medium text-md">审核说明</span>
+                </div>
+                <p class="muted-note">
+                  项目管理者创建的项目必须经管理员审核后才能发布；管理员不能审核自己创建的项目。
+                  驳回时必须填写意见，修改后可重新提交。
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

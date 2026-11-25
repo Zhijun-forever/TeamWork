@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>项目库 · 非遗数字化管理平台</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <div id="site-header" data-active="projects"></div>
+
+  <main class="site-main">
+    <section class="page-hero">
+      <div class="container">
+        <h1 class="page-hero__title">项目库</h1>
+        <p class="page-hero__desc">
+          按地区、门类、标签与关键词组合检索已发布的公开项目，支持按浏览量、更新时间、创建时间与归档时间排序。
+        </p>
+      </div>
+    </section>
+
+    <div class="page-body">
+      <div class="container">
+        <!-- 筛选 -->
+        <div class="el-card filter-panel">
+          <div class="el-card__body">
+            <div class="filter-row">
+              <div class="filter-item filter-item--wide">
+                <label class="filter-label" for="q">关键词</label>
+                <div class="el-input">
+                  <span class="el-input__prefix"><span class="el-icon el-icon--sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg></span></span>
+                  <input class="el-input__inner" id="q" type="search" placeholder="项目名称、摘要、关键词">
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="region">地区</label>
+                <div class="el-select">
+                  <select id="region">
+                    <option>全部地区</option>
+                    <option>贵州省</option>
+                    <option>江苏省</option>
+                    <option>浙江省</option>
+                    <option>福建省</option>
+                    <option>江西省</option>
+                    <option>陕西省</option>
+                    <option>河南省</option>
+                    <option>安徽省</option>
+                    <option>山东省</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="category">门类</label>
+                <div class="el-select">
+                  <select id="category">
+                    <option>全部门类</option>
+                    <option>民间文学</option>
+                    <option>传统音乐</option>
+                    <option>传统舞蹈</option>
+                    <option>传统戏剧</option>
+                    <option>曲艺</option>
+                    <option>传统体育</option>
+                    <option>传统美术</option>
+                    <option>传统技艺</option>
+                    <option>传统医药</option>
+                    <option>民俗</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="tag">标签</label>
+                <div class="el-select">
+                  <select id="tag">
+                    <option>全部标签</option>
+                    <option>国家级</option>
+                    <option>省级</option>
+                    <option>手工技艺</option>
+                    <option>口传文学</option>
+                    <option>节庆民俗</option>
+                    <option>少数民族</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="sort">排序</label>
+                <div class="el-select">
+                  <select id="sort">
+                    <option>最近更新</option>
+                    <option>浏览量从高到低</option>
+                    <option>创建时间从新到旧</option>
+                    <option>归档时间从新到旧</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-actions">
+                <button class="el-button el-button--primary" type="button" data-filter-submit>
+                  <i data-icon="search"></i> 查询
+                </button>
+                <button class="el-button" type="button" data-toast="已重置全部筛选条件">重置</button>
+              </div>
+            </div>
+
+            <div class="active-filters">
+              <span>当前筛选：</span>
+              <span class="el-tag">地区：贵州省 <span class="close" data-toast="移除地区筛选">✕</span></span>
+              <span class="el-tag">门类：传统美术 <span class="close" data-toast="移除门类筛选">✕</span></span>
+              <button class="el-button el-button--text el-button--small" type="button" data-toast="已清除全部筛选条件">清除全部</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-bar">
+          <span>共 <strong>50</strong> 个公开项目，当前显示 1–9 条</span>
+          <span>地区：贵州省 / 门类：传统美术</span>
+        </div>
+
+        <!-- 卡片 -->
+        <div class="project-grid">
+          <article class="p-card">
+            <a href="project.html" aria-label="苗族刺绣">
+              <div class="p-card__cover">
+                <span class="p-card__char" aria-hidden="true">绣</span>
+                <span class="p-card__cover-tag">传统美术</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">国家级</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">苗族刺绣</a></h3>
+              <p class="p-card__desc">以破线绣、绉绣、堆绣见长，纹样多取蝴蝶妈妈、龙、鸟等意象，是苗族服饰与礼仪的重要载体。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="map-pin"></i> 贵州 · 黔东南</span>
+                <span><i data-icon="eye"></i> 12,480</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="侗族大歌">
+              <div class="p-card__cover p-card__cover--green">
+                <span class="p-card__char" aria-hidden="true">歌</span>
+                <span class="p-card__cover-tag">传统音乐</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">国家级</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">侗族大歌</a></h3>
+              <p class="p-card__desc">多声部、无指挥、无伴奏的民间合唱，模仿蝉鸣鸟叫与流水，2009 年列入人类非遗代表作名录。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="map-pin"></i> 贵州 · 黔东南</span>
+                <span><i data-icon="eye"></i> 9,860</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="景德镇手工制瓷技艺">
+              <div class="p-card__cover p-card__cover--orange">
+                <span class="p-card__char" aria-hidden="true">瓷</span>
+                <span class="p-card__cover-tag">传统技艺</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">省级</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">景德镇手工制瓷技艺</a></h3>
+              <p class="p-card__desc">拉坯、利坯、施釉、烧窑等七十余道工序，以“白如玉、薄如纸、声如磬”著称。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="map-pin"></i> 江西 · 景德镇</span>
+                <span><i data-icon="eye"></i> 8,310</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="南京云锦织造技艺">
+              <div class="p-card__cover p-card__cover--red">
+                <span class="p-card__char" aria-hidden="true">锦</span>
+                <span class="p-card__cover-tag">传统技艺</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">国家级</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">南京云锦织造技艺</a></h3>
+              <p class="p-card__desc">大花楼木织机双人配合，逐花异色，妆花、库缎、织金并称，素有“寸锦寸金”之说。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="map-pin"></i> 江苏 · 南京</span>
+                <span><i data-icon="eye"></i> 7,940</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="泉州提线木偶戏">
+              <div class="p-card__cover">
+                <span class="p-card__char" aria-hidden="true">偶</span>
+                <span class="p-card__cover-tag">传统戏剧</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">国家级</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">泉州提线木偶戏</a></h3>
+              <p class="p-card__desc">傀儡调与提线技艺结合，一尊木偶最多三十余条提线，动作细腻，保留宋元南戏遗响。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="map-pin"></i> 福建 · 泉州</span>
+                <span><i data-icon="eye"></i> 6,720</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="苏州评弹">
+              <div class="p-card__cover p-card__cover--green">
+                <span class="p-card__char" aria-hidden="true">弹</span>
+                <span class="p-card__cover-tag">曲艺</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">省级</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">苏州评弹</a></h3>
+              <p class="p-card__desc">评话与弹词合称，以“说、噱、弹、唱”见长，三弦琵琶相伴，吴侬软语讲述人间故事。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="map-pin"></i> 江苏 · 苏州</span>
+                <span><i data-icon="eye"></i> 4,960</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="龙泉青瓷烧制技艺">
+              <div class="p-card__cover p-card__cover--green">
+                <span class="p-card__char" aria-hidden="true">青</span>
+                <span class="p-card__cover-tag">传统技艺</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">国家级</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">龙泉青瓷烧制技艺</a></h3>
+              <p class="p-card__desc">粉青、梅子青釉色温润如玉，哥窑、弟窑并立，是青瓷烧制技艺的典型代表。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="map-pin"></i> 浙江 · 丽水</span>
+                <span><i data-icon="eye"></i> 4,520</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="安塞腰鼓">
+              <div class="p-card__cover p-card__cover--orange">
+                <span class="p-card__char" aria-hidden="true">鼓</span>
+                <span class="p-card__cover-tag">传统舞蹈</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">省级</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">安塞腰鼓</a></h3>
+              <p class="p-card__desc">鼓手腾跃旋转、鼓点整齐，融舞蹈、武术与打击乐于一体，是陕北年节的重要民俗场景。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="map-pin"></i> 陕西 · 延安</span>
+                <span><i data-icon="eye"></i> 4,180</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="昆曲">
+              <div class="p-card__cover p-card__cover--red">
+                <span class="p-card__char" aria-hidden="true">曲</span>
+                <span class="p-card__cover-tag">传统戏剧</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">国家级</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">昆曲</a></h3>
+              <p class="p-card__desc">水磨腔婉转，曲词典雅，载歌载舞，《牡丹亭》《长生殿》等剧目流传至今。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="map-pin"></i> 江苏 · 苏州</span>
+                <span><i data-icon="eye"></i> 3,900</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 分页 -->
+        <div class="pagination-bar">
+          <nav class="el-pagination" aria-label="分页">
+            <button type="button" aria-label="上一页"><i data-icon="chevron-left"></i></button>
+            <button class="is-active" type="button" aria-current="page">1</button>
+            <button type="button">2</button>
+            <button type="button">3</button>
+            <button type="button">4</button>
+            <button type="button">5</button>
+            <button type="button" aria-label="下一页"><i data-icon="chevron-right"></i></button>
+          </nav>
+        </div>
+
+        <p class="muted-note mt-16 text-center">
+          说明：项目资料来自公开名录与项目保护单位；详情页仅展示已发布的公开内容，不包含草稿。
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

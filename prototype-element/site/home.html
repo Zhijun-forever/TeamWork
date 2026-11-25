@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>首页 · 非遗数字化管理平台</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+  <div id="site-header" data-active="home"></div>
+
+  <main class="site-main">
+    <!-- 首屏 -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div>
+          <span class="hero__badge"><i data-icon="shield"></i> 省市级非遗保护中心</span>
+          <h1 class="hero__title">让每一项非遗<br>都被看见、<em>被理解</em></h1>
+          <p class="hero__desc">
+            面向非遗保护中心、项目保护单位与公众的轻量数字化平台。项目从草稿到归档全程可追溯，
+            公众可按地区、门类与标签检索，也能直接向 AI 提问。
+          </p>
+          <div class="hero__actions">
+            <a class="el-button el-button--primary el-button--large" href="projects.html">
+              <i data-icon="folder"></i> 浏览项目库
+            </a>
+            <a class="el-button el-button--large" href="ai.html">
+              <i data-icon="sparkles"></i> 试试 AI 问答
+            </a>
+          </div>
+          <div class="hero__meta">
+            <span><i data-icon="check-circle"></i> 50 个公开项目</span>
+            <span><i data-icon="check-circle"></i> 十大门类</span>
+            <span><i data-icon="check-circle"></i> 引用可追溯</span>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="平台数据概览">
+          <div class="hero-panel__head">
+            <div class="hero-panel__title"><i data-icon="chart"></i> 平台数据概览</div>
+            <span class="hero-panel__live">数据更新于今天</span>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat__value">50<small>个</small></div>
+              <div class="hero-stat__label">公开项目</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__value">10<small>类</small></div>
+              <div class="hero-stat__label">非遗门类</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__value">8<small>个</small></div>
+              <div class="hero-stat__label">覆盖地区</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat__value">3.2<small>万</small></div>
+              <div class="hero-stat__label">累计浏览</div>
+            </div>
+          </div>
+          <div class="hero-panel__list">
+            <div class="hero-panel__list-title">最新发布</div>
+            <div class="hero-project">
+              <span class="thumb thumb--green">瓷</span>
+              <div class="hero-project__text">
+                <div class="hero-project__name">龙泉青瓷烧制技艺</div>
+                <div class="hero-project__meta">传统技艺 · 浙江丽水 · 2 小时前</div>
+              </div>
+              <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+            </div>
+            <div class="hero-project">
+              <span class="thumb thumb--orange">鼓</span>
+              <div class="hero-project__text">
+                <div class="hero-project__name">安塞腰鼓</div>
+                <div class="hero-project__meta">传统舞蹈 · 陕西延安 · 昨天</div>
+              </div>
+              <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+            </div>
+            <div class="hero-project">
+              <span class="thumb">筝</span>
+              <div class="hero-project__text">
+                <div class="hero-project__name">潍坊风筝</div>
+                <div class="hero-project__meta">传统美术 · 山东潍坊 · 昨天</div>
+              </div>
+              <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+            </div>
+          </div>
+          <div class="hero-panel__foot">
+            <a href="projects.html">查看全部项目 <i data-icon="arrow-right"></i></a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 数据带 -->
+    <section class="metric-band" aria-label="平台统计">
+      <div class="metric-band__inner">
+        <div class="metric">
+          <span class="metric__icon" data-icon="file"></span>
+          <div>
+            <div class="metric__value">50</div>
+            <div class="metric__label">收录公开项目</div>
+          </div>
+        </div>
+        <div class="metric">
+          <span class="metric__icon" data-icon="grid"></span>
+          <div>
+            <div class="metric__value">10</div>
+            <div class="metric__label">国家级非遗门类</div>
+          </div>
+        </div>
+        <div class="metric">
+          <span class="metric__icon" data-icon="map-pin"></span>
+          <div>
+            <div class="metric__value">8</div>
+            <div class="metric__label">省 / 市地区</div>
+          </div>
+        </div>
+        <div class="metric">
+          <span class="metric__icon" data-icon="eye"></span>
+          <div>
+            <div class="metric__value">32,680</div>
+            <div class="metric__label">项目累计浏览</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 门类 -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 class="section__title">十大门类</h2>
+            <p class="section__desc">按国家级非物质文化遗产名录分类，快速定位感兴趣的项目。</p>
+          </div>
+          <a class="section__more" href="projects.html">全部项目 <i data-icon="arrow-right"></i></a>
+        </div>
+        <div class="category-grid">
+          <a class="category-card" href="projects.html">
+            <span class="category-card__icon" data-icon="book"></span>
+            <span><span class="category-card__name">民间文学</span><span class="category-card__count">6 个项目</span></span>
+          </a>
+          <a class="category-card" href="projects.html">
+            <span class="category-card__icon" data-icon="music"></span>
+            <span><span class="category-card__name">传统音乐</span><span class="category-card__count">7 个项目</span></span>
+          </a>
+          <a class="category-card" href="projects.html">
+            <span class="category-card__icon" data-icon="activity"></span>
+            <span><span class="category-card__name">传统舞蹈</span><span class="category-card__count">5 个项目</span></span>
+          </a>
+          <a class="category-card" href="projects.html">
+            <span class="category-card__icon" data-icon="smile"></span>
+            <span><span class="category-card__name">传统戏剧</span><span class="category-card__count">6 个项目</span></span>
+          </a>
+          <a class="category-card" href="projects.html">
+            <span class="category-card__icon" data-icon="mic"></span>
+            <span><span class="category-card__name">曲艺</span><span class="category-card__count">4 个项目</span></span>
+          </a>
+          <a class="category-card" href="projects.html">
+            <span class="category-card__icon" data-icon="award"></span>
+            <span><span class="category-card__name">传统体育</span><span class="category-card__count">3 个项目</span></span>
+          </a>
+          <a class="category-card" href="projects.html">
+            <span class="category-card__icon" data-icon="palette"></span>
+            <span><span class="category-card__name">传统美术</span><span class="category-card__count">8 个项目</span></span>
+          </a>
+          <a class="category-card" href="projects.html">
+            <span class="category-card__icon" data-icon="tool"></span>
+            <span><span class="category-card__name">传统技艺</span><span class="category-card__count">9 个项目</span></span>
+          </a>
+          <a class="category-card" href="projects.html">
+            <span class="category-card__icon" data-icon="heart"></span>
+            <span><span class="category-card__name">传统医药</span><span class="category-card__count">2 个项目</span></span>
+          </a>
+          <a class="category-card" href="projects.html">
+            <span class="category-card__icon" data-icon="flag"></span>
+            <span><span class="category-card__name">民俗</span><span class="category-card__count">5 个项目</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 近期项目 -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 class="section__title">近期公开项目</h2>
+            <p class="section__desc">由项目管理者维护、管理员审核后发布，资料与来源可追溯。</p>
+          </div>
+          <a class="section__more" href="projects.html">查看全部 <i data-icon="arrow-right"></i></a>
+        </div>
+        <div class="project-grid">
+          <article class="p-card">
+            <a href="project.html" aria-label="苗族刺绣">
+              <div class="p-card__cover">
+                <span class="p-card__char" aria-hidden="true">绣</span>
+                <span class="p-card__cover-tag">传统美术</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">贵州 · 黔东南</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">苗族刺绣</a></h3>
+              <p class="p-card__desc">以破线绣、绉绣、堆绣见长，纹样多取蝴蝶妈妈、龙、鸟等意象，是苗族服饰与礼仪的重要载体。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="eye"></i> 12,480</span>
+                <span><i data-icon="clock"></i> 2026-11-21</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="侗族大歌">
+              <div class="p-card__cover p-card__cover--green">
+                <span class="p-card__char" aria-hidden="true">歌</span>
+                <span class="p-card__cover-tag">传统音乐</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">贵州 · 黔东南</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">侗族大歌</a></h3>
+              <p class="p-card__desc">多声部、无指挥、无伴奏的民间合唱，模仿蝉鸣鸟叫与流水，2009 年列入人类非遗代表作名录。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="eye"></i> 9,860</span>
+                <span><i data-icon="clock"></i> 2026-11-20</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="景德镇手工制瓷技艺">
+              <div class="p-card__cover p-card__cover--orange">
+                <span class="p-card__char" aria-hidden="true">瓷</span>
+                <span class="p-card__cover-tag">传统技艺</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">江西 · 景德镇</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">景德镇手工制瓷技艺</a></h3>
+              <p class="p-card__desc">拉坯、利坯、施釉、烧窑等七十余道工序，以“白如玉、薄如纸、声如磬”著称。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="eye"></i> 8,310</span>
+                <span><i data-icon="clock"></i> 2026-11-19</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="南京云锦织造技艺">
+              <div class="p-card__cover p-card__cover--red">
+                <span class="p-card__char" aria-hidden="true">锦</span>
+                <span class="p-card__cover-tag">传统技艺</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">江苏 · 南京</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">南京云锦织造技艺</a></h3>
+              <p class="p-card__desc">大花楼木织机双人配合，逐花异色，妆花、库缎、织金并称，素有“寸锦寸金”之说。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="eye"></i> 7,940</span>
+                <span><i data-icon="clock"></i> 2026-11-18</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="泉州提线木偶戏">
+              <div class="p-card__cover">
+                <span class="p-card__char" aria-hidden="true">偶</span>
+                <span class="p-card__cover-tag">传统戏剧</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">福建 · 泉州</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">泉州提线木偶戏</a></h3>
+              <p class="p-card__desc">傀儡调与提线技艺结合，一尊木偶最多三十余条提线，动作细腻，保留宋元南戏遗响。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="eye"></i> 6,720</span>
+                <span><i data-icon="clock"></i> 2026-11-17</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="p-card">
+            <a href="project.html" aria-label="苏州评弹">
+              <div class="p-card__cover p-card__cover--green">
+                <span class="p-card__char" aria-hidden="true">弹</span>
+                <span class="p-card__cover-tag">曲艺</span>
+              </div>
+            </a>
+            <div class="p-card__body">
+              <div class="p-card__meta-top">
+                <span class="el-tag el-tag--success"><span class="dot"></span>已发布</span>
+                <span class="el-tag el-tag--plain">江苏 · 苏州</span>
+              </div>
+              <h3 class="p-card__title"><a href="project.html">苏州评弹</a></h3>
+              <p class="p-card__desc">评话与弹词合称，以“说、噱、弹、唱”见长，三弦琵琶相伴，吴侬软语讲述人间故事。</p>
+              <div class="p-card__foot">
+                <span><i data-icon="eye"></i> 4,960</span>
+                <span><i data-icon="clock"></i> 2026-11-14</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 地区 -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 class="section__title">按地区浏览</h2>
+            <p class="section__desc">地区按省 / 市 / 县三级组织，当前数据以省为主。</p>
+          </div>
+        </div>
+        <div class="region-list">
+          <a class="region-chip" href="projects.html">贵州省 <span>14</span></a>
+          <a class="region-chip" href="projects.html">江苏省 <span>8</span></a>
+          <a class="region-chip" href="projects.html">浙江省 <span>6</span></a>
+          <a class="region-chip" href="projects.html">福建省 <span>5</span></a>
+          <a class="region-chip" href="projects.html">江西省 <span>4</span></a>
+          <a class="region-chip" href="projects.html">陕西省 <span>4</span></a>
+          <a class="region-chip" href="projects.html">河南省 <span>3</span></a>
+          <a class="region-chip" href="projects.html">安徽省 <span>3</span></a>
+          <a class="region-chip" href="projects.html">山东省 <span>2</span></a>
+          <a class="region-chip" href="projects.html">西藏自治区 <span>1</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI 问答 -->
+    <section class="section">
+      <div class="container">
+        <div class="ai-banner">
+          <div>
+            <span class="ai-banner__eyebrow"><i data-icon="sparkles"></i> 基于公开项目语料的 RAG 问答</span>
+            <h2 class="ai-banner__title">不知道从哪查？直接问 AI</h2>
+            <p class="ai-banner__desc">
+              回答只基于平台公开项目，附带引用来源；资料不足时会明确说“未找到”，超出非遗范围的问题会拒答。
+              每位登录用户每天 15 次提问额度。
+            </p>
+            <div class="ai-banner__chips">
+              <a class="ai-chip" href="ai.html">苗族刺绣有哪些代表项目？</a>
+              <a class="ai-chip" href="ai.html">贵州有哪些传统音乐？</a>
+              <a class="ai-chip" href="ai.html">推荐三个传统戏剧项目</a>
+            </div>
+            <div class="hero__actions">
+              <a class="el-button el-button--primary" href="ai.html"><i data-icon="message"></i> 进入 AI 问答</a>
+              <a class="el-button" href="login.html">登录后使用</a>
+            </div>
+          </div>
+          <div class="ai-demo" aria-hidden="true">
+            <div class="ai-demo__head"><span class="ai-demo__dot"></span> 非遗知识助手 · </div>
+            <div class="ai-demo__msg ai-demo__msg--q">苗族刺绣有哪些代表项目？</div>
+            <div class="ai-demo__msg ai-demo__msg--a">
+              知识库中找到 2 个相关项目：苗族刺绣（贵州黔东南）与水族马尾绣（贵州三都）……
+              <div><span class="ai-demo__cite">[1] 苗族刺绣</span> <span class="ai-demo__cite">[2] 水族马尾绣</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关于 -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 class="section__title">平台能力</h2>
+            <p class="section__desc">四个角色、六个模块，覆盖项目从创建到归档的完整链路。</p>
+          </div>
+        </div>
+        <div class="feature-grid">
+          <div class="el-card">
+            <div class="el-card__body">
+              <span class="metric__icon" data-icon="layers"></span>
+              <h3 class="text-primary font-semibold mt-16">全生命周期管理</h3>
+              <p class="text-secondary text-md mt-8" style="line-height:1.8;">
+                草稿 → 待审核 → 发布 / 驳回 → 归档，每次状态迁移写入审核记录，归档后只读、可恢复。
+              </p>
+            </div>
+          </div>
+          <div class="el-card">
+            <div class="el-card__body">
+              <span class="metric__icon" data-icon="filter"></span>
+              <h3 class="text-primary font-semibold mt-16">分类检索</h3>
+              <p class="text-secondary text-md mt-8" style="line-height:1.8;">
+                省 / 市 / 县地区树、十大门类、标签多对多，支持关键词、组合筛选、四种排序与分页。
+              </p>
+            </div>
+          </div>
+          <div class="el-card">
+            <div class="el-card__body">
+              <span class="metric__icon" data-icon="shield"></span>
+              <h3 class="text-primary font-semibold mt-16">权限与认证</h3>
+              <p class="text-secondary text-md mt-8" style="line-height:1.8;">
+                系统管理员、管理员、项目管理者、普通用户四类角色，服务端鉴权与项目级认证，越权直接拦截。
+              </p>
+            </div>
+          </div>
+        </div>
+        <p class="muted-note mt-16">
+          数据来自公开名录与项目保护单位资料；AI 回答仅供参考。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

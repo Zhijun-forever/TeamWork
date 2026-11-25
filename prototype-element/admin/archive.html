@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>归档管理 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="archive"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="归档管理" data-crumb="项目管理 / 审核归档 / 归档管理"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">归档管理</h1>
+            <p class="page-head__desc">归档项目只读，公众仍可查看；恢复或修改需经管理员处理。</p>
+          </div>
+          <div class="page-head__actions">
+            <button class="el-button" type="button" data-toast="导出任务已创建"><i data-icon="download"></i> 导出清单</button>
+          </div>
+        </div>
+
+        <div class="el-alert el-alert--warning mb-16">
+          <span class="el-alert__icon"><i data-icon="alert-circle"></i></span>
+          <div class="el-alert__body">
+            <div class="el-alert__title">归档后只读</div>
+            <div class="el-alert__desc">已归档项目不可直接编辑。项目管理者需提交修改申请，管理员同意后项目恢复为“已发布”并可编辑；不同意则保持归档。</div>
+          </div>
+        </div>
+
+        <div class="el-card filter-card">
+          <div class="el-card__body">
+            <div class="filter-row">
+              <div class="filter-item filter-item--wide">
+                <label class="filter-label" for="q">关键词</label>
+                <div class="el-input">
+                  <span class="el-input__prefix"><i data-icon="search" class="el-icon--sm"></i></span>
+                  <input class="el-input__inner" id="q" type="search" placeholder="项目名称、编号">
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="time">归档时间</label>
+                <div class="el-select">
+                  <select id="time">
+                    <option>全部时间</option>
+                    <option>最近 7 天</option>
+                    <option>最近 30 天</option>
+                    <option>最近 90 天</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="request">修改申请</label>
+                <div class="el-select">
+                  <select id="request">
+                    <option>全部</option>
+                    <option>无申请</option>
+                    <option>待审批</option>
+                    <option>已同意</option>
+                    <option>已拒绝</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-actions">
+                <button class="el-button el-button--primary" type="button" data-filter-submit><i data-icon="search"></i> 查询</button>
+                <button class="el-button" type="button" data-toast="已重置筛选条件">重置</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="el-tabs" data-tabs>
+          <div class="el-tabs__header" role="tablist" aria-label="归档视图">
+            <button class="el-tabs__item is-active" type="button" data-tab="archived" role="tab" aria-selected="true">已归档项目（3）</button>
+            <button class="el-tabs__item" type="button" data-tab="requests" role="tab" aria-selected="false">修改申请（2）</button>
+          </div>
+          <div class="el-tabs__body">
+            <!-- 归档列表 -->
+            <div data-tab-panel="archived" class="is-active">
+              <div class="el-card table-card">
+                <div class="table-toolbar">
+                  <div class="table-toolbar__left"><span class="cell-title text-primary">已归档项目</span><span>共 3 条</span></div>
+                  <div class="table-toolbar__right">
+                    <button class="el-button el-button--small" type="button" data-toast="列表已刷新"><i data-icon="refresh"></i> 刷新</button>
+                  </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="el-table">
+                    <thead>
+                      <tr>
+                        <th>项目</th>
+                        <th>原门类</th>
+                        <th>归档时间</th>
+                        <th>归档人</th>
+                        <th>修改申请</th>
+                        <th class="col-actions">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-record-id="6">
+                        <td>
+                          <div class="project-cell">
+                            <span class="thumb thumb--green">藏</span>
+                            <div class="project-cell__text">
+                              <div class="cell-title">藏医药浴法</div>
+                              <div class="cell-sub">ID 6 · 西藏拉萨</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>传统医药</td>
+                        <td>2026-10-12 15:30</td>
+                        <td>admin01</td>
+                        <td><span class="el-tag el-tag--warning"><span class="dot"></span>待审批</span></td>
+                        <td class="col-actions">
+                          <div class="table-actions">
+                            <a href="../site/project.html">查看</a>
+                            <button type="button" data-toast="查看申请详情">查看申请</button>
+                            <button type="button" data-dialog-open="restoreDialog">恢复</button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-record-id="21">
+                        <td>
+                          <div class="project-cell">
+                            <span class="thumb thumb--orange">砖</span>
+                            <div class="project-cell__text">
+                              <div class="cell-title">苏州御窑金砖制作技艺</div>
+                              <div class="cell-sub">ID 21 · 江苏苏州</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>传统技艺</td>
+                        <td>2026-09-30 10:12</td>
+                        <td>admin01</td>
+                        <td><span class="el-tag el-tag--info"><span class="dot"></span>无申请</span></td>
+                        <td class="col-actions">
+                          <div class="table-actions">
+                            <a href="../site/project.html">查看</a>
+                            <button type="button" data-dialog-open="restoreDialog">恢复</button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-record-id="26">
+                        <td>
+                          <div class="project-cell">
+                            <span class="thumb thumb--red">锦</span>
+                            <div class="project-cell__text">
+                              <div class="cell-title">土家族织锦技艺</div>
+                              <div class="cell-sub">ID 26 · 贵州铜仁</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>传统技艺</td>
+                        <td>2026-09-18 09:05</td>
+                        <td>admin01</td>
+                        <td><span class="el-tag el-tag--success"><span class="dot"></span>已同意</span></td>
+                        <td class="col-actions">
+                          <div class="table-actions">
+                            <a href="../site/project.html">查看</a>
+                            <button type="button" data-toast="查看申请详情">查看申请</button>
+                            <button type="button" data-dialog-open="restoreDialog">恢复</button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-footer">
+                  <span>共 3 条</span>
+                  <nav class="el-pagination" aria-label="分页">
+                    <button type="button" disabled aria-label="上一页"><i data-icon="chevron-left"></i></button>
+                    <button class="is-active" type="button">1</button>
+                    <button type="button" disabled aria-label="下一页"><i data-icon="chevron-right"></i></button>
+                  </nav>
+                </div>
+              </div>
+            </div>
+
+            <!-- 修改申请 -->
+            <div data-tab-panel="requests">
+              <div class="el-card table-card">
+                <div class="table-toolbar">
+                  <div class="table-toolbar__left"><span class="cell-title text-primary">归档项目修改申请</span><span>2 条待审批</span></div>
+                  <div class="table-toolbar__right">
+                    <span class="el-tag el-tag--warning">待审批 2</span>
+                  </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="el-table">
+                    <thead>
+                      <tr>
+                        <th>项目</th>
+                        <th>申请人</th>
+                        <th>申请理由</th>
+                        <th>申请时间</th>
+                        <th>状态</th>
+                        <th class="col-actions">操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-record-id="6">
+                        <td>
+                          <div class="cell-title">藏医药浴法</div>
+                          <div class="cell-sub">ID 6</div>
+                        </td>
+                        <td>manager05</td>
+                        <td class="text-md">补充 2026 年度传承活动记录与 2 张现场照片，需恢复编辑权限。</td>
+                        <td>2026-11-24 16:20</td>
+                        <td><span class="el-tag el-tag--warning"><span class="dot"></span>待审批</span></td>
+                        <td class="col-actions">
+                          <div class="table-actions">
+                            <button type="button" data-dialog-open="editRequestDialog">审批</button>
+                            <button type="button" data-toast="已拒绝修改申请">拒绝</button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr data-record-id="26">
+                        <td>
+                          <div class="cell-title">土家族织锦技艺</div>
+                          <div class="cell-sub">ID 26</div>
+                        </td>
+                        <td>manager06</td>
+                        <td class="text-md">更正保护单位名称，原填写为旧机构名。</td>
+                        <td>2026-11-23 09:48</td>
+                        <td><span class="el-tag el-tag--warning"><span class="dot"></span>待审批</span></td>
+                        <td class="col-actions">
+                          <div class="table-actions">
+                            <button type="button" data-dialog-open="editRequestDialog">审批</button>
+                            <button type="button" data-toast="已拒绝修改申请">拒绝</button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-footer">
+                  <span>共 2 条待审批申请</span>
+                  <span class="muted-note">同意后项目恢复为“已发布”，并写一条审核记录。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="muted-note mt-16">规则对应 BR-06：归档后只读，可筛选查看、可恢复；修改需申请，重复申请返回 409。</p>
+      </main>
+    </div>
+  </div>
+
+  <!-- 恢复弹窗 -->
+  <div class="el-dialog" id="restoreDialog" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="restoreTitle">
+    <div class="el-dialog__mask" data-dialog-close></div>
+    <div class="el-dialog__panel">
+      <div class="el-dialog__header">
+        <div>
+          <div class="el-dialog__title" id="restoreTitle">恢复项目</div>
+          <div class="el-dialog__subtitle">恢复后项目回到“已发布”状态，管理者可继续编辑。</div>
+        </div>
+        <button class="el-dialog__close" type="button" data-dialog-close aria-label="关闭">✕</button>
+      </div>
+      <div class="el-dialog__body">
+        <div class="el-alert el-alert--primary">
+          <span class="el-alert__icon"><i data-icon="info"></i></span>
+          <div class="el-alert__body">
+            <div class="el-alert__title">确认恢复所选项目？</div>
+            <div class="el-alert__desc">若存在待审批的修改申请，恢复后申请自动关闭。</div>
+          </div>
+        </div>
+        <div class="el-form-item mt-16">
+          <label class="el-form-item__label" for="restoreNote">操作备注（选填）</label>
+          <textarea class="el-textarea__inner" id="restoreNote" rows="3" placeholder="例如：资料核对完成，恢复公开"></textarea>
+        </div>
+      </div>
+      <div class="el-dialog__footer">
+        <button class="el-button" type="button" data-dialog-close>取消</button>
+        <button class="el-button el-button--primary" type="button" data-api="project-status" data-action="restore" data-comment="#restoreNote">确认恢复</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 修改申请审批弹窗 -->
+  <div class="el-dialog" id="editRequestDialog" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="editRequestTitle">
+    <div class="el-dialog__mask" data-dialog-close></div>
+    <div class="el-dialog__panel">
+      <div class="el-dialog__header">
+        <div>
+          <div class="el-dialog__title" id="editRequestTitle">审批修改申请</div>
+          <div class="el-dialog__subtitle">藏医药浴法 · 申请人 manager05</div>
+        </div>
+        <button class="el-dialog__close" type="button" data-dialog-close aria-label="关闭">✕</button>
+      </div>
+      <div class="el-dialog__body">
+        <div class="el-descriptions">
+          <div class="el-descriptions__item"><div class="el-descriptions__label">申请时间</div><div class="el-descriptions__value">2026-11-24 16:20</div></div>
+          <div class="el-descriptions__item"><div class="el-descriptions__label">当前状态</div><div class="el-descriptions__value">已归档 · 只读</div></div>
+        </div>
+        <div class="el-form-item mt-16">
+          <label class="el-form-item__label">申请理由</label>
+          <div class="el-alert el-alert--info">
+            <div class="el-alert__body">补充 2026 年度传承活动记录与 2 张现场照片，需恢复编辑权限。</div>
+          </div>
+        </div>
+        <div class="el-form-item">
+          <label class="el-form-item__label" for="requestNote">审批意见（拒绝时必填）</label>
+          <textarea class="el-textarea__inner" id="requestNote" rows="3" placeholder="请填写审批意见"></textarea>
+        </div>
+      </div>
+      <div class="el-dialog__footer">
+        <button class="el-button" type="button" data-dialog-close>取消</button>
+        <button class="el-button el-button--danger" type="button" data-toast="已拒绝修改申请">拒绝</button>
+        <button class="el-button el-button--primary" type="button" data-api="project-status" data-action="restore" data-comment="#requestNote">同意并恢复</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

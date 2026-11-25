@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>待审核 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="review"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="待审核" data-crumb="项目管理 / 审核归档 / 待审核"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">审核工作台</h1>
+            <p class="page-head__desc">查看项目材料，通过后发布或填写意见驳回。不能审核自己创建的项目。</p>
+          </div>
+          <div class="page-head__actions">
+            <span class="el-tag el-tag--warning el-tag--large"><span class="dot"></span>6 个项目待处理</span>
+            <button class="el-button" type="button" data-toast="审核记录已加载"><i data-icon="list"></i> 审核记录</button>
+          </div>
+        </div>
+
+        <div class="review-layout">
+          <!-- 左侧列表 -->
+          <div class="el-card">
+            <div class="el-card__header">
+              <span class="el-card__title"><i data-icon="check-circle"></i> 待审核项目</span>
+              <span class="count-badge" style="background:var(--el-color-warning);">6</span>
+            </div>
+            <div class="el-card__body review-list">
+              <button class="review-item is-active" type="button" data-review-item data-project-id="10"
+                data-title="景德镇手工制瓷技艺" data-owner="manager02" data-region="江西省 / 景德镇市"
+                data-category="传统技艺" data-date="2026-11-19 09:40"
+                data-summary="拉坯、利坯、施釉、烧窑等七十余道工序，以“白如玉、薄如纸、声如磬”著称。">
+                <div class="review-item__top">
+                  <span class="review-item__title">景德镇手工制瓷技艺</span>
+                  <span class="el-tag el-tag--warning"><span class="dot"></span>待审核</span>
+                </div>
+                <div class="review-item__desc">ID 10 · 传统技艺 · 江西景德镇</div>
+                <div class="review-item__meta"><span>manager02</span><span>11-19 09:40</span><span class="text-orange">已等待 26 小时</span></div>
+              </button>
+
+              <button class="review-item" type="button" data-review-item data-project-id="13"
+                data-title="潍坊风筝" data-owner="manager01" data-region="山东省 / 潍坊市"
+                data-category="传统美术" data-date="2026-11-19 14:20"
+                data-summary="以竹篾扎骨、纸绢糊面，讲究“扎、糊、绘、放”四艺，题材多取沙燕、龙头蜈蚣与神话人物。">
+                <div class="review-item__top">
+                  <span class="review-item__title">潍坊风筝</span>
+                  <span class="el-tag el-tag--warning"><span class="dot"></span>待审核</span>
+                </div>
+                <div class="review-item__desc">ID 13 · 传统美术 · 山东潍坊</div>
+                <div class="review-item__meta"><span>manager01</span><span>11-19 14:20</span><span class="text-orange">已等待 21 小时</span></div>
+              </button>
+
+              <button class="review-item" type="button" data-review-item data-project-id="14"
+                data-title="侗戏" data-owner="manager02" data-region="贵州省 / 黎平县"
+                data-category="传统戏剧" data-date="2026-11-20 08:15"
+                data-summary="以侗语演唱，多取材于民间叙事与传说，表演融入侗族大歌与琵琶歌元素，流行于黔湘桂交界地区。">
+                <div class="review-item__top">
+                  <span class="review-item__title">侗戏</span>
+                  <span class="el-tag el-tag--warning"><span class="dot"></span>待审核</span>
+                </div>
+                <div class="review-item__desc">ID 14 · 传统戏剧 · 贵州黎平</div>
+                <div class="review-item__meta"><span>manager02</span><span>11-20 08:15</span><span>已等待 3 小时</span></div>
+              </button>
+
+              <button class="review-item" type="button" data-review-item data-project-id="15"
+                data-title="陕北民歌" data-owner="manager03" data-region="陕西省 / 榆林市"
+                data-category="传统音乐" data-date="2026-11-20 10:50"
+                data-summary="包括信天游、小调、劳动号子等体裁，旋律高亢舒展，歌词多用比兴，记录黄土高原的生活与情感。">
+                <div class="review-item__top">
+                  <span class="review-item__title">陕北民歌</span>
+                  <span class="el-tag el-tag--warning"><span class="dot"></span>待审核</span>
+                </div>
+                <div class="review-item__desc">ID 15 · 传统音乐 · 陕西榆林</div>
+                <div class="review-item__meta"><span>manager03</span><span>11-20 10:50</span><span>已等待 1 小时</span></div>
+              </button>
+
+              <button class="review-item" type="button" data-review-item data-project-id="16"
+                data-title="徽州三雕" data-owner="manager05" data-region="安徽省 / 黄山市"
+                data-category="传统美术" data-date="2026-11-20 11:32"
+                data-summary="砖雕、石雕、木雕合称，广泛用于徽州民居的门罩、窗栏与梁架，题材涵盖戏曲故事、花鸟瑞兽。">
+                <div class="review-item__top">
+                  <span class="review-item__title">徽州三雕</span>
+                  <span class="el-tag el-tag--warning"><span class="dot"></span>待审核</span>
+                </div>
+                <div class="review-item__desc">ID 16 · 传统美术 · 安徽黄山</div>
+                <div class="review-item__meta"><span>manager05</span><span>11-20 11:32</span><span>刚刚提交</span></div>
+              </button>
+
+              <button class="review-item" type="button" data-review-item data-project-id="17"
+                data-title="洛阳唐三彩烧制技艺" data-owner="manager03" data-region="河南省 / 洛阳市"
+                data-category="传统技艺" data-date="2026-11-20 12:05"
+                data-summary="以黄、绿、白为主色，采用二次烧成与低温铅釉工艺，器型涵盖人物、马匹与生活器具。">
+                <div class="review-item__top">
+                  <span class="review-item__title">洛阳唐三彩烧制技艺</span>
+                  <span class="el-tag el-tag--warning"><span class="dot"></span>待审核</span>
+                </div>
+                <div class="review-item__desc">ID 17 · 传统技艺 · 河南洛阳</div>
+                <div class="review-item__meta"><span>manager03</span><span>11-20 12:05</span><span>刚刚提交</span></div>
+              </button>
+            </div>
+          </div>
+
+          <!-- 右侧详情 -->
+          <div class="el-card review-detail">
+            <div class="el-card__body">
+              <div class="review-detail-head">
+                <div>
+                  <div class="flex flex-wrap gap-8">
+                    <span class="el-tag el-tag--warning"><span class="dot"></span>待审核</span>
+                    <span class="el-tag el-tag--plain">首次提交</span>
+                    <span class="el-tag el-tag--plain">认证已通过</span>
+                  </div>
+                  <h2 class="review-detail-title mt-12" data-review-title>景德镇手工制瓷技艺</h2>
+                  <div class="review-detail-sub">
+                    <span>编号 ID 10</span><span>·</span>
+                    <span>提交人 <strong data-review-owner>manager02</strong></span><span>·</span>
+                    <span data-review-date>2026-11-19 09:40</span>
+                    <span>·</span>
+                    <span><i data-icon="map-pin" class="el-icon--sm"></i> <span data-review-region>江西省 / 景德镇市</span></span>
+                    <span>·</span>
+                    <span><span data-review-category>传统技艺</span></span>
+                  </div>
+                </div>
+                <span class="thumb thumb--lg thumb--orange" data-review-cover aria-hidden="true">瓷</span>
+              </div>
+
+              <div class="el-alert el-alert--primary mt-16">
+                <span class="el-alert__icon"><i data-icon="info"></i></span>
+                <div class="el-alert__body">
+                  <div class="el-alert__title">审核提示</div>
+                  <div class="el-alert__desc">通过后项目状态变为“已发布”，认证状态保持 approved；驳回必须填写意见，管理者可修改后重新提交。</div>
+                </div>
+              </div>
+
+              <div class="review-section">
+                <div class="review-section__title">项目摘要</div>
+                <p class="review-text" data-review-summary>拉坯、利坯、施釉、烧窑等七十余道工序，以“白如玉、薄如纸、声如磬”著称。</p>
+              </div>
+
+              <div class="review-section">
+                <div class="review-section__title">详细资料</div>
+                <div class="review-text">
+                  <p>景德镇手工制瓷技艺分布于江西省景德镇市，涵盖原料制备、拉坯、利坯、施釉、彩绘与烧成等完整工序链。传统以松柴窑烧制，窑温与气氛控制依赖把桩师傅经验。</p>
+                  <p style="margin-top:10px;">项目资料由景德镇市非遗保护中心整理，涵盖工序流程、代表性器物与传承人谱系。本次提交补充了 12 张工序图与 1 份口述史记录。</p>
+                  <blockquote class="detail-quote" style="margin-top:14px;">“共计一坯之力，过手七十二，方克成器。”——项目资料引《天工开物》（引用）</blockquote>
+                </div>
+              </div>
+
+              <div class="review-section">
+                <div class="review-section__title">分类与地区</div>
+                <div class="el-descriptions">
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">所属门类</div><div class="el-descriptions__value">传统技艺</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">名录级别</div><div class="el-descriptions__value">国家级</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">地区路径</div><div class="el-descriptions__value">江西省 / 景德镇市 / 珠山区</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">标签</div><div class="el-descriptions__value">陶瓷、手工技艺、国家级、景德镇</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">保护单位</div><div class="el-descriptions__value">景德镇市非物质文化遗产研究保护中心</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">资料来源</div><div class="el-descriptions__value">中国非物质文化遗产网 · 公开名录</div></div>
+                </div>
+              </div>
+
+              <div class="review-section">
+                <div class="review-section__title">媒体与附件</div>
+                <div class="review-attachment">
+                  <span class="thumb thumb--orange">瓷</span>
+                  <div style="flex:1;min-width:0;">
+                    <div class="cell-title">封面候选图 · 青花缠枝莲纹罐.jpg</div>
+                    <div class="cell-sub">1280 × 720 · 1.2 MB</div>
+                  </div>
+                  <button class="el-button el-button--small" type="button" data-toast="图片预览已打开"><i data-icon="eye"></i> 预览</button>
+                </div>
+                <div class="review-attachment">
+                  <span class="thumb thumb--gray"><i data-icon="file"></i></span>
+                  <div style="flex:1;min-width:0;">
+                    <div class="cell-title">工序说明与来源清单.pdf</div>
+                    <div class="cell-sub">PDF · 860 KB · 12 页</div>
+                  </div>
+                  <button class="el-button el-button--small" type="button" data-toast="附件下载已开始"><i data-icon="download"></i> 下载</button>
+                </div>
+              </div>
+
+              <div class="review-section">
+                <div class="review-section__title">提交记录</div>
+                <div class="el-timeline">
+                  <div class="el-timeline-item">
+                    <span class="el-timeline-item__dot el-timeline-item__dot--primary"></span>
+                    <div class="el-timeline-item__time">2026-11-19 09:40</div>
+                    <div class="el-timeline-item__title">manager02 提交审核</div>
+                    <div class="el-timeline-item__content">草稿 → 待审核，补充封面与来源清单。</div>
+                  </div>
+                  <div class="el-timeline-item">
+                    <span class="el-timeline-item__dot"></span>
+                    <div class="el-timeline-item__time">2026-11-18 17:22</div>
+                    <div class="el-timeline-item__title">manager02 保存草稿</div>
+                    <div class="el-timeline-item__content">创建项目并填写基本信息。</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="review-actions">
+                <a class="el-button" href="../site/project.html"><i data-icon="eye"></i> 查看完整页面</a>
+                <button class="el-button el-button--danger" type="button" data-dialog-open="rejectDialog"><i data-icon="x"></i> 驳回</button>
+                <button class="el-button el-button--primary" type="button" data-dialog-open="approveDialog"><i data-icon="check"></i> 通过并发布</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="muted-note mt-16">说明：审核操作在系统中不会真实写入数据库；正式实现由 ReviewService 统一处理状态迁移并写入审核记录。</p>
+      </main>
+    </div>
+  </div>
+
+  <!-- 通过弹窗 -->
+  <div class="el-dialog" id="approveDialog" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="approveTitle">
+    <div class="el-dialog__mask" data-dialog-close></div>
+    <div class="el-dialog__panel">
+      <div class="el-dialog__header">
+        <div>
+          <div class="el-dialog__title" id="approveTitle">通过并发布</div>
+          <div class="el-dialog__subtitle">项目将对公众可见，并进入 AI 知识库索引队列。</div>
+        </div>
+        <button class="el-dialog__close" type="button" data-dialog-close aria-label="关闭">✕</button>
+      </div>
+      <div class="el-dialog__body">
+        <div class="el-alert el-alert--success mb-16">
+          <span class="el-alert__icon"><i data-icon="check-circle"></i></span>
+          <div class="el-alert__body">
+            <div class="el-alert__title">材料检查通过</div>
+            <div class="el-alert__desc">必填字段完整，地区与门类正确，来源清单已附。</div>
+          </div>
+        </div>
+        <div class="el-form-item">
+          <label class="el-form-item__label" for="approveNote">审核意见（选填）</label>
+          <textarea class="el-textarea__inner" id="approveNote" rows="3" placeholder="例如：资料完整，同意发布"></textarea>
+        </div>
+      </div>
+      <div class="el-dialog__footer">
+        <button class="el-button" type="button" data-dialog-close>取消</button>
+        <button class="el-button el-button--primary" type="button" data-api="project-status" data-action="approve" data-comment="#approveNote">确认通过</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 驳回弹窗 -->
+  <div class="el-dialog" id="rejectDialog" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rejectTitle">
+    <div class="el-dialog__mask" data-dialog-close></div>
+    <div class="el-dialog__panel">
+      <div class="el-dialog__header">
+        <div>
+          <div class="el-dialog__title" id="rejectTitle">驳回项目</div>
+          <div class="el-dialog__subtitle">驳回意见为必填项，项目管理者将看到该意见。</div>
+        </div>
+        <button class="el-dialog__close" type="button" data-dialog-close aria-label="关闭">✕</button>
+      </div>
+      <div class="el-dialog__body">
+        <div class="el-form-item">
+          <label class="el-form-item__label is-required" for="rejectReason">驳回意见</label>
+          <textarea class="el-textarea__inner" id="rejectReason" rows="4" placeholder="请具体说明需要修改的内容，例如：封面缺失、保护单位信息不完整、来源未标注。"></textarea>
+          <div class="el-form-item__help">提交后项目状态变为“已驳回”，管理者可修改并重新提交。</div>
+        </div>
+      </div>
+      <div class="el-dialog__footer">
+        <button class="el-button" type="button" data-dialog-close>取消</button>
+        <button class="el-button el-button--danger" type="button" data-api="project-status" data-action="reject" data-comment="#rejectReason">确认驳回</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

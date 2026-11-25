@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户管理 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="users"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="用户管理" data-crumb="系统 / 用户管理"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">用户管理</h1>
+            <p class="page-head__desc">维护四类角色账号。管理员不能创建管理员，系统管理员账号只由命令行维护。</p>
+          </div>
+          <div class="page-head__actions">
+            <button class="el-button" type="button" data-toast="导出任务已创建"><i data-icon="download"></i> 导出</button>
+            <button class="el-button el-button--primary" type="button" data-dialog-open="userDialog"><i data-icon="plus"></i> 新建用户</button>
+          </div>
+        </div>
+
+        <section class="stat-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">全部用户</div>
+              <div class="stat-card__value">28</div>
+              <div class="stat-card__meta">不含系统管理员兜底账号</div>
+            </div>
+            <span class="stat-card__icon"><i data-icon="users" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">项目管理者</div>
+              <div class="stat-card__value">12</div>
+              <div class="stat-card__meta"><i data-icon="trend" class="text-green"></i> 本月新增 2 人</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--green"><i data-icon="edit" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">管理员</div>
+              <div class="stat-card__value">4</div>
+              <div class="stat-card__meta">由系统管理员创建</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--orange"><i data-icon="shield" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">已禁用</div>
+              <div class="stat-card__value">2</div>
+              <div class="stat-card__meta">保留数据，无法登录</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--gray"><i data-icon="lock" class="el-icon--lg"></i></span>
+          </div>
+        </section>
+
+        <div class="el-card filter-card">
+          <div class="el-card__body">
+            <div class="filter-row">
+              <div class="filter-item filter-item--wide">
+                <label class="filter-label" for="q">关键词</label>
+                <div class="el-input">
+                  <span class="el-input__prefix"><i data-icon="search" class="el-icon--sm"></i></span>
+                  <input class="el-input__inner" id="q" type="search" placeholder="用户名、姓名、手机号">
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="role">角色</label>
+                <div class="el-select">
+                  <select id="role">
+                    <option>全部角色</option>
+                    <option>系统管理员</option>
+                    <option>管理员</option>
+                    <option>项目管理者</option>
+                    <option>普通用户</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-item">
+                <label class="filter-label" for="status">状态</label>
+                <div class="el-select">
+                  <select id="status">
+                    <option>全部状态</option>
+                    <option>启用</option>
+                    <option>已禁用</option>
+                  </select>
+                </div>
+              </div>
+              <div class="filter-actions">
+                <button class="el-button el-button--primary" type="button" data-filter-submit><i data-icon="search"></i> 查询</button>
+                <button class="el-button" type="button" data-toast="已重置筛选条件">重置</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="el-card table-card">
+          <div class="table-toolbar">
+            <div class="table-toolbar__left"><span class="cell-title text-primary">全部用户</span><span>共 28 人</span></div>
+            <div class="table-toolbar__right"><button class="el-button el-button--small" type="button" data-toast="列表已刷新"><i data-icon="refresh"></i> 刷新</button></div>
+          </div>
+          <div class="table-wrap">
+            <table class="el-table">
+              <thead>
+                <tr>
+                  <th>用户</th>
+                  <th>角色</th>
+                  <th>联系方式</th>
+                  <th>状态</th>
+                  <th>注册时间</th>
+                  <th>最后登录</th>
+                  <th class="col-actions">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-record-id="1">
+                  <td>
+                    <div class="project-cell">
+                      <span class="el-avatar el-avatar--primary">管</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">admin01</div>
+                        <div class="cell-sub">陈立 · 内容审核组</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="el-tag"><span class="dot"></span>管理员</span></td>
+                  <td>138****0021<br><span class="cell-sub">admin01@example.org</span></td>
+                  <td><label class="el-switch" aria-label="启用 admin01"><input type="checkbox" checked><span class="el-switch__core"></span></label></td>
+                  <td>2026-09-01</td>
+                  <td>今天 10:02</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <button type="button" data-dialog-open="userDialog">编辑</button>
+                      <button type="button" data-toast="重置密码链接已生成">重置密码</button>
+                      <button class="is-danger" type="button" data-toast="账号已禁用">禁用</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="2">
+                  <td>
+                    <div class="project-cell">
+                      <span class="el-avatar">赵</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">manager01</div>
+                        <div class="cell-sub">赵敏 · 黔东南州非遗中心</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="el-tag el-tag--warning"><span class="dot"></span>项目管理者</span></td>
+                  <td>139****3382<br><span class="cell-sub">zhaomin@example.org</span></td>
+                  <td><label class="el-switch" aria-label="启用 manager01"><input type="checkbox" checked><span class="el-switch__core"></span></label></td>
+                  <td>2026-09-12</td>
+                  <td>今天 09:40</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <button type="button" data-dialog-open="userDialog">编辑</button>
+                      <button type="button" data-toast="重置密码链接已生成">重置密码</button>
+                      <button class="is-danger" type="button" data-toast="账号已禁用">禁用</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="3">
+                  <td>
+                    <div class="project-cell">
+                      <span class="el-avatar el-avatar--green">钱</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">manager02</div>
+                        <div class="cell-sub">钱进 · 景德镇市非遗中心</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="el-tag el-tag--warning"><span class="dot"></span>项目管理者</span></td>
+                  <td>137****6615<br><span class="cell-sub">qianjin@example.org</span></td>
+                  <td><label class="el-switch" aria-label="启用 manager02"><input type="checkbox" checked><span class="el-switch__core"></span></label></td>
+                  <td>2026-09-18</td>
+                  <td>今天 09:12</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <button type="button" data-dialog-open="userDialog">编辑</button>
+                      <button type="button" data-toast="重置密码链接已生成">重置密码</button>
+                      <button class="is-danger" type="button" data-toast="账号已禁用">禁用</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="4">
+                  <td>
+                    <div class="project-cell">
+                      <span class="el-avatar">林</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">user01</div>
+                        <div class="cell-sub">林晓 · 普通用户</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="el-tag el-tag--info"><span class="dot"></span>普通用户</span></td>
+                  <td>136****8842<br><span class="cell-sub">linxiao@example.org</span></td>
+                  <td><label class="el-switch" aria-label="启用 user01"><input type="checkbox" checked><span class="el-switch__core"></span></label></td>
+                  <td>2026-10-02</td>
+                  <td>昨天 21:18</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <button type="button" data-dialog-open="userDialog">编辑</button>
+                      <button type="button" data-toast="重置密码链接已生成">重置密码</button>
+                      <button class="is-danger" type="button" data-toast="账号已禁用">禁用</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="8">
+                  <td>
+                    <div class="project-cell">
+                      <span class="el-avatar el-avatar--primary">系</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">sysadmin</div>
+                        <div class="cell-sub">系统管理员 · 运维</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="el-tag el-tag--danger"><span class="dot"></span>系统管理员</span></td>
+                  <td>—<br><span class="cell-sub">命令行维护</span></td>
+                  <td><label class="el-switch" aria-label="启用 sysadmin"><input type="checkbox" checked disabled><span class="el-switch__core"></span></label></td>
+                  <td>2026-08-20</td>
+                  <td>今天 03:00</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <span class="is-muted">不可编辑</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="6">
+                  <td>
+                    <div class="project-cell">
+                      <span class="el-avatar">王</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">manager07</div>
+                        <div class="cell-sub">王秀兰 · 黔东南州非遗中心</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="el-tag el-tag--warning"><span class="dot"></span>项目管理者</span></td>
+                  <td>135****2290<br><span class="cell-sub">wangxl@example.org</span></td>
+                  <td><label class="el-switch" aria-label="启用 manager07"><input type="checkbox" checked><span class="el-switch__core"></span></label></td>
+                  <td>2026-11-20</td>
+                  <td>昨天 16:20</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <button type="button" data-dialog-open="userDialog">编辑</button>
+                      <button type="button" data-toast="重置密码链接已生成">重置密码</button>
+                      <button class="is-danger" type="button" data-toast="账号已禁用">禁用</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="5">
+                  <td>
+                    <div class="project-cell">
+                      <span class="el-avatar el-avatar--green">张</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">user02</div>
+                        <div class="cell-sub">张弛 · 普通用户</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="el-tag el-tag--info"><span class="dot"></span>普通用户</span></td>
+                  <td>134****7756<br><span class="cell-sub">zhangchi@example.org</span></td>
+                  <td><label class="el-switch" aria-label="启用 user02"><input type="checkbox"><span class="el-switch__core"></span></label></td>
+                  <td>2026-09-28</td>
+                  <td>2026-11-10</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <button type="button" data-dialog-open="userDialog">编辑</button>
+                      <button type="button" data-toast="重置密码链接已生成">重置密码</button>
+                      <button type="button" data-toast="账号已启用">启用</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-record-id="7">
+                  <td>
+                    <div class="project-cell">
+                      <span class="el-avatar el-avatar--primary">陈</span>
+                      <div class="project-cell__text">
+                        <div class="cell-title">admin02</div>
+                        <div class="cell-sub">陈雨桐 · 审核组</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="el-tag"><span class="dot"></span>管理员</span></td>
+                  <td>133****1908<br><span class="cell-sub">admin02@example.org</span></td>
+                  <td><label class="el-switch" aria-label="启用 admin02"><input type="checkbox" checked><span class="el-switch__core"></span></label></td>
+                  <td>2026-10-08</td>
+                  <td>今天 08:46</td>
+                  <td class="col-actions">
+                    <div class="table-actions">
+                      <button type="button" data-dialog-open="userDialog">编辑</button>
+                      <button type="button" data-toast="重置密码链接已生成">重置密码</button>
+                      <button class="is-danger" type="button" data-toast="账号已禁用">禁用</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span>共 28 条 · 每页 12 条</span>
+            <nav class="el-pagination" aria-label="分页">
+              <button type="button" aria-label="上一页"><i data-icon="chevron-left"></i></button>
+              <button class="is-active" type="button">1</button>
+              <button type="button">2</button>
+              <button type="button">3</button>
+              <button type="button" aria-label="下一页"><i data-icon="chevron-right"></i></button>
+            </nav>
+          </div>
+        </div>
+
+        <p class="muted-note mt-16">规则对应 BR-08 / BR-10：管理员列表排除系统管理员；只有系统管理员能创建管理员；删除一律软删除并保留数据。</p>
+      </main>
+    </div>
+  </div>
+
+  <!-- 新建 / 编辑用户弹窗 -->
+  <div class="el-dialog" id="userDialog" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="userDialogTitle">
+    <div class="el-dialog__mask" data-dialog-close></div>
+    <div class="el-dialog__panel">
+      <div class="el-dialog__header">
+        <div>
+          <div class="el-dialog__title" id="userDialogTitle">新建用户</div>
+          <div class="el-dialog__subtitle">可创建普通用户、项目管理者；管理员仅系统管理员可创建。</div>
+        </div>
+        <button class="el-dialog__close" type="button" data-dialog-close aria-label="关闭">✕</button>
+      </div>
+      <div class="el-dialog__body">
+        <div class="el-form-grid">
+          <div class="el-form-item">
+            <label class="el-form-item__label is-required" for="newUser">用户名</label>
+            <div class="el-input"><input class="el-input__inner" id="newUser" type="text" placeholder="4–20 位字母或数字"></div>
+          </div>
+          <div class="el-form-item">
+            <label class="el-form-item__label is-required" for="newName">姓名</label>
+            <div class="el-input"><input class="el-input__inner" id="newName" type="text" placeholder="真实姓名"></div>
+          </div>
+          <div class="el-form-item">
+            <label class="el-form-item__label is-required" for="newRole">角色</label>
+            <div class="el-select">
+              <select id="newRole">
+                <option>普通用户</option>
+                <option>项目管理者</option>
+                <option>管理员（仅系统管理员可创建）</option>
+              </select>
+            </div>
+          </div>
+          <div class="el-form-item">
+            <label class="el-form-item__label" for="newUnit">所属单位</label>
+            <div class="el-input"><input class="el-input__inner" id="newUnit" type="text" placeholder="选填"></div>
+          </div>
+          <div class="el-form-item">
+            <label class="el-form-item__label" for="newEmail">邮箱</label>
+            <div class="el-input"><input class="el-input__inner" id="newEmail" type="email" placeholder="name@example.org"></div>
+          </div>
+          <div class="el-form-item">
+            <label class="el-form-item__label" for="newPhone">手机号</label>
+            <div class="el-input"><input class="el-input__inner" id="newPhone" type="tel" placeholder="选填"></div>
+          </div>
+          <div class="el-form-item span-2">
+            <label class="el-form-item__label" for="newPassword">初始密码</label>
+            <div class="el-input">
+              <input class="el-input__inner" id="newPassword" type="password" value="Feiyi@2026">
+              <button class="el-input__suffix" type="button" data-toggle-password="#newPassword" aria-label="显示或隐藏密码" style="border:none;background:none;cursor:pointer;"><i data-icon="eye" class="el-icon--sm"></i></button>
+            </div>
+            <div class="el-form-item__help">首次登录后要求修改密码；正式系统会发送一次性设置链接，而非明文密码。</div>
+          </div>
+        </div>
+      </div>
+      <div class="el-dialog__footer">
+        <button class="el-button" type="button" data-dialog-close>取消</button>
+        <button class="el-button el-button--primary" type="button" data-api="user-save">确认创建</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

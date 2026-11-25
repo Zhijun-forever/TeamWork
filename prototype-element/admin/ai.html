@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 知识库 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="ai"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="AI 知识库" data-crumb="AI 知识库 / 知识库"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">AI 知识库</h1>
+            <p class="page-head__desc">管理公开项目的知识块、向量索引与问答日志。仅索引“已发布且公开”的项目。</p>
+          </div>
+          <div class="page-head__actions">
+            <button class="el-button" type="button" data-toast="导出任务已创建"><i data-icon="download"></i> 导出日志</button>
+            <button class="el-button el-button--primary" type="button" data-dialog-open="rebuildDialog"><i data-icon="refresh"></i> 重建索引</button>
+          </div>
+        </div>
+
+        <section class="stat-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">已索引项目</div>
+              <div class="stat-card__value">38</div>
+              <div class="stat-card__meta"><i data-icon="info"></i> 2 个新项目待索引</div>
+            </div>
+            <span class="stat-card__icon"><i data-icon="database" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">知识块</div>
+              <div class="stat-card__value">386</div>
+              <div class="stat-card__meta">300–500 字 / 块，Top3 检索</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--green"><i data-icon="layers" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">今日问答</div>
+              <div class="stat-card__value">42</div>
+              <div class="stat-card__meta"><i data-icon="trend" class="text-green"></i> 命中率 91%</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--orange"><i data-icon="message" class="el-icon--lg"></i></span>
+          </div>
+          <div class="stat-card">
+            <div>
+              <div class="stat-card__label">平均响应</div>
+              <div class="stat-card__value">1.8<span style="font-size:14px;font-weight:400;color:#909399;">s</span></div>
+              <div class="stat-card__meta">超时自动降级为检索片段</div>
+            </div>
+            <span class="stat-card__icon stat-card__icon--gray"><i data-icon="activity" class="el-icon--lg"></i></span>
+          </div>
+        </section>
+
+        <div class="el-alert el-alert--primary mb-16">
+          <span class="el-alert__icon"><i data-icon="shield"></i></span>
+          <div class="el-alert__body">
+            <div class="el-alert__title">索引边界</div>
+            <div class="el-alert__desc">只索引 status=published 且 visibility=public 的项目；问题先做权限与范围校验，回答带引用；重建索引由系统管理员执行并写操作日志。</div>
+          </div>
+        </div>
+
+        <div class="el-tabs" data-tabs>
+          <div class="el-tabs__header" role="tablist" aria-label="知识库视图">
+            <button class="el-tabs__item is-active" type="button" data-tab="chunks" role="tab" aria-selected="true">知识块（386）</button>
+            <button class="el-tabs__item" type="button" data-tab="logs" role="tab" aria-selected="false">问答日志</button>
+          </div>
+          <div class="el-tabs__body">
+            <!-- 知识块 -->
+            <div data-tab-panel="chunks" class="is-active">
+              <div class="el-card filter-card">
+                <div class="el-card__body">
+                  <div class="filter-row">
+                    <div class="filter-item filter-item--wide">
+                      <label class="filter-label" for="kbq">搜索知识块</label>
+                      <div class="el-input">
+                        <span class="el-input__prefix"><i data-icon="search" class="el-icon--sm"></i></span>
+                        <input class="el-input__inner" id="kbq" type="search" placeholder="项目名称、知识块内容">
+                      </div>
+                    </div>
+                    <div class="filter-item">
+                      <label class="filter-label" for="kbproject">项目</label>
+                      <div class="el-select">
+                        <select id="kbproject"><option>全部项目</option><option>苗族刺绣</option><option>侗族大歌</option><option>景德镇手工制瓷技艺</option><option>昆曲</option></select>
+                      </div>
+                    </div>
+                    <div class="filter-item">
+                      <label class="filter-label" for="kbstatus">向量状态</label>
+                      <div class="el-select">
+                        <select id="kbstatus"><option>全部</option><option>已索引</option><option>待索引</option><option>索引失败</option></select>
+                      </div>
+                    </div>
+                    <div class="filter-actions">
+                      <button class="el-button el-button--primary" type="button" data-filter-submit><i data-icon="search"></i> 查询</button>
+                      <button class="el-button" type="button" data-toast="已重置筛选条件">重置</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="el-card table-card">
+                <div class="table-toolbar">
+                  <div class="table-toolbar__left"><span class="cell-title text-primary">知识块列表</span><span>检索按余弦相似度取 Top3</span></div>
+                  <div class="table-toolbar__right">
+                    <span class="el-tag el-tag--success"><span class="dot"></span>索引服务正常</span>
+                    <button class="el-button el-button--small" type="button" data-toast="刷新索引状态"><i data-icon="refresh"></i> 刷新</button>
+                  </div>
+                </div>
+                <div class="table-wrap">
+                  <table class="el-table">
+                    <thead>
+                      <tr><th>项目</th><th>知识块</th><th>内容摘要</th><th>向量状态</th><th>更新时间</th><th class="col-actions">操作</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><div class="cell-title">苗族刺绣</div><div class="cell-sub">ID 12</div></td>
+                        <td>#12</td>
+                        <td class="text-md" style="max-width:320px;">苗族刺绣主要分布于贵州省黔东南苗族侗族自治州，针法以破线绣、绉绣、堆绣……</td>
+                        <td><span class="el-tag el-tag--success"><span class="dot"></span>已索引</span></td>
+                        <td>11-21 10:30</td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看知识块">查看</button><button type="button" data-toast="单块重建">重建</button></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-title">侗族大歌</div><div class="cell-sub">ID 11</div></td>
+                        <td>#08</td>
+                        <td class="text-md" style="max-width:320px;">侗族大歌是多声部、无指挥、无伴奏的民间合唱，模仿蝉鸣鸟叫与流水……</td>
+                        <td><span class="el-tag el-tag--success"><span class="dot"></span>已索引</span></td>
+                        <td>11-20 15:20</td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看知识块">查看</button><button type="button" data-toast="单块重建">重建</button></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-title">景德镇手工制瓷技艺</div><div class="cell-sub">ID 10</div></td>
+                        <td>#21</td>
+                        <td class="text-md" style="max-width:320px;">拉坯、利坯、施釉、烧窑等七十余道工序，以“白如玉、薄如纸、声如磬”著称……</td>
+                        <td><span class="el-tag el-tag--warning"><span class="dot"></span>待索引</span></td>
+                        <td>11-19 09:45</td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看知识块">查看</button><button type="button" data-toast="已加入索引队列">索引</button></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-title">南京云锦织造技艺</div><div class="cell-sub">ID 9</div></td>
+                        <td>#09</td>
+                        <td class="text-md" style="max-width:320px;">大花楼木织机双人配合，逐花异色，妆花、库缎、织金并称，素有“寸锦寸金”之说……</td>
+                        <td><span class="el-tag el-tag--success"><span class="dot"></span>已索引</span></td>
+                        <td>11-18 16:12</td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看知识块">查看</button><button type="button" data-toast="单块重建">重建</button></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-title">泉州提线木偶戏</div><div class="cell-sub">ID 8</div></td>
+                        <td>#06</td>
+                        <td class="text-md" style="max-width:320px;">傀儡调与提线技艺结合，一尊木偶最多三十余条提线，动作细腻，保留宋元南戏遗响……</td>
+                        <td><span class="el-tag el-tag--danger"><span class="dot"></span>索引失败</span></td>
+                        <td>11-17 11:40</td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看失败原因">原因</button><button type="button" data-toast="已重新加入索引队列">重试</button></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-title">苏州评弹</div><div class="cell-sub">ID 5</div></td>
+                        <td>#07</td>
+                        <td class="text-md" style="max-width:320px;">评话与弹词合称，以“说、噱、弹、唱”见长，三弦琵琶相伴，吴侬软语讲述人间故事……</td>
+                        <td><span class="el-tag el-tag--success"><span class="dot"></span>已索引</span></td>
+                        <td>11-14 10:24</td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看知识块">查看</button><button type="button" data-toast="单块重建">重建</button></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-title">昆曲</div><div class="cell-sub">ID 4</div></td>
+                        <td>#05</td>
+                        <td class="text-md" style="max-width:320px;">水磨腔婉转，曲词典雅，载歌载舞，《牡丹亭》《长生殿》等剧目流传至今……</td>
+                        <td><span class="el-tag el-tag--success"><span class="dot"></span>已索引</span></td>
+                        <td>11-12 09:18</td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看知识块">查看</button><button type="button" data-toast="单块重建">重建</button></div></td>
+                      </tr>
+                      <tr>
+                        <td><div class="cell-title">安塞腰鼓</div><div class="cell-sub">ID 3</div></td>
+                        <td>#04</td>
+                        <td class="text-md" style="max-width:320px;">鼓手腾跃旋转、鼓点整齐，融舞蹈、武术与打击乐于一体，是陕北年节的重要民俗场景……</td>
+                        <td><span class="el-tag el-tag--warning"><span class="dot"></span>待索引</span></td>
+                        <td>11-11 14:02</td>
+                        <td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看知识块">查看</button><button type="button" data-toast="已加入索引队列">索引</button></div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-footer">
+                  <span>共 386 块 · 当前显示 8 块</span>
+                  <nav class="el-pagination" aria-label="分页">
+                    <button type="button" aria-label="上一页"><i data-icon="chevron-left"></i></button>
+                    <button class="is-active" type="button">1</button>
+                    <button type="button">2</button>
+                    <button type="button">3</button>
+                    <button type="button">…</button>
+                    <button type="button">33</button>
+                    <button type="button" aria-label="下一页"><i data-icon="chevron-right"></i></button>
+                  </nav>
+                </div>
+              </div>
+            </div>
+
+            <!-- 问答日志 -->
+            <div data-tab-panel="logs">
+              <div class="el-card filter-card">
+                <div class="el-card__body">
+                  <div class="filter-row">
+                    <div class="filter-item filter-item--wide">
+                      <label class="filter-label" for="logq">搜索问题</label>
+                      <div class="el-input">
+                        <span class="el-input__prefix"><i data-icon="search" class="el-icon--sm"></i></span>
+                        <input class="el-input__inner" id="logq" type="search" placeholder="问题关键词">
+                      </div>
+                    </div>
+                    <div class="filter-item">
+                      <label class="filter-label" for="mode">回答模式</label>
+                      <div class="el-select">
+                        <select id="mode"><option>全部</option><option>RAG 生成</option><option>检索降级</option><option>拒答</option></select>
+                      </div>
+                    </div>
+                    <div class="filter-item">
+                      <label class="filter-label" for="loguser">用户</label>
+                      <div class="el-select">
+                        <select id="loguser"><option>全部用户</option><option>user01</option><option>user02</option><option>manager01</option><option>admin01</option></select>
+                      </div>
+                    </div>
+                    <div class="filter-actions">
+                      <button class="el-button el-button--primary" type="button" data-filter-submit><i data-icon="search"></i> 查询</button>
+                      <button class="el-button" type="button" data-toast="已重置筛选条件">重置</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="el-card table-card">
+                <div class="table-toolbar">
+                  <div class="table-toolbar__left"><span class="cell-title text-primary">问答日志</span><span>今日 42 次，限流 15 次 / 人 / 天</span></div>
+                  <div class="table-toolbar__right"><span class="el-tag el-tag--plain">日志脱敏展示</span></div>
+                </div>
+                <div class="table-wrap">
+                  <table class="el-table">
+                    <thead>
+                      <tr><th>用户</th><th>问题</th><th>回答模式</th><th>引用数</th><th>响应耗时</th><th>时间</th><th class="col-actions">操作</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td class="cell-title">user01</td><td style="max-width:280px;">苗族刺绣有哪些代表项目？</td><td><span class="el-tag el-tag--success"><span class="dot"></span>RAG 生成</span></td><td>2</td><td>1.6s</td><td>今天 10:27</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看问答详情">详情</button></div></td></tr>
+                      <tr><td class="cell-title">user02</td><td style="max-width:280px;">贵州有哪些传统音乐项目？</td><td><span class="el-tag el-tag--success"><span class="dot"></span>RAG 生成</span></td><td>3</td><td>1.9s</td><td>今天 09:58</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看问答详情">详情</button></div></td></tr>
+                      <tr><td class="cell-title">manager01</td><td style="max-width:280px;">昆曲的保护单位是谁？</td><td><span class="el-tag el-tag--warning"><span class="dot"></span>检索降级</span></td><td>2</td><td>5.0s</td><td>昨天 20:14</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看问答详情">详情</button></div></td></tr>
+                      <tr><td class="cell-title">user01</td><td style="max-width:280px;">今天贵阳天气怎么样？</td><td><span class="el-tag el-tag--info"><span class="dot"></span>拒答</span></td><td>0</td><td>0.4s</td><td>昨天 18:03</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看问答详情">详情</button></div></td></tr>
+                      <tr><td class="cell-title">admin01</td><td style="max-width:280px;">比较苗族刺绣与侗族大歌</td><td><span class="el-tag el-tag--success"><span class="dot"></span>RAG 生成</span></td><td>2</td><td>2.2s</td><td>昨天 15:30</td><td class="col-actions"><div class="table-actions"><button type="button" data-toast="查看问答详情">详情</button></div></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table-footer">
+                  <span>共 1,286 条 · 当前显示 5 条</span>
+                  <nav class="el-pagination" aria-label="分页">
+                    <button type="button" aria-label="上一页"><i data-icon="chevron-left"></i></button>
+                    <button class="is-active" type="button">1</button>
+                    <button type="button">2</button>
+                    <button type="button">3</button>
+                    <button type="button" aria-label="下一页"><i data-icon="chevron-right"></i></button>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="muted-note mt-16">规则对应 BR-09：AI 只索引公开项目；登录用户 15 次 / 天；无结果拒答；超时降级检索片段；第 16 次返回 429。</p>
+      </main>
+    </div>
+  </div>
+
+  <!-- 重建索引弹窗 -->
+  <div class="el-dialog" id="rebuildDialog" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rebuildTitle">
+    <div class="el-dialog__mask" data-dialog-close></div>
+    <div class="el-dialog__panel">
+      <div class="el-dialog__header">
+        <div>
+          <div class="el-dialog__title" id="rebuildTitle">重建知识库索引</div>
+          <div class="el-dialog__subtitle">重新切块并向量化全部公开项目，期间问答可能降级为检索片段。</div>
+        </div>
+        <button class="el-dialog__close" type="button" data-dialog-close aria-label="关闭">✕</button>
+      </div>
+      <div class="el-dialog__body">
+        <div class="el-alert el-alert--warning">
+          <span class="el-alert__icon"><i data-icon="alert-circle"></i></span>
+          <div class="el-alert__body">
+            <div class="el-alert__title">预计耗时 2–3 分钟</div>
+            <div class="el-alert__desc">当前 38 个已发布公开项目、386 个知识块。重建会写入操作日志，需要系统管理员权限。</div>
+          </div>
+        </div>
+        <div class="el-form-item mt-16">
+          <label class="el-checkbox">
+            <input type="checkbox" checked>
+            <span class="el-checkbox__box"></span>
+            <span class="text-md">仅重建状态异常或待索引的知识块（推荐）</span>
+          </label>
+        </div>
+      </div>
+      <div class="el-dialog__footer">
+        <button class="el-button" type="button" data-dialog-close>取消</button>
+        <button class="el-button el-button--primary" type="button" data-api="ai-rebuild">开始重建</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

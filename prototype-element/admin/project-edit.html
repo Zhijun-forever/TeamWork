@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>编辑项目 · 后台管理</title>
+  <link rel="stylesheet" href="../assets/css/element.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body-bg">
+  <div class="admin-shell">
+    <aside class="admin-aside" id="admin-aside" data-active="projects"></aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar" id="admin-topbar" data-title="编辑项目" data-crumb="项目管理 / 项目库 / 编辑项目"></header>
+
+      <main class="admin-page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-head__title">编辑项目 <span class="el-tag el-tag--danger" style="vertical-align:middle;margin-left:6px;"><span class="dot"></span>已驳回</span></h1>
+            <p class="page-head__desc">泉州提线木偶戏 · ID 8 · 最近更新 2026-11-17 11:30</p>
+          </div>
+          <div class="page-head__actions">
+            <a class="el-button" href="../site/project.html"><i data-icon="eye"></i> 查看公开页</a>
+            <a class="el-button" href="projects.html">返回项目库</a>
+          </div>
+        </div>
+
+        <div class="el-alert el-alert--danger mb-16">
+          <span class="el-alert__icon"><i data-icon="x-circle"></i></span>
+          <div class="el-alert__body">
+            <div class="el-alert__title">审核未通过：请按意见修改后重新提交</div>
+            <div class="el-alert__desc">驳回意见：封面缺失，保护单位信息待补充；摘要中涉及传承人的表述缺少来源。审核人 admin01，2026-11-17 11:30。</div>
+          </div>
+        </div>
+
+        <div class="form-layout">
+          <div class="form-main">
+            <div class="el-card">
+              <div class="el-card__header">
+                <span class="el-card__title"><i data-icon="edit"></i> 项目资料</span>
+                <span class="el-tag el-tag--warning">修改后可重新提交</span>
+              </div>
+              <div class="el-card__body">
+                <div class="el-tabs" data-tabs>
+                  <div class="el-tabs__header" role="tablist" aria-label="编辑分区">
+                    <button class="el-tabs__item is-active" type="button" data-tab="basic" role="tab" aria-selected="true">基本信息</button>
+                    <button class="el-tabs__item" type="button" data-tab="detail" role="tab" aria-selected="false">详细资料</button>
+                    <button class="el-tabs__item" type="button" data-tab="media" role="tab" aria-selected="false">封面与媒体</button>
+                  </div>
+                  <div class="el-tabs__body">
+                    <!-- 基本信息 -->
+                    <div data-tab-panel="basic" class="is-active">
+                      <div class="el-form-grid">
+                        <div class="el-form-item span-2">
+                          <label class="el-form-item__label is-required" for="title">项目名称</label>
+                          <div class="el-input"><input class="el-input__inner" id="title" type="text" value="泉州提线木偶戏"></div>
+                        </div>
+                        <div class="el-form-item">
+                          <label class="el-form-item__label is-required" for="province">所属地区（省）</label>
+                          <div class="el-select">
+                            <select id="province">
+                              <option>贵州省</option>
+                              <option>江苏省</option>
+                              <option selected>福建省</option>
+                              <option>浙江省</option>
+                              <option>江西省</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="el-form-item">
+                          <label class="el-form-item__label is-required" for="city">所属地区（市 / 县）</label>
+                          <div class="el-select">
+                            <select id="city">
+                              <option>福州市</option>
+                              <option selected>泉州市</option>
+                              <option>漳州市</option>
+                              <option>厦门市</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="el-form-item">
+                          <label class="el-form-item__label is-required" for="category">门类</label>
+                          <div class="el-select">
+                            <select id="category">
+                              <option>传统美术</option>
+                              <option>传统技艺</option>
+                              <option>传统音乐</option>
+                              <option>传统舞蹈</option>
+                              <option selected>传统戏剧</option>
+                              <option>曲艺</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="el-form-item">
+                          <label class="el-form-item__label" for="level">名录级别</label>
+                          <div class="el-select">
+                            <select id="level">
+                              <option selected>国家级</option>
+                              <option>省级</option>
+                              <option>市级</option>
+                              <option>县级</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="el-form-item span-2">
+                          <label class="el-form-item__label" for="tags">标签</label>
+                          <div class="el-input" style="height:auto;min-height:32px;flex-wrap:wrap;gap:6px;padding:5px 8px;">
+                            <span class="el-tag">国家级 <span class="close">✕</span></span>
+                            <span class="el-tag">木偶戏 <span class="close">✕</span></span>
+                            <span class="el-tag">泉州 <span class="close">✕</span></span>
+                            <input class="el-input__inner" id="tags" type="text" placeholder="输入标签后回车添加" style="width:150px;flex:1;">
+                          </div>
+                        </div>
+                        <div class="el-form-item span-2">
+                          <label class="el-form-item__label is-required" for="summary">摘要</label>
+                          <textarea class="el-textarea__inner" id="summary" rows="3">泉州提线木偶戏以傀儡调与提线技艺见长，一尊木偶最多三十余条提线，动作细腻，保留宋元南戏遗响。</textarea>
+                          <div class="el-form-item__help">请补充摘要中传承人相关表述的来源，避免无出处信息。</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 详细资料 -->
+                    <div data-tab-panel="detail">
+                      <div class="el-form-item">
+                        <label class="el-form-item__label" for="history">历史渊源</label>
+                        <textarea class="el-textarea__inner" id="history" rows="4">泉州提线木偶戏古称“悬丝傀儡”，源于秦汉，盛于宋元，与南音、梨园戏共同构成泉州传统表演艺术体系。</textarea>
+                      </div>
+                      <div class="el-form-item">
+                        <label class="el-form-item__label" for="content">主要内容与技艺特征</label>
+                        <textarea class="el-textarea__inner" id="content" rows="5">表演由“四美班”分工协作，提线者通过三十余条丝线控制木偶的头、躯干与四肢，配合傀儡调演唱与锣鼓点，形成细腻的表演语汇。</textarea>
+                      </div>
+                      <div class="el-form-item">
+                        <label class="el-form-item__label" for="protection">保护与传承措施</label>
+                        <textarea class="el-textarea__inner" id="protection" rows="4">建立传习所，开展校园普及；记录传统剧目与傀儡制作技艺；支持剧团常态化演出。</textarea>
+                      </div>
+                      <div class="el-form-grid">
+                        <div class="el-form-item">
+                          <label class="el-form-item__label is-required" for="unit">保护单位</label>
+                          <div class="el-input"><input class="el-input__inner" id="unit" type="text" placeholder="请补充保护单位全称"></div>
+                          <div class="el-form-item__error">驳回意见要求补充此项</div>
+                        </div>
+                        <div class="el-form-item">
+                          <label class="el-form-item__label" for="source">资料来源</label>
+                          <div class="el-input"><input class="el-input__inner" id="source" type="text" value="中国非物质文化遗产网 · 公开名录"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 媒体 -->
+                    <div data-tab-panel="media">
+                      <div class="el-alert el-alert--warning mb-16">
+                        <span class="el-alert__icon"><i data-icon="alert-circle"></i></span>
+                        <div class="el-alert__body">
+                          <div class="el-alert__title">当前缺少封面</div>
+                          <div class="el-alert__desc">请上传一张 16:9 的横向图片作为项目封面，审核通过后将用于列表卡片与详情页。</div>
+                        </div>
+                      </div>
+                      <div class="upload-grid">
+                        <label class="el-upload" data-upload>
+                          <input type="file" accept="image/png,image/jpeg,image/webp" style="display:none;">
+                          <i data-icon="upload" class="el-icon--xl"></i>
+                          <span class="el-upload__text">上传封面<br><em>点击选择图片</em></span>
+                          <div class="el-upload__tip">JPG / PNG，≤ 2 MB</div>
+                        </label>
+                        <label class="el-upload" data-upload>
+                          <input type="file" accept="image/png,image/jpeg,image/webp" multiple style="display:none;">
+                          <i data-icon="image" class="el-icon--xl"></i>
+                          <span class="el-upload__text">补充图集<br><em>可多选</em></span>
+                          <div class="el-upload__tip">最多 9 张，每张 ≤ 5 MB</div>
+                        </label>
+                        <label class="el-upload" data-upload>
+                          <input type="file" accept="application/pdf" style="display:none;">
+                          <i data-icon="file" class="el-icon--xl"></i>
+                          <span class="el-upload__text">替换附件<br><em>PDF 资料</em></span>
+                          <div class="el-upload__tip">单个文件 ≤ 20 MB</div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-footer">
+              <span class="muted-note">保存修改不会改变状态；重新提交后进入待审核。</span>
+              <div class="flex gap-8">
+                <a class="el-button" href="projects.html">取消</a>
+                <button class="el-button" type="button" data-api="project-save" data-mode="draft" data-project-id="8">保存修改</button>
+                <button class="el-button el-button--primary" type="button" data-api="project-save" data-mode="submit" data-project-id="8"><i data-icon="send"></i> 重新提交审核</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="form-side">
+            <div class="el-card">
+              <div class="el-card__header">
+                <span class="el-card__title">当前状态</span>
+                <span class="el-tag el-tag--danger">已驳回</span>
+              </div>
+              <div class="el-card__body">
+                <div class="el-descriptions el-descriptions--one">
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">项目编号</div><div class="el-descriptions__value">ID 8</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">提交人</div><div class="el-descriptions__value">manager04</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">提交时间</div><div class="el-descriptions__value">2026-11-16 09:20</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">审核时间</div><div class="el-descriptions__value">2026-11-17 11:30</div></div>
+                  <div class="el-descriptions__item"><div class="el-descriptions__label">审核人</div><div class="el-descriptions__value">admin01</div></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="el-card">
+              <div class="el-card__header">
+                <span class="el-card__title">审核记录</span>
+              </div>
+              <div class="el-card__body">
+                <div class="el-timeline">
+                  <div class="el-timeline-item">
+                    <span class="el-timeline-item__dot el-timeline-item__dot--danger"></span>
+                    <div class="el-timeline-item__time">2026-11-17 11:30</div>
+                    <div class="el-timeline-item__title">已驳回</div>
+                    <div class="el-timeline-item__content">意见：封面缺失，保护单位信息待补充；摘要缺少来源。</div>
+                  </div>
+                  <div class="el-timeline-item">
+                    <span class="el-timeline-item__dot el-timeline-item__dot--primary"></span>
+                    <div class="el-timeline-item__time">2026-11-16 09:20</div>
+                    <div class="el-timeline-item__title">提交审核</div>
+                    <div class="el-timeline-item__content">提交人：manager04</div>
+                  </div>
+                  <div class="el-timeline-item">
+                    <span class="el-timeline-item__dot"></span>
+                    <div class="el-timeline-item__time">2026-11-15 16:42</div>
+                    <div class="el-timeline-item__title">创建草稿</div>
+                    <div class="el-timeline-item__content">创建人：manager04</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="el-card">
+              <div class="el-card__body">
+                <div class="flex gap-8 mb-8">
+                  <i data-icon="info" class="text-blue"></i>
+                  <span class="text-primary font-medium text-md">修改要点</span>
+                </div>
+                <ul class="form-tip-list">
+                  <li>补充封面图片</li>
+                  <li>填写保护单位全称</li>
+                  <li>为摘要中的传承人表述补充来源</li>
+                  <li>确认地区、门类与标签无误后重新提交</li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

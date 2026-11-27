@@ -24,10 +24,11 @@ import os
 import warnings
 from typing import Any, Mapping, Optional
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
+from flask_wtf.csrf import generate_csrf
 from jinja2 import TemplateNotFound
 from markupsafe import escape
 from werkzeug.exceptions import HTTPException
@@ -53,12 +54,12 @@ MAX_CONTENT_LENGTH_BYTES = 25 * 1024 * 1024
 # 顺序即合入顺序；模块文件不存在 → INFO 跳过；存在但导入失败 → WARNING 跳过。
 # 验收前要求：所有模块注册成功、无 WARNING。
 # ---------------------------------------------------------------------------
-_BLUEPRINT_SPECS: list[tuple[str, str, str]] = [
-    ("app.main", "main_bp", "首页 / healthz（API-21）"),
-    ("app.auth", "auth_bp", "API-01~04 注册/登录/退出/我的（方成朋）"),
-    ("app.projects", "projects_bp", "API-10~14 项目 CRUD/检索/媒体（邓春鹏）"),
-    ("app.admin", "admin_bp", "API-05/06/08/09/15/19/20 用户/认证/分类/运维"),
-    ("app.ai", "ai_bp", "API-16~18 AI 问答/索引重建（周世航）"),
+_BLUEPRINT_SPECS: list[tuple[str, str, str, Optional[str]]] = [
+    ("app.main", "main_bp", "首页 / healthz（API-21）",None),
+    ("app.auth", "auth_bp", "API-01~04 注册/登录/退出/我的","/api"),
+    ("app.projects", "projects_bp", "API-10~14 项目 CRUD/检索/媒体","/api"),
+    ("app.admin", "admin_bp", "API-05/06/08/09/15/19/20 用户/认证/分类/运维","/api"),
+    ("app.ai", "ai_bp", "API-16~18 AI 问答/索引重建）","/api"),
 ]
 
 # JSON 错误码（接口约定「统一 JSON 失败」）
@@ -133,8 +134,9 @@ def create_app(test_config: Optional[Mapping[str, Any]] = None) -> Flask:
             "SQLALCHEMY_ENGINE_OPTIONS", {"pool_pre_ping": True, "pool_recycle": 280}
         )
 
-    # 中文 JSON 直出，不转 \uXXXX
+    # 中文JSON直出
     app.json.ensure_ascii = False
+    app.json.sort_keys = False
 
     # --- 扩展初始化 ---
     db.init_app(app)
@@ -146,6 +148,15 @@ def create_app(test_config: Optional[Mapping[str, Any]] = None) -> Flask:
     login_manager.login_message = "请先登录后再访问该页面"
     login_manager.login_message_category = "warning"
 
+    @login_manager.unauthorized_handler
+    def _unauthorized():
+        if _wants_json():
+            return jsonify(code="UNAUTHORIZED", message="未登录或会话已过期，请先登录", data=None), 401
+        if "auth.login" in app.view_functions:
+            return redirect(url_for("auth.login", next=request.full_path.rstrip("?")))
+        # auth 蓝图尚未合入：退回 401，避免 url_for 抛 BuildError
+        return jsonify(code="UNAUTHORIZED", message="未登录或会话已过期，请先登录", data=None), 401
+
     from app.models import User
 
     @login_manager.user_loader
@@ -154,6 +165,10 @@ def create_app(test_config: Optional[Mapping[str, Any]] = None) -> Flask:
 
     _register_blueprints(app)
     _register_error_handlers(app)
+
+    @app.get("/api/csrf")
+    def api_csrf():
+        return jsonify(code="OK", message="success", data={"csrf_token": generate_csrf()})
 
     # 开发便利：首次启动自动建表（幂等）。表结构变更后删除 instance/app.db 重建；
     # 本学期不引入 Alembic 迁移。pytest（TESTING=True）由测试夹具自行 create_all。
@@ -168,7 +183,7 @@ def create_app(test_config: Optional[Mapping[str, Any]] = None) -> Flask:
 # 蓝图注册：渐进合入期容忍缺失模块，验收前 WARNING 必须清零
 # ---------------------------------------------------------------------------
 def _register_blueprints(app: Flask) -> None:
-    for module_name, bp_name, scope in _BLUEPRINT_SPECS:
+    for module_name, bp_name, scope, pre_url in _BLUEPRINT_SPECS:
         try:
             if importlib.util.find_spec(module_name) is None:
                 app.logger.info("[集成] 蓝图未合入，跳过：%s（%s）", module_name, scope)
@@ -185,7 +200,7 @@ def _register_blueprints(app: Flask) -> None:
             continue
 
         app.register_blueprint(blueprint)
-        app.logger.info("[集成] 已注册蓝图 %s（%s）", bp_name, scope)
+        app.logger.info("[集成] 已注册蓝图 %s（%s），前缀：%s", bp_name, scope, pre_url)
 
 
 # ---------------------------------------------------------------------------
@@ -205,7 +220,7 @@ def _wants_json() -> bool:
 
 
 def _fallback_html(code: int, message: str) -> str:
-    """errors/ 模板缺失时的极简兜底页（谭应锋交付统一错误页后自动被替代）。"""
+    """errors/ 模板缺失时的极简兜底页。"""
     return (
         "<!doctype html><html lang='zh-CN'><head><meta charset='utf-8'>"
         f"<title>{code} - 非遗数字化管理平台</title></head>"

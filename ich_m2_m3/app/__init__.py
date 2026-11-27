@@ -56,10 +56,10 @@ MAX_CONTENT_LENGTH_BYTES = 25 * 1024 * 1024
 # ---------------------------------------------------------------------------
 _BLUEPRINT_SPECS: list[tuple[str, str, str, Optional[str]]] = [
     ("app.main", "main_bp", "首页 / healthz（API-21）",None),
-    ("app.auth", "auth_bp", "API-01~04 注册/登录/退出/我的","/api"),
-    ("app.projects", "projects_bp", "API-10~14 项目 CRUD/检索/媒体","/api"),
-    ("app.admin", "admin_bp", "API-05/06/08/09/15/19/20 用户/认证/分类/运维","/api"),
-    ("app.ai", "ai_bp", "API-16~18 AI 问答/索引重建）","/api"),
+    ("app.auth", "auth_bp", "注册/登录/退出/我的","/api"),
+    ("app.projects", "projects_bp", "项目 CRUD/检索/媒体","/api"),
+    ("app.admin", "admin_bp", "用户/认证/分类/运维","/api"),
+    ("app.ai", "ai_bp", "AI 问答/索引重建","/api"),
 ]
 
 # JSON 错误码（接口约定「统一 JSON 失败」）
@@ -199,7 +199,7 @@ def _register_blueprints(app: Flask) -> None:
             app.logger.warning("[集成] %s 中未找到 %s，请核对蓝图命名约定", module_name, bp_name)
             continue
 
-        app.register_blueprint(blueprint)
+        app.register_blueprint(blueprint, url_prefix=pre_url)
         app.logger.info("[集成] 已注册蓝图 %s（%s），前缀：%s", bp_name, scope, pre_url)
 
 

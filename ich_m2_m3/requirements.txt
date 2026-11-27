@@ -1,6 +1,38 @@
-Flask>=3.0,<4.0
-Flask-SQLAlchemy>=3.1
-Flask-Login>=0.6.3
-Flask-WTF>=1.2
-Pillow>=10.0
-pytest>=8.0
+# ============================================================================
+# 非遗数字化管理平台 · 依赖清单（V2.0 / 2026-11-27）
+# 版本号 = 组长已验证环境（Windows / Python 3.12；地基冒烟 14 项、M2/M3 测试 8 项、
+# 权限单测 41 项、工厂 V2.0 行为 9 项全部通过时所用版本）。
+# 安装：python -m pip install -r requirements.txt
+# 传递依赖（Werkzeug 3.1.9 / Jinja2 3.1.6 / WTForms 3.3.2 / itsdangerous 2.2.0 等）
+# 由 pip 自动解析安装，无需逐一手写。
+# ============================================================================
+
+# --- Web 框架与扩展（报告 5.5 技术栈）---
+Flask==3.1.3
+Flask-SQLAlchemy==3.1.1
+Flask-Login==0.6.3
+Flask-WTF==1.3.0
+SQLAlchemy==2.1.9
+
+# --- WSGI 服务器（run.py 演示/验收部署，接口约定 Base URL :8000）---
+waitress==3.0.2
+
+# --- .env 环境变量加载（run.py）---
+python-dotenv==1.2.4
+
+# --- 图像处理（封面/附件安全校验、400px 缩略图，Pillow）---
+Pillow==13.0.0
+
+# --- HTTP 客户端（M5：DashScope / SiliconFlow 的 OpenAI 兼容接口调用）---
+requests==2.34.2
+
+# --- 测试（tests/ 套件；运行：python -m pytest -q）---
+pytest==9.2.0
+
+# --- 可选：MySQL 部署（DATABASE_URL 用 mysql+pymysql 时取消注释）---
+# PyMySQL>=1.1
+
+# --- 可选：M5 AI SDK（若不用 requests 直连 HTTP，按需取消注释）---
+# dashscope>=1.20      # 千问官方 SDK
+# openai>=1.40         # SiliconFlow OpenAI 兼容客户端
+# numpy>=1.26          # 向量余弦相似度批量计算（纯 Python 亦可，不强依赖）

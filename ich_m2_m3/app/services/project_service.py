@@ -83,8 +83,8 @@ ALLOWED_MIME_TYPES = {
     ".webp": {"image/webp"},
     ".pdf": {"application/pdf"},
 }
-MAX_IMAGE_BYTES = 5 * 1024 * 1024   # 单张图片上限 5 MB
-MAX_PDF_BYTES = 10 * 1024 * 1024    # 单个 PDF 上限 10 MB
+MAX_IMAGE_BYTES = 10 * 1024 * 1024   # 单张图片上限 10 MB
+MAX_PDF_BYTES = 20 * 1024 * 1024    # 单个 PDF 上限 20 MB
 
 
 class ProjectService:

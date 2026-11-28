@@ -58,6 +58,7 @@ _BLUEPRINT_SPECS: list[tuple[str, str, str, Optional[str]]] = [
     ("app.main", "main_bp", "首页 / healthz（API-21）",None),
     ("app.auth", "auth_bp", "注册/登录/退出/我的","/api"),
     ("app.projects", "projects_bp", "项目 CRUD/检索/媒体","/api"),
+    ("app.projects", "media_bp", "媒体读取（API-33，无 /api 前缀）", None),
     ("app.admin", "admin_bp", "用户/认证/分类/运维","/api"),
     ("app.ai", "ai_bp", "AI 问答/索引重建","/api"),
 ]

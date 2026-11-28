@@ -1,3 +1,9 @@
+﻿> **V2.0 更新（2026-11-28，邓春鹏）**：主仓已切换为 Vue3 SPA + `/api` JSON 接口
+> （以仓库根目录《系统接口清单》V2.0 为准）。本目录的 `app/projects.py`、
+> `app/services/project_service.py`、`app/services/query_builder.py`、
+> `tests/test_m2_m3_projects.py` 已按 V2.0 重写（实现 API-14~21、API-33）。
+> 下文 V1.1 时期的“Jinja 页面 + 302 表单重定向 / tag_ids / region_id 参数 / `/media/<asset_id>`”
+> 等描述**已作废**，仅保留各文件用途说明供查阅。
 # 非遗数字化管理平台 — M2 & M3 模块代码说明（邓春鹏）
 
 本目录包含 **M2（项目管理与媒体安全）** 与 **M3（分类体系、多条件检索与 50 条非遗演示数据）** 的完整实现、联调模板及自动化测试用例，已按《非遗数字化管理平台系统分析与设计报告》第 5–7 章规范拆分为独立可运行结构。
